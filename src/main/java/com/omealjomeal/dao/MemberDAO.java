@@ -5,6 +5,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Repository("memberDAO")
@@ -14,7 +15,7 @@ public class MemberDAO {
     SqlSession sqlSession;
 
     // 로그인
-    public MemberDTO selectMember(Map<String, Integer> map) throws Exception {
+    public MemberDTO selectMember(HashMap<String, Object> map) throws Exception {
         return sqlSession.selectOne("com.config.MemberMapper.selectMember", map);
     }
     // 접속일시 업데이트

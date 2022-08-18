@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Service("memberService")
@@ -15,7 +16,7 @@ public class MemberServiceImpl implements MemberService{
     MemberDAO memberDAO;
 
     @Override
-    public MemberDTO selectMember(Map<String, Integer> map) throws Exception {
+    public MemberDTO selectMember(HashMap<String, Object> map) throws Exception {
         return memberDAO.selectMember(map);
     }
 }

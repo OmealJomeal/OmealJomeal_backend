@@ -3,12 +3,10 @@ package com.omealjomeal.controller;
 import com.omealjomeal.dto.MemberDTO;
 import com.omealjomeal.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.lang.reflect.Member;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,7 +22,7 @@ public class MemberController {
     }
 
     @PostMapping("/api/login")
-    public MemberDTO login(HttpSession session, @RequestParam Map<String, Integer> map) throws Exception {
+    public MemberDTO login(HttpSession session, @RequestBody HashMap<String, Object> map) throws Exception {
         System.out.println(map);
         MemberDTO memberDTO = memberService.selectMember(map);
         session.setAttribute("login", memberDTO);

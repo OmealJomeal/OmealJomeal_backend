@@ -5,7 +5,7 @@
 <mapper namespace="com.config.MemberMapper">
 
     <!-- 로그인 -->
-    <select id="selectMember" parameterType="int" resultType="MemberDTO">
+    <select id="selectMember" parameterType="hashmap" resultType="MemberDTO">
 	<![CDATA[
         SELECT * FROM user
 		WHERE user_email = #{email} AND user_password = #{password}
