@@ -15,8 +15,23 @@ public class MemberServiceImpl implements MemberService{
     @Autowired
     MemberDAO memberDAO;
 
+    //로그인
+    @Transactional
     @Override
     public MemberDTO selectMember(HashMap<String, Object> map) throws Exception {
+        memberDAO.updateDatetime(map);
         return memberDAO.selectMember(map);
+    }
+
+    // 일반회원가입
+    @Override
+    public int generalSignUp(MemberDTO dto) throws Exception {
+        return memberDAO.generalSignUp(dto);
+    }
+
+    // 아이디 중복 체크
+    @Override
+    public int checkId(String email) throws Exception {
+        return memberDAO.checkId(email);
     }
 }

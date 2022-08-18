@@ -16,11 +16,6 @@ public class MemberController {
     @Autowired
     MemberService memberService;
 
-    @GetMapping("/api/hello")
-    public String test(){
-        return "Hello, world!";
-    }
-
     @PostMapping("/api/login")
     public MemberDTO login(HttpSession session, @RequestBody HashMap<String, Object> map) throws Exception {
         System.out.println(map);
@@ -36,10 +31,25 @@ public class MemberController {
         return true;
     }
 
+    // 아이디 중복 체크
+    @PostMapping("/api/checkEmail")
+    public int checkEmail(@RequestBody MemberDTO dto) throws Exception {
+        return memberService.checkId(dto.getUser_email());
+    }
+
     // 일반회원가입 처리
-//    @PostMapping("/api/generalSignUp")
-//    public int insertGeneral(MemberDTO memberDTO) throws Exception {
+    @PostMapping("/api/generalSignUp")
+    public int insertGeneral(@RequestBody HashMap<String, Object> map) throws Exception {
+//        map.get();
+//        map.get();
+//        map.get();
+//        map.get();
+//        map.get();
+//        map에서 정보 빼서 memberDTO에 set하고, lifestyle,
+//        interest, food_Favor값도 Map으로 get해서 select해서
+//        lifestyle_id,interest_id,food_favor_id가 몇인지 조회해서 추가시키자.
 //        return memberService.generalSignUp(memberDTO);
-//    }
+        return 0;
+    }
 
 }

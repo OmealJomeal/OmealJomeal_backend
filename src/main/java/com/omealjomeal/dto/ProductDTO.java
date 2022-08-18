@@ -1,0 +1,22 @@
+package com.omealjomeal.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.apache.ibatis.type.Alias;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Alias("ProductDTO")
+public class ProductDTO {
+
+    String product_Id;
+    String product_name;
+    String product_price;
+    String product_description;
+    String product_category;
+    String product_img;
+    String product_clear_img;
+
+}

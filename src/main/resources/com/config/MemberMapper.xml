@@ -15,8 +15,8 @@
     <!-- 일반회원가입 -->
     <insert id="generalSignUp" parameterType="MemberDTO">
    	<![CDATA[
-        INSERT	INTO member (id, email, password, phone, privilege, name, region, datetime, point, role, kakao_id)
-        VALUES (seq_member.nextval,#{email},#{password},#{phone},3,#{name},#{region},sysdate,50,'ROLE_USER',#{kakaoId})
+        INSERT	INTO user (user_password,user_name,user_email, user_phone, user_address, user_gender, user_lifestyle, user_interest, user_food_favor, user_access_time)
+        VALUES (#{password},#{name},#{email},#{phone},#{address},#{gender},#{lifestyle},#{interest},#{foodFavor},CURRENT_TIMESTAMP)
         ]]>
 	</insert>
 
