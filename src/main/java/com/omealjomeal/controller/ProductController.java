@@ -25,31 +25,31 @@ public class ProductController {
         return productService.insert(pDto);
     }
 
-    // 챌린지 저장
-    @PostMapping("/api/chatbot/challenge")
-    public Map<String, Object> insertChallenge(HttpServletRequest request, ChallengeDTO challengeDTO,
-                                               @RequestParam("multipartFile") MultipartFile multipartFile) throws Exception {
-        MemberDTO login = principalDetails.getMemberDTO();
-        int memberId = login.getId();
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String datetime = simpleDateFormat.format(calendar.getTime());
-        multipartFile.transferTo(new File(uploadPath + "challenge/", memberId + "_" + datetime + ".png"));
-        Map<String, Object> response = new HashMap<String, Object>();
-        response.put("flag", false);
-        /* ----------이미지 분석---------- */
-        boolean result = getResult();
-        /* ----------------------------------- */
-        if (result) {
-            challengeDTO.setMemberId(memberId);
-            challengeDTO.setDatetime(datetime);
-            int cnt = chatBotService.insertChallenge(challengeDTO);
-            if (cnt == 1) {
-                login.setPoint(login.getPoint() + 5);
-                response.put("flag", true);
-            }
-        }
-        return response;
-    }
+//    // 챌린지 저장
+//    @PostMapping("/api/chatbot/challenge")
+//    public Map<String, Object> insertChallenge(HttpServletRequest request, ChallengeDTO challengeDTO,
+//                                               @RequestParam("multipartFile") MultipartFile multipartFile) throws Exception {
+//        MemberDTO login = principalDetails.getMemberDTO();
+//        int memberId = login.getId();
+//        Calendar calendar = Calendar.getInstance();
+//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        String datetime = simpleDateFormat.format(calendar.getTime());
+//        multipartFile.transferTo(new File(uploadPath + "challenge/", memberId + "_" + datetime + ".png"));
+//        Map<String, Object> response = new HashMap<String, Object>();
+//        response.put("flag", false);
+//        /* ----------이미지 분석---------- */
+//        boolean result = getResult();
+//        /* ----------------------------------- */
+//        if (result) {
+//            challengeDTO.setMemberId(memberId);
+//            challengeDTO.setDatetime(datetime);
+//            int cnt = chatBotService.insertChallenge(challengeDTO);
+//            if (cnt == 1) {
+//                login.setPoint(login.getPoint() + 5);
+//                response.put("flag", true);
+//            }
+//        }
+//        return response;
+//    }
 
 }
