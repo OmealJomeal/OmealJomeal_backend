@@ -23,6 +23,11 @@ public class MemberController {
         session.setAttribute("login", memberDTO);
         return memberDTO;
     }
+    // 로그인 세션 불러오기
+    @GetMapping("/api/loginSession")
+    public MemberDTO loginSession(HttpSession session) throws Exception {
+        return (MemberDTO) session.getAttribute("login");
+    }
 
     // 로그아웃
     @GetMapping("/api/logout")
@@ -51,5 +56,20 @@ public class MemberController {
 //        return memberService.generalSignUp(memberDTO);
         return 0;
     }
+
+    // 일반회원 정보 수정
+//    @PutMapping("/api/generalEdit")
+//    public int generalEdit(HttpSession session, @RequestBody MemberDTO memberDTO) throws Exception {
+//        MemberDTO mDTO = (MemberDTO) session.getAttribute("login");
+//        memberDTO.setId(mDTO.getId());
+//        memberDTO.setPassword(mDTO.getPassword());
+//        memberDTO.setPrivilege(mDTO.getPrivilege());
+//        memberDTO.setDatetime(mDTO.getDatetime());
+//        memberDTO.setPoint(mDTO.getPoint());
+//        session.setAttribute("login", memberDTO);
+//        return memberService.generalEdit(memberDTO);
+//    }
+
+
 
 }
