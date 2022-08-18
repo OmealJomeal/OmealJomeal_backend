@@ -44,6 +44,4 @@ public class MemberController {
 //        return memberService.generalSignUp(memberDTO);
 //    }
 
-
-
 }
