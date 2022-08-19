@@ -32,4 +32,9 @@ public class MemberDAO {
     public int checkId(String email) throws Exception {
         return sqlSession.selectOne("com.config.MemberMapper.checkId", email);
     }
+
+    // 일반회원 정보수정
+    public int userEdit(MemberDTO dto) throws Exception {
+        return sqlSession.update("com.config.MemberMapper.userEdit", dto);
+    }
 }

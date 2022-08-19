@@ -34,4 +34,9 @@ public class MemberServiceImpl implements MemberService{
     public int checkId(String email) throws Exception {
         return memberDAO.checkId(email);
     }
+
+    @Override
+    public int userEdit(MemberDTO dto) throws Exception {
+        return memberDAO.userEdit(dto);
+    }
 }

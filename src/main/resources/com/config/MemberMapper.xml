@@ -16,7 +16,7 @@
     <insert id="generalSignUp" parameterType="hashmap">
    	<![CDATA[
         INSERT	INTO member (user_id,user_password,user_name,user_email, user_phone, user_address, user_gender, user_lifestyle, user_interest, user_food_favor, user_access_time)
-        VALUES (member_seq.nextval,#{password},#{name},#{email},#{phone},#{address},#{gender},#{user_lifestyle},#{user_interest},#{user_food_favor},to_char(sysdate,'yy-mm-dd HH:MI:SS'))
+        VALUES (member_seq.nextval,#{password},#{name},#{email},#{phone},#{address},#{gender},#{user_lifestyle},#{user_interest},#{user_food_favor},to_date(sysdate,'yy-mm-dd hh24:mi:SS'))
         ]]>
 	</insert>
 

@@ -16,6 +16,8 @@ public interface MemberService {
     // 아이디 중복 체크
     public int checkId(String email) throws Exception;
 
+    // 정보수정
+    public int userEdit(MemberDTO dto) throws Exception;
 
 
 }

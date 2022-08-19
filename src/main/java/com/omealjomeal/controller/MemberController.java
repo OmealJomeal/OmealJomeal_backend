@@ -68,6 +68,9 @@ public class MemberController {
         return memberService.generalSignUp(map);
     }
 
+    @GetMapping
+
+
     // 일반회원 정보 수정
     @PutMapping("/api/User")
     public int UserEdit(HttpSession session, @RequestBody HashMap<String, Object> map) throws Exception {
@@ -85,11 +88,10 @@ public class MemberController {
         int food_favor_ID = lifestyleService.findFoodFavor(foodFavorMap);
         //새로 받아온 요소들을 기존의 세션값에 업데이트를 시켜줘야하고, user테이블에 새로 업데이트시켜줘야한다.
         mDTO.setUser_lifestyle(lifestyle_ID);
-        mDTO.setUser_lifestyle(lifestyle_ID);
-        mDTO.setUser_lifestyle(lifestyle_ID);
-//        session.setAttribute("login", memberDTO);
-//        return memberService.UserEdit(memberDTO);
-        return 0;
+        mDTO.setUser_lifestyle(interest_ID);
+        mDTO.setUser_lifestyle(food_favor_ID);
+        session.setAttribute("login", mDTO);
+        return memberService.userEdit(mDTO);
     }
 
 
