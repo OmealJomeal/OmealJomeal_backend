@@ -54,7 +54,6 @@ public class MemberController {
     @PostMapping("/api/user")
     public int insertGeneral(@RequestBody HashMap<String, Object> map) throws Exception {
 
-        System.out.println(map);
         HashMap<String, Integer> LifeStyleMap = (HashMap<String, Integer>) map.get("lifestyle");
         HashMap<String, Integer> interestMap = (HashMap<String, Integer>) map.get("interest");
         HashMap<String, Integer> foodFavorMap = (HashMap<String, Integer>) map.get("food_favor");
@@ -73,6 +72,7 @@ public class MemberController {
     @GetMapping("/api/user")
     public HashMap<String, Object> UserEdit(HttpSession session) throws Exception {
         MemberDTO mDTO = (MemberDTO) session.getAttribute("login");
+        System.out.println(mDTO);
         int lifestyle = mDTO.getUser_lifestyle();
         int interest = mDTO.getUser_interest();
         int food_favor = mDTO.getUser_food_favor();

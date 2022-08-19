@@ -1,0 +1,48 @@
+.checks {
+  position: relative;
+}
+.checks input[type="radio"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+.checks input[type="radio"] + label {
+  display: inline-block;
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+}
+.checks input[type="radio"] + label:before {
+  content: "";
+  position: absolute;
+  left: 50px;
+  top: 10px;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  background: white;
+  border: 1px solid #5f0080;
+  border-radius: 100%;
+}
+.checks input[type="radio"] + label:active:before,
+.checks input[type="radio"]:checked + label:active:before {
+}
+.checks input[type="radio"]:checked + label:before {
+  background: #5f0080;
+  border-color: #5f0080;
+}
+.checks input[type="radio"]:checked + label:after {
+  content: "";
+  position: absolute;
+  top: 16.5px;
+  left: 56.5px;
+  width: 14px;
+  height: 14px;
+  background: white;
+  border-radius: 100%;
+}
