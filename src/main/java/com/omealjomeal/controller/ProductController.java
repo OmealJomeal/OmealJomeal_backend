@@ -6,7 +6,9 @@ import com.omealjomeal.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,14 +18,44 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
-    // 글 등록
+    // 상품 등록
     @PostMapping("/api/product")
-    public int productWrite(@RequestBody ProductDTO pDto, HttpSession session)
+    public int productWrite(@RequestParam("multipartFile") MultipartFile multipartFile, HttpSession session)
             throws Exception {
         MemberDTO mDto = (MemberDTO) session.getAttribute("login");
 
-        return productService.insert(pDto);
+//        return productService.insert(pDto);
+        return 0;
     }
+
+
+    // 챌린지 저장
+//    @PostMapping("/api/chatbot/challenge")
+//    public Map<String, Object> insertChallenge(@AuthenticationPrincipal PrincipalDetails principalDetails,
+//                                               HttpServletRequest request, ChallengeDTO challengeDTO,
+//                                               @RequestParam("multipartFile") MultipartFile multipartFile) throws Exception {
+//        MemberDTO login = principalDetails.getMemberDTO();
+//        int memberId = login.getId();
+//        Calendar calendar = Calendar.getInstance();
+//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        String datetime = simpleDateFormat.format(calendar.getTime());
+//        multipartFile.transferTo(new File(uploadPath + "challenge/", memberId + "_" + datetime + ".png"));
+//        Map<String, Object> response = new HashMap<String, Object>();
+//        response.put("flag", false);
+//        /* ----------이미지 분석---------- */
+//        boolean result = getResult();
+//        /* ----------------------------------- */
+//        if (result) {
+//            challengeDTO.setMemberId(memberId);
+//            challengeDTO.setDatetime(datetime);
+//            int cnt = chatBotService.insertChallenge(challengeDTO);
+//            if (cnt == 1) {
+//                login.setPoint(login.getPoint() + 5);
+//                response.put("flag", true);
+//            }
+//        }
+//        return response;
+//    }
 
 //    // 챌린지 저장
 //    @PostMapping("/api/chatbot/challenge")

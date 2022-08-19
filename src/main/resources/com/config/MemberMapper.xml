@@ -37,9 +37,9 @@
 	</select>
 
 	<!-- 추천요소 업데이트 -->
-	<update id="" parameterType="hashmap">
+	<update id="userEdit" parameterType="hashmap">
 		UPDATE member
-		SET user_access_time = sysdate
+		SET (user_lifestyle,user_interest, user_food_favor) = (#{user_lifestyle},#{user_interest},#{user_food_favor})
 		WHERE user_email = #{email} AND user_password = #{password}
 	</update>
 </mapper>

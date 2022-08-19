@@ -26,4 +26,26 @@
 		]]>
 	</select>
 
+<!--	findLifestyleElememtByID-->
+	<select id="findLifestyleElememtByID" parameterType="int" resultType="LifestyleDTO">
+	<![CDATA[
+		SELECT * FROM lifestyle
+		WHERE lifestyle_id = #{lifestyle}
+		]]>
+	</select>
+<!--	findInterestElememtByID-->
+	<select id="findInterestElememtByID" parameterType="int" resultType="InterestDTO">
+	<![CDATA[
+		SELECT * FROM interest
+		WHERE interest_id = #{interest}
+		]]>
+	</select>
+<!--	findFoodFavorElememtByID-->
+	<select id="findFoodFavorElememtByID" parameterType="int" resultType="FoodFavorDTO">
+	<![CDATA[
+		SELECT * FROM food_favor
+		WHERE food_favor_id = #{food_favor}
+		]]>
+	</select>
+
 </mapper>

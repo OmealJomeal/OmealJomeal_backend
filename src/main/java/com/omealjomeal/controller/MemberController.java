@@ -1,6 +1,8 @@
 package com.omealjomeal.controller;
 
 
+import com.omealjomeal.dto.FoodFavorDTO;
+import com.omealjomeal.dto.InterestDTO;
 import com.omealjomeal.dto.LifestyleDTO;
 import com.omealjomeal.dto.MemberDTO;
 import com.omealjomeal.service.LifestyleService;
@@ -24,7 +26,6 @@ public class MemberController {
 
     @PostMapping("/api/login")
     public MemberDTO login(HttpSession session, @RequestBody HashMap<String, Object> map) throws Exception {
-        System.out.println(map);
         MemberDTO memberDTO = memberService.selectMember(map);
         session.setAttribute("login", memberDTO);
         return memberDTO;
@@ -68,17 +69,32 @@ public class MemberController {
         return memberService.generalSignUp(map);
     }
 
-    @GetMapping
+    //정보수정에 내 정보 보이게.
+    @GetMapping("/api/user")
+    public HashMap<String, Object> UserEdit(HttpSession session) throws Exception {
+        MemberDTO mDTO = (MemberDTO) session.getAttribute("login");
+        int lifestyle = mDTO.getUser_lifestyle();
+        int interest = mDTO.getUser_interest();
+        int food_favor = mDTO.getUser_food_favor();
 
+        LifestyleDTO lDTO = lifestyleService.findLifestyleElememtByID(lifestyle);
+        InterestDTO iDTO = lifestyleService.findInterestElememtByID(interest);
+        FoodFavorDTO fDTO = lifestyleService.findFoodFavorElememtByID(food_favor);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("lifestyle",lDTO);
+        map.put("interest",iDTO);
+        map.put("food_favor",fDTO);
+        System.out.println(map);
+        return map;
+    }
 
     // 일반회원 정보 수정
-    @PutMapping("/api/User")
+    @PutMapping("/api/user")
     public int UserEdit(HttpSession session, @RequestBody HashMap<String, Object> map) throws Exception {
 
         MemberDTO mDTO = (MemberDTO) session.getAttribute("login");
-        //user에서 누구꺼의 추천요소들을 바꿀건지 알기위해서.
-        map.put("user_id",mDTO.getUser_Id());
-
+        mDTO.setUser_email(mDTO.getUser_email());
+        mDTO.setUser_password(mDTO.getUser_password());
         HashMap<String, Integer> LifeStyleMap = (HashMap<String, Integer>) map.get("lifestyle");
         HashMap<String, Integer> interestMap = (HashMap<String, Integer>) map.get("interest");
         HashMap<String, Integer> foodFavorMap = (HashMap<String, Integer>) map.get("food_favor");
