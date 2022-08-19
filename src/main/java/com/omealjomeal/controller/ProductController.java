@@ -17,7 +17,7 @@ public class ProductController {
     ProductService productService;
 
     // 글 등록
-    @PostMapping("/api/product/write")
+    @PostMapping("/api/product")
     public int productWrite(@RequestBody ProductDTO pDto, HttpSession session)
             throws Exception {
         MemberDTO mDto = (MemberDTO) session.getAttribute("login");

@@ -1,7 +1,6 @@
 package com.omealjomeal.controller;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+
 import com.omealjomeal.dto.LifestyleDTO;
 import com.omealjomeal.dto.MemberDTO;
 import com.omealjomeal.service.LifestyleService;
@@ -46,12 +45,12 @@ public class MemberController {
     // 아이디 중복 체크
     @PostMapping("/api/checkEmail")
     public int checkEmail(@RequestBody HashMap<String, Object> map) throws Exception {
-        String email = (String)map.get("email");
+        String email = (String) map.get("email");
         return memberService.checkId(email);
     }
 
-    // 일반회원가입 처리
-    @PostMapping("/api/User")
+    // 회원가입 처리
+    @PostMapping("/api/user")
     public int insertGeneral(@RequestBody HashMap<String, Object> map) throws Exception {
 
         System.out.println(map);

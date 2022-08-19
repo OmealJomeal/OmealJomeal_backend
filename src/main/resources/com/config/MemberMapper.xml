@@ -7,7 +7,7 @@
     <!-- 로그인 -->
     <select id="selectMember" parameterType="hashmap" resultType="MemberDTO">
 	<![CDATA[
-        SELECT * FROM user
+        SELECT * FROM member
 		WHERE user_email = #{email} AND user_password = #{password}
         ]]>
 	</select>
@@ -15,14 +15,14 @@
     <!-- 일반회원가입 -->
     <insert id="generalSignUp" parameterType="hashmap">
    	<![CDATA[
-        INSERT	INTO user (user_password,user_name,user_email, user_phone, user_address, user_gender, user_lifestyle, user_interest, user_food_favor, user_access_time)
-        VALUES (#{password},#{name},#{email},#{phone},#{address},#{gender},#{user_lifestyle},#{user_interest},#{user_food_favor},CURRENT_TIMESTAMP)
+        INSERT	INTO member (user_id,user_password,user_name,user_email, user_phone, user_address, user_gender, user_lifestyle, user_interest, user_food_favor, user_access_time)
+        VALUES (member_seq.nextval,#{password},#{name},#{email},#{phone},#{address},#{gender},#{user_lifestyle},#{user_interest},#{user_food_favor},to_char(sysdate,'yy-mm-dd HH:MI:SS'))
         ]]>
 	</insert>
 
 	<!-- 접속일시 업데이트 -->
 	<update id="updateDatetime" parameterType="hashmap">
-		UPDATE user
+		UPDATE member
 		SET user_access_time = CURRENT_TIMESTAMP
 		WHERE user_email = #{email} AND user_password = #{password}
 	</update>
@@ -31,15 +31,15 @@
 	<select id="checkId" parameterType="String" resultType="int">
 	<![CDATA[
 		SELECT COUNT(*)
-		FROM user
+		FROM member
 		WHERE user_email = #{email}
 		]]>
 	</select>
 
 	<!-- 추천요소 업데이트 -->
 	<update id="" parameterType="hashmap">
-		UPDATE user
-		SET user_access_time = CURRENT_TIMESTAMP
+		UPDATE member
+		SET user_access_time = sysdate
 		WHERE user_email = #{email} AND user_password = #{password}
 	</update>
 </mapper>
