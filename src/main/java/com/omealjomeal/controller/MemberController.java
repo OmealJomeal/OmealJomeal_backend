@@ -84,6 +84,9 @@ public class MemberController {
         int interest_ID = lifestyleService.findInterest(interestMap);
         int food_favor_ID = lifestyleService.findFoodFavor(foodFavorMap);
         //새로 받아온 요소들을 기존의 세션값에 업데이트를 시켜줘야하고, user테이블에 새로 업데이트시켜줘야한다.
+        mDTO.setUser_lifestyle(lifestyle_ID);
+        mDTO.setUser_lifestyle(lifestyle_ID);
+        mDTO.setUser_lifestyle(lifestyle_ID);
 //        session.setAttribute("login", memberDTO);
 //        return memberService.UserEdit(memberDTO);
         return 0;

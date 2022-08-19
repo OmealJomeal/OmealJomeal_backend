@@ -18,9 +18,9 @@ public class MemberDTO {
     String user_phone;
     String user_address;
     String user_gender;
-    String user_lifestyle;
-    String user_interest;
-    String user_food_favor;
+    int user_lifestyle;
+    int user_interest;
+    int user_food_favor;
     String user_access_time;
 
 }
