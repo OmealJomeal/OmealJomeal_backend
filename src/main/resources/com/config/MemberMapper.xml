@@ -13,10 +13,10 @@
 	</select>
 
     <!-- 일반회원가입 -->
-    <insert id="generalSignUp" parameterType="MemberDTO">
+    <insert id="generalSignUp" parameterType="hashmap">
    	<![CDATA[
         INSERT	INTO user (user_password,user_name,user_email, user_phone, user_address, user_gender, user_lifestyle, user_interest, user_food_favor, user_access_time)
-        VALUES (#{password},#{name},#{email},#{phone},#{address},#{gender},#{lifestyle},#{interest},#{foodFavor},CURRENT_TIMESTAMP)
+        VALUES (#{password},#{name},#{email},#{phone},#{address},#{gender},#{user_lifestyle},#{user_interest},#{user_food_favor},CURRENT_TIMESTAMP)
         ]]>
 	</insert>
 
@@ -27,4 +27,19 @@
 		WHERE user_email = #{email} AND user_password = #{password}
 	</update>
 
+	<!-- 아이디 중복 체크 -->
+	<select id="checkId" parameterType="String" resultType="int">
+	<![CDATA[
+		SELECT COUNT(*)
+		FROM user
+		WHERE user_email = #{email}
+		]]>
+	</select>
+
+	<!-- 추천요소 업데이트 -->
+	<update id="" parameterType="hashmap">
+		UPDATE user
+		SET user_access_time = CURRENT_TIMESTAMP
+		WHERE user_email = #{email} AND user_password = #{password}
+	</update>
 </mapper>

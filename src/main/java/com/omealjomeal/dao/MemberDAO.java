@@ -24,8 +24,8 @@ public class MemberDAO {
     }
 
     // 일반회원가입
-    public int generalSignUp(MemberDTO dto) throws Exception {
-        return sqlSession.insert("com.config.MemberMapper.generalSignUp", dto);
+    public int generalSignUp(HashMap<String, Object> map) throws Exception {
+        return sqlSession.insert("com.config.MemberMapper.generalSignUp", map);
     }
 
     // 아이디 중복 체크

@@ -1,6 +1,10 @@
 package com.omealjomeal.controller;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.omealjomeal.dto.LifestyleDTO;
 import com.omealjomeal.dto.MemberDTO;
+import com.omealjomeal.service.LifestyleService;
 import com.omealjomeal.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +19,9 @@ public class MemberController {
 
     @Autowired
     MemberService memberService;
+
+    @Autowired
+    LifestyleService lifestyleService;
 
     @PostMapping("/api/login")
     public MemberDTO login(HttpSession session, @RequestBody HashMap<String, Object> map) throws Exception {
@@ -38,37 +45,50 @@ public class MemberController {
 
     // 아이디 중복 체크
     @PostMapping("/api/checkEmail")
-    public int checkEmail(@RequestBody MemberDTO dto) throws Exception {
-        return memberService.checkId(dto.getUser_email());
+    public int checkEmail(@RequestBody HashMap<String, Object> map) throws Exception {
+        String email = (String)map.get("email");
+        return memberService.checkId(email);
     }
 
     // 일반회원가입 처리
-    @PostMapping("/api/generalSignUp")
+    @PostMapping("/api/User")
     public int insertGeneral(@RequestBody HashMap<String, Object> map) throws Exception {
-//        map.get();
-//        map.get();
-//        map.get();
-//        map.get();
-//        map.get();
-//        map에서 정보 빼서 memberDTO에 set하고, lifestyle,
-//        interest, food_Favor값도 Map으로 get해서 select해서
-//        lifestyle_id,interest_id,food_favor_id가 몇인지 조회해서 추가시키자.
-//        return memberService.generalSignUp(memberDTO);
-        return 0;
+
+        System.out.println(map);
+        HashMap<String, Integer> LifeStyleMap = (HashMap<String, Integer>) map.get("lifestyle");
+        HashMap<String, Integer> interestMap = (HashMap<String, Integer>) map.get("interest");
+        HashMap<String, Integer> foodFavorMap = (HashMap<String, Integer>) map.get("food_favor");
+
+        int lifestyle_ID = lifestyleService.findLifestyle(LifeStyleMap);
+        int interest_ID = lifestyleService.findInterest(interestMap);
+        int food_favor_ID = lifestyleService.findFoodFavor(foodFavorMap);
+        map.put("user_lifestyle",lifestyle_ID);
+        map.put("user_interest",interest_ID);
+        map.put("user_food_favor",food_favor_ID);
+
+        return memberService.generalSignUp(map);
     }
 
     // 일반회원 정보 수정
-//    @PutMapping("/api/generalEdit")
-//    public int generalEdit(HttpSession session, @RequestBody MemberDTO memberDTO) throws Exception {
-//        MemberDTO mDTO = (MemberDTO) session.getAttribute("login");
-//        memberDTO.setId(mDTO.getId());
-//        memberDTO.setPassword(mDTO.getPassword());
-//        memberDTO.setPrivilege(mDTO.getPrivilege());
-//        memberDTO.setDatetime(mDTO.getDatetime());
-//        memberDTO.setPoint(mDTO.getPoint());
+    @PutMapping("/api/User")
+    public int UserEdit(HttpSession session, @RequestBody HashMap<String, Object> map) throws Exception {
+
+        MemberDTO mDTO = (MemberDTO) session.getAttribute("login");
+        //user에서 누구꺼의 추천요소들을 바꿀건지 알기위해서.
+        map.put("user_id",mDTO.getUser_Id());
+
+        HashMap<String, Integer> LifeStyleMap = (HashMap<String, Integer>) map.get("lifestyle");
+        HashMap<String, Integer> interestMap = (HashMap<String, Integer>) map.get("interest");
+        HashMap<String, Integer> foodFavorMap = (HashMap<String, Integer>) map.get("food_favor");
+
+        int lifestyle_ID = lifestyleService.findLifestyle(LifeStyleMap);
+        int interest_ID = lifestyleService.findInterest(interestMap);
+        int food_favor_ID = lifestyleService.findFoodFavor(foodFavorMap);
+        //새로 받아온 요소들을 기존의 세션값에 업데이트를 시켜줘야하고, user테이블에 새로 업데이트시켜줘야한다.
 //        session.setAttribute("login", memberDTO);
-//        return memberService.generalEdit(memberDTO);
-//    }
+//        return memberService.UserEdit(memberDTO);
+        return 0;
+    }
 
 
 

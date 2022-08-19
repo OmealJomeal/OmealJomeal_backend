@@ -25,8 +25,8 @@ public class MemberServiceImpl implements MemberService{
 
     // 일반회원가입
     @Override
-    public int generalSignUp(MemberDTO dto) throws Exception {
-        return memberDAO.generalSignUp(dto);
+    public int generalSignUp(HashMap<String, Object> map) throws Exception {
+        return memberDAO.generalSignUp(map);
     }
 
     // 아이디 중복 체크
