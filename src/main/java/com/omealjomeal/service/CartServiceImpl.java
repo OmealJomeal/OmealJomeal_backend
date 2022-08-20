@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("cartService")
 public class CartServiceImpl implements CartService{
@@ -25,6 +26,11 @@ public class CartServiceImpl implements CartService{
     @Override
     public int cartProductInsert(int product_id) throws Exception {
         return dao.cartProductInsert(product_id);
+    }
+
+    @Override
+    public List<Map<String,String>> cartView(int user_id) throws Exception {
+        return dao.cartView(user_id);
     }
 
 }

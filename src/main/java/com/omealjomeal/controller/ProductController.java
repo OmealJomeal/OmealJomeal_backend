@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class ProductController {
@@ -30,8 +31,9 @@ public class ProductController {
 
     @Value("${spring.servlet.multipart.location}")
     private String uploadPath;
+
     // 상품 등록
-    @PostMapping("/api/productImg")
+    @PostMapping("/api/product")
     public int productImg(@RequestPart("product_img") MultipartFile files,
                             @RequestPart("product_clear_img") MultipartFile clear_img,
                             @RequestParam("product_name") String product_name,
@@ -40,6 +42,7 @@ public class ProductController {
                             @RequestParam("product_category") String product_category
                             )
             throws Exception {
+        System.out.println(product_category);
         ProductDTO productDTO = new ProductDTO();
         productDTO.setProduct_name(product_name);
         int product_price = Integer.parseInt(product_pric);
@@ -48,23 +51,20 @@ public class ProductController {
         productDTO.setProduct_category(product_category);
 
         int n = productService.insert(productDTO);
-        MemberDTO mDto = (MemberDTO) session.getAttribute("login");
+        int product_id = productService.selectProductID(productDTO);
 
-        int user_id = mDto.getUser_id();
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String datetime = simpleDateFormat.format(calendar.getTime());
-        files.transferTo(new File(uploadPath + "product/",  user_id + "_" + datetime + ".png"));
-//        map.put("user_id",user_id);
-//        int cnt = productService.insert(map);
-//        return cnt;
-        return 0;
+        //트랜잭션 고민.
+        files.transferTo(new File(uploadPath,  product_id + "_"+"noneClear"+ ".png"));
+        clear_img.transferTo(new File(uploadPath,  product_id + "_"+"clearImg"+ ".png"));
+
+        return n;
     }
 
     //상품 자세히보기
     @GetMapping("/api/productdetail/{product_id}")
     public ProductDTO productDetail(@PathVariable String product_id) throws Exception {
         ProductDTO productDTO = productService.selectProductDetail(product_id);
+        System.out.println(productDTO);
         return productDTO;
     }
 
@@ -88,19 +88,22 @@ public class ProductController {
         CartDTO cDTO = new CartDTO();
         cDTO.setTotal_price(total_price);
         cDTO.setUser_id(user_id);
+
+        //트랜잭션 고려
         int cartCnt = cartService.cartInsert(cDTO);
         int CartProductCnt = cartService.cartProductInsert(productDTO.getProduct_id());
         return cartCnt;
     }
 
     //장바구니 조회
-//    @GetMapping("/api/cart")
-//    public HashMap<String, Object> Cart() throws Exception {
-//        MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
-//
-//        HashMap<String, Object> map = cartService.cartView(memberDTO.getUser_id());
-//        return map;
-//    }
+    @GetMapping("/api/cart")
+    public List<Map<String,String>> Cart() throws Exception {
+        MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
+        System.out.println(memberDTO);
+        List<Map<String,String>> map = cartService.cartView(memberDTO.getUser_id());
+        System.out.println(map);
+        return map;
+    }
 
     //상품 검색도 만들어야함.
 
