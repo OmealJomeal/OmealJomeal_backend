@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.lang.reflect.Member;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,6 +45,8 @@ public class FeedController {
                           @RequestParam("feed_food_favor") HashMap<String,Integer> feed_food_favor,
                           HttpSession session
     ) throws Exception{
+        MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
+        int user_id = memberDTO.getUser_id();
         FeedDTO feedDTO = new FeedDTO();
         feedDTO.setFeed_title(feed_title);
         feedDTO.setFeed_description(feed_description);
@@ -51,6 +54,7 @@ public class FeedController {
         feedDTO.setFeed_cooktime(feed_cooktime);
         feedDTO.setFeed_food_time(feed_food_time);
         feedDTO.setFeed_cooklevel(feed_cooklevel);
+        feedDTO.setUser_id(user_id);
 
         int lifestyle_ID = lifestyleService.findLifestyle(feed_lifestyle);
         int interest_ID = lifestyleService.findInterest(feed_interest);
