@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Repository("cartDAO")
 public class CartDAO {
@@ -24,7 +23,4 @@ public class CartDAO {
         return sqlSession.insert("com.config.CartMapper.cartProductInsert",product_id);
     }
 
-    public List<Map<String,String>> cartView(int user_id) throws Exception {
-        return sqlSession.selectList("com.config.CartMapper.cartView",user_id);
-    }
 }

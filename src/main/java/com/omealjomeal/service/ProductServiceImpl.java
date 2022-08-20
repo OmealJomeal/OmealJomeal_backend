@@ -31,9 +31,4 @@ public class ProductServiceImpl implements ProductService{
     public ProductDTO selectProductDetail(String product_id) throws Exception {
         return dao.selectProductDetail(product_id);
     }
-
-    @Override
-    public int selectProductID(ProductDTO productDTO) throws Exception {
-        return dao.selectProductID(productDTO);
-    }
 }

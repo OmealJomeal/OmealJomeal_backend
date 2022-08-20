@@ -12,6 +12,5 @@ public interface ProductService {
     public int insert(ProductDTO productDTO) throws Exception;
     public List<ProductDTO> selectProductList() throws Exception;
     public ProductDTO selectProductDetail(String product_id) throws Exception;
-    public int selectProductID(ProductDTO productDTO) throws Exception;
 
 }
