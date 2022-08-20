@@ -11,6 +11,7 @@ import SignIn from "./pages/signin/SignIn";
 import SignUp from "./pages/signup/SignUp";
 import Cart from "./pages/carts/Cart";
 import CreateFeed from "./pages/createfeed/CreateFeed";
+import ProductDetail from "./pages/productdetail/ProductDetail";
 
 function App() {
   return (
@@ -22,13 +23,15 @@ function App() {
             <NavBar />
             <Routes className="App">
               <Route path="/" element={<Main />}></Route>
-              <Route path="signin" element={<SignIn />}></Route>
-              <Route path="signup" element={<SignUp />}></Route>
-              <Route path="mypage" element={<MyPage />}></Route>
-              <Route path="signin" element={<SignIn />}></Route>
-              <Route path="signup" element={<SignUp />}></Route>
-              <Route path="cart" element={<Cart />}></Route>
-              <Route path="createfeed" element={<CreateFeed />}></Route>
+              <Route path="/signin" element={<SignIn />}></Route>
+              <Route path="/signup" element={<SignUp />}></Route>
+              <Route path="/mypage" element={<MyPage />}></Route>
+              <Route path="/cart" element={<Cart />}></Route>
+              <Route path="/createfeed" element={<CreateFeed />}></Route>
+              <Route
+                path="/productdetail/:id"
+                element={<ProductDetail />}
+              ></Route>
             </Routes>
           </BrowserRouter>
         </ThemeProvider>

@@ -11,12 +11,15 @@ import org.apache.ibatis.type.Alias;
 @Alias("ProductDTO")
 public class ProductDTO {
 
-    String product_Id;
+    int product_Id;
     String product_name;
     String product_price;
     String product_description;
     String product_category;
     String product_img;
     String product_clear_img;
+    String product_time;
+    int product_amount;
 
+    int user_id;
 }

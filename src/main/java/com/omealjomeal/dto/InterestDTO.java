@@ -11,6 +11,7 @@ import org.apache.ibatis.type.Alias;
 @Alias("InterestDTO")
 public class InterestDTO {
 
+    int interest_id;
     int pet;
     int outdoor;
     int health;

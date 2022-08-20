@@ -11,13 +11,13 @@ import org.apache.ibatis.type.Alias;
 @Alias("PlatingDTO")
 public class PlatingDTO {
 
-    String plating_Id;
+    int plating_Id;
     String plating_title;
     String plating_image;
     String plating_description;
     String plating_time;
 
-    String user_Id;
+    int user_Id;
 
 
 }

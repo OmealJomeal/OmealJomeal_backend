@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
+import java.util.List;
 
 @Service("productService")
 public class ProductServiceImpl implements ProductService{
@@ -17,9 +18,17 @@ public class ProductServiceImpl implements ProductService{
     ProductDAO dao;
 
     @Override
-    public int insert(ProductDTO dto) throws Exception {
-        return dao.insert(dto);
+    public int insert(HashMap<String, Object> map) throws Exception {
+        return dao.insert(map);
     }
 
+    @Override
+    public List<ProductDTO> selectProductList() throws Exception {
+        return dao.selectProductList();
+    }
 
+    @Override
+    public ProductDTO selectProductDetail(String product_id) throws Exception {
+        return dao.selectProductDetail(product_id);
+    }
 }

@@ -40,7 +40,7 @@ const SearchBox = () => {
             cursor: "pointer",
           }}
         >
-          <img alt="searchicon" src="img/searchicon.png" />
+          <img alt="searchicon" src={require("../../assets/searchicon.png")} />
         </button>
       </div>
     </>

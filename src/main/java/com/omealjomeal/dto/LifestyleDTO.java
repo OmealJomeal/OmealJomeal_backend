@@ -11,6 +11,7 @@ import org.apache.ibatis.type.Alias;
 @Alias("LifestyleDTO")
 public class LifestyleDTO {
 
+    int lifestyle_id;
     int livealone;
     int gender;
     int child;

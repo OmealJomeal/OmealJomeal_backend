@@ -6,10 +6,25 @@
 
 	<insert id="insert" parameterType="ProductDTO">
 		<![CDATA[
-		insert into product ( product_name, product_price, product_description, product_category, product_img, product_clear_img )
-		values (  #{product_name}, #{product_price}, #{product_description}, #{product_category}, #{product_img}, #{product_clear_img} )
+		insert into product ( product_id, product_name, product_price, product_description, product_category, product_img, product_clear_img,user_id,product_time )
+		values (product_seq.nextval,  #{product_name}, #{product_price}, #{product_description}, #{product_category}, #{product_img}, #{product_clear_img},#{user_id},sysdate )
 		]]>
 	</insert>
+
+	<!-- 상품 자세히 보기 -->
+	<select id="selectProductDetail" parameterType="string" resultType="ProductDTO">
+	<![CDATA[
+		SELECT * FROM product
+		WHERE product_name = #{product_name}
+		]]>
+	</select>
+
+	<!-- 상품 리스트 보기 -->
+	<select id="selectProductList" resultType="ProductDTO">
+	<![CDATA[
+		SELECT * FROM product
+		]]>
+	</select>
 
 <!--	<select id="search" resultType="ProductDTO" parameterType="hashmap">-->
 <!--		<![CDATA[-->

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
+import java.util.List;
 
 @Repository("productDAO")
 public class ProductDAO {
@@ -14,7 +15,16 @@ public class ProductDAO {
     @Autowired
     SqlSession sqlSession;
 
-    public int insert(ProductDTO dto) throws Exception {
-        return sqlSession.insert("com.config.ProductMapper.insert", dto);
+    public int insert(HashMap<String, Object> map) throws Exception {
+        return sqlSession.insert("com.config.ProductMapper.insert", map);
     }
+
+    public List<ProductDTO> selectProductList() throws Exception {
+        return sqlSession.selectList("com.config.ProductMapper.selectProductList");
+    }
+
+    public ProductDTO selectProductDetail(String product_id) throws Exception {
+        return sqlSession.selectOne("com.config.ProductMapper.selectProductDetail",product_id);
+    }
+
 }

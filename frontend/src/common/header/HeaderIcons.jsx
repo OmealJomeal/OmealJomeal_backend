@@ -15,18 +15,18 @@ const HeaderIcons = () => {
         <img
           style={{ margin: "0 5px" }}
           alt="searchicon"
-          src="img/headermap.png"
+          src={require("../../assets/headermap.png")}
         />
         <img
           style={{ margin: "0 5px" }}
           alt="searchicon"
-          src="img/headerheart.png"
+          src={require("../../assets/headerheart.png")}
         />
         <a href="/cart">
           <img
             style={{ margin: "0 5px" }}
             alt="searchicon"
-            src="img/headercart.png"
+            src={require("../../assets/headercart.png")}
           />
         </a>
       </div>

@@ -52,16 +52,15 @@ const SignIn = () => {
   const axios_post = () => {
     const data = {
       email: email,
-      password: password
+      password: password,
     };
-    const crossOriginIsolated = {withCredentials: true}
     axios
       .post("http://localhost:8080/api/login", JSON.stringify(data), {
         headers: {
           "Content-Type": "application/json",
           data,
         },
-      },crossOriginIsolated)
+      })
       .then((response) => {
         console.log(response);
         if (response.data !== "") {
