@@ -51,7 +51,7 @@ const HeaderNav = () => {
       .catch((error) => {
         console.log(error);
       });
-  });
+  }, []);
 
   return (
     <>

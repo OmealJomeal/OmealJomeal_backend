@@ -12,6 +12,7 @@ import SignUp from "./pages/signup/SignUp";
 import Cart from "./pages/carts/Cart";
 import CreateFeed from "./pages/createfeed/CreateFeed";
 import ProductDetail from "./pages/productdetail/ProductDetail";
+import CreateProduct from "./pages/CreateProduct/CreateProduct";
 import React from "react";
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
               <Route path="/mypage" element={<MyPage />}></Route>
               <Route path="/cart" element={<Cart />}></Route>
               <Route path="/createfeed" element={<CreateFeed />}></Route>
+              <Route path="/createproduct" element={<CreateProduct />}></Route>
               <Route
                 path="/productdetail/:id"
                 element={<ProductDetail />}

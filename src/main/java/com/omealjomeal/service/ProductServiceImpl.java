@@ -18,8 +18,8 @@ public class ProductServiceImpl implements ProductService{
     ProductDAO dao;
 
     @Override
-    public int insert(HashMap<String, Object> map) throws Exception {
-        return dao.insert(map);
+    public int insert(ProductDTO productDTO) throws Exception {
+        return dao.insert(productDTO);
     }
 
     @Override

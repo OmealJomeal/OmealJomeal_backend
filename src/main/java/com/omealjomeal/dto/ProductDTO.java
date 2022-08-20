@@ -20,6 +20,4 @@ public class ProductDTO {
     String product_clear_img;
     String product_time;
     int product_amount;
-
-    int user_id;
 }

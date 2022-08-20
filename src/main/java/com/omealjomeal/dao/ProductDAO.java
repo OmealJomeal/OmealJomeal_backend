@@ -15,8 +15,8 @@ public class ProductDAO {
     @Autowired
     SqlSession sqlSession;
 
-    public int insert(HashMap<String, Object> map) throws Exception {
-        return sqlSession.insert("com.config.ProductMapper.insert", map);
+    public int insert(ProductDTO productDTO) throws Exception {
+        return sqlSession.insert("com.config.ProductMapper.insert", productDTO);
     }
 
     public List<ProductDTO> selectProductList() throws Exception {

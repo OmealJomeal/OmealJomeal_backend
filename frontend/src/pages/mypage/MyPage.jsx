@@ -40,7 +40,7 @@ const MyPage = () => {
       .catch((error) => {
         console.log("마이페이지", error.response.data);
       });
-  });
+  }, []);
   const [value, setValue] = useState({
     email: "",
     password: "",
