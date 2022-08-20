@@ -28,4 +28,27 @@
 		]]>
 	</insert>
 
+	<!--피드 조회-->
+	<select id="feedView" parameterType="int" resultMap="selectMapList">
+	<![CDATA[
+		select a.cart_id, a.total_price,
+			   a.user_id, cp.product_id,
+			   p.product_amount,p.product_category,p.product_description, p.product_time
+		from cart a, cartproduct cp, product p, member m
+		where a.cart_id = cp.cart_id
+		  and cp.product_id=p.product_id
+		  and a.user_id=m.user_id and a.user_id=#{user_id}
+		]]>
+	</select>
+	<resultMap type="map" id="selectMapList">
+		<result column="cart_id"/>
+		<result column="total_price" />
+		<result column="user_id" />
+		<result column="product_id" />
+		<result column="product_amount" />
+		<result column="product_category" />
+		<result column="product_description" />
+		<result column="product_time" />
+	</resultMap>
+
 </mapper>

@@ -81,11 +81,17 @@ public class FeedController {
 
         return feedNum;
     }
+    //피드 자세히보기
+//    @GetMapping("/api/feedDetail")
 
+    //피드 목록 보기. 여기서 알고리즘 적용
     @GetMapping("/api/feed")
-    public List<Map<String,String>> selectFeedList(){
+    public List<Map<String,String>> selectFeedList(HttpSession session) throws Exception{
+        MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
         //피드 & feedProduct & product 조인해서 불러오기.
-        return null;
+        List<Map<String,String>> map = feedService.feedView(memberDTO.getUser_id());
+
+        return map;
     }
 
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository("feedDAO")
 public class FeedDAO {
@@ -22,11 +23,12 @@ public class FeedDAO {
     public int selectFeedId(FeedDTO feedDTO) throws Exception {
         return sqlSession.insert("com.config.FeedMapper.selectFeedId", feedDTO);
     }
+
     public int feedProductUpload(FeedProductDTO feedProductDTO) throws Exception {
         return sqlSession.insert("com.config.FeedMapper.feedProductUpload", feedProductDTO);
     }
 
-
-
-
+    public List<Map<String, String>> feedView(int user_id) throws Exception {
+        return sqlSession.selectList("com.config.FeedMapper.feedView",user_id);
+    }
 }

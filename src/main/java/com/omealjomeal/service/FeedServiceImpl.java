@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service("feedService")
 public class FeedServiceImpl implements FeedService{
@@ -30,5 +31,11 @@ public class FeedServiceImpl implements FeedService{
     public int feedProductUpload(FeedProductDTO feedProductDTO) throws Exception {
         return dao.feedProductUpload(feedProductDTO);
     }
+
+    @Override
+    public List<Map<String, String>> feedView(int user_id) throws Exception {
+        return dao.feedView(user_id);
+    }
+
 
 }
