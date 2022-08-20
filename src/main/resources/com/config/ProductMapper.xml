@@ -7,8 +7,8 @@
 <!--	상품등록-->
 	<insert id="insert" parameterType="ProductDTO">
 		<![CDATA[
-		insert into product ( product_id, product_name, product_price, product_description, product_category, product_img, product_clear_img,user_id,product_time )
-		values (product_seq.nextval,  #{product_name}, #{product_price}, #{product_description}, #{product_category}, #{product_img}, #{product_clear_img},#{user_id},sysdate )
+		insert into product ( product_id, product_name, product_price, product_description, product_category, product_img, product_clear_img,product_time )
+		values (product_seq.nextval,  #{product_name}, #{product_price}, #{product_description}, #{product_category}, #{product_img}, #{product_clear_img},sysdate )
 		]]>
 	</insert>
 
@@ -26,6 +26,15 @@
 		SELECT * FROM product
 		]]>
 	</select>
+
+	<!-- 상품 아이디 찾아오기 -->
+	<select id="selectProductID" parameterType="ProductDTO" resultType="int">
+	<![CDATA[
+		SELECT product_id FROM product
+		WHERE product_name = #{product_name}
+		]]>
+	</select>
+
 
 <!--	<select id="search" resultType="ProductDTO" parameterType="hashmap">-->
 <!--		<![CDATA[-->

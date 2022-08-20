@@ -6,7 +6,7 @@ const CreateProduct = () => {
     name: "",
     price: "",
     description: "",
-    category: ""
+    category: "",
   });
 
   const onChangeHandler = (e) => {
@@ -32,8 +32,6 @@ const CreateProduct = () => {
   };
 
   const onUploadProduct = () => {
-    // formData.append('stringFoodDto', JSON.stringify(foodDto));
-    // console.log(formData.get("product_name"));
     if (formData.get("product_name") === null) {
       formData.append("product_name", value.name);
     }
@@ -47,18 +45,8 @@ const CreateProduct = () => {
       formData.append("product_category", value.category);
     }
 
-    // const data = {
-    //   product_name: value.name,
-    //   product_price: value.price,
-    //   product_description: value.description,
-    //   product_category: value.category,
-    // };
-    // formData.append("product_name",value.name);
-    // formData.append("product_price",value.price);
-    // formData.append("product_description",value.description);
-    // formData.append("product_category",value.category);
     axios
-      .post("http://localhost:8080/api/productImg", formData)
+      .post("http://localhost:8080/api/product", formData)
       .then((response) => {
         console.log(response);
       })

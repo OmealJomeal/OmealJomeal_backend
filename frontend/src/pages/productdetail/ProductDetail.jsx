@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+
 import styled from "styled-components";
 import { BsHeart } from "react-icons/bs";
 import { VscBell } from "react-icons/vsc";
@@ -55,6 +58,23 @@ const CountButton = styled.button`
 `;
 
 const ProductDetail = () => {
+  const { id } = useParams();
+  const [product, setProduct] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/api/productdetail/${id}`)
+      .then((response) => {
+        console.log(response);
+        setProduct(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [id]);
+
+  console.log(product);
+
   const [heartHover, setHeartHover] = useState(false);
   const [bellHover, setBellHover] = useState(false);
 
@@ -94,6 +114,8 @@ const ProductDetail = () => {
     setCount(count + 1);
   };
 
+  const image = `../../images/${id}_noneClear.png`;
+
   return (
     <>
       <div
@@ -113,9 +135,13 @@ const ProductDetail = () => {
               style={{
                 width: "435px",
                 height: "500px",
-                backgroundColor: "yellow",
               }}
-            ></div>
+            >
+              <img
+                alt="product_image"
+                src={`/img/${id}_noneClear.png`}
+              />
+            </div>
           </div>
           <div
             style={{
@@ -140,7 +166,7 @@ const ProductDetail = () => {
                 fontWeight: "bold",
               }}
             >
-              [모두의맛집] 샤오짠 탄탄면
+              {product && product.product_name}
             </ProductBox>
             <ProductBox
               style={{
@@ -149,7 +175,7 @@ const ProductDetail = () => {
                 margin: "0px 0px 20px 0px",
               }}
             >
-              면류
+              {product && product.product_category}
             </ProductBox>
             <ProductBox style={{ margin: "0px 0px 35px 0px" }}>
               <span
@@ -159,7 +185,7 @@ const ProductDetail = () => {
                   fontWeight: "bold",
                 }}
               >
-                8,800
+                {product && product.product_price}
               </span>
               &nbsp; &nbsp;
               <span
@@ -207,14 +233,7 @@ const ProductDetail = () => {
             >
               <ProductMiniBox>상품 설명</ProductMiniBox>
               <ProductSecBox>
-                전국의 맛집을 모아 가정의 식탁위에 펼쳐내는 브랜드, 모두의
-                맛집을 만나보세요. 이번에는 대만 로컬 푸드를 캐주얼하게 재해석해
-                선보이는 샤오짠의 대표메뉴, 탄탄면을 준비했어요. 땅콩소스와
-                돼지고기를 넉넉히 넣어 묵직한 국물 맛이 특징인데요. 여기에
-                아삭한 청경채까지 더해지니 풍성함이 배가 되었답니다. 생면을
-                사용해서 국물이 골고루 배어드는 것은 물론, 더욱 쫄깃하게 즐길 수
-                있지요. 간단한 조리만 거치면 긴 줄을 기다릴 필요 없이 매장의 맛
-                그대로 즐길 수 있을 거에요.
+                {product && product.product_description}
               </ProductSecBox>
             </ProductBox>
             <ProductBox style={{ display: "flex", wrap: "wrap" }}>

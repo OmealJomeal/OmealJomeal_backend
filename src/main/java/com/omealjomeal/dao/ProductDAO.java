@@ -27,4 +27,10 @@ public class ProductDAO {
         return sqlSession.selectOne("com.config.ProductMapper.selectProductDetail",product_id);
     }
 
+    public int selectProductID(ProductDTO productDTO) throws Exception {
+        return sqlSession.selectOne("com.config.ProductMapper.selectProductID",productDTO);
+    }
+
+
+
 }
