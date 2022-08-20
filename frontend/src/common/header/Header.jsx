@@ -3,17 +3,8 @@ import Promition from "./Promition";
 import SearchBox from "./SearchBox";
 import HeaderNav from "./HeaderNav";
 import HeaderIcons from "./HeaderIcons";
-import axios from "axios";
 
 const Header = () => {
-  axios
-    .get("http://localhost:8080/api/loginSession")
-    .then((response) => {
-      console.log("로그인 세션", response);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
   return (
     <>
       <Promition />

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import styled from "styled-components";
 
 const Text = styled.span`
@@ -20,7 +21,38 @@ const Middle = styled.div`
   margin: 0 8px;
 `;
 
+const Login = styled.span``;
+
+const Logout = styled.span``;
+
 const HeaderNav = () => {
+  const [logined, setLogined] = useState(null);
+
+  const onLogOut = () => {
+    axios
+      .get("http://localhost:8080/api/logout")
+      .then((response) => {
+        console.log("로그인 세션", response);
+        alert("로그아웃 되셨습니다.");
+        setLogined("");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/api/loginSession")
+      .then((response) => {
+        console.log("로그인 세션", response);
+        setLogined(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  });
+
   return (
     <>
       <div style={{ position: "absolute", top: "5px", right: "2px" }}>
@@ -28,8 +60,12 @@ const HeaderNav = () => {
           회원가입
         </Text>
         <Middle></Middle>
-        <Text as="a" href="/signin" style={{}}>
-          로그인
+        <Text as="a" href="/signin">
+          {logined === "" ? (
+            <Login>로그인 </Login>
+          ) : (
+            <Logout onClick={onLogOut}>로그아웃</Logout>
+          )}
         </Text>
         <Middle></Middle>
         <Text as="a" href="/mypage">

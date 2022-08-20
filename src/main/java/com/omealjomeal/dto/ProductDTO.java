@@ -11,9 +11,9 @@ import org.apache.ibatis.type.Alias;
 @Alias("ProductDTO")
 public class ProductDTO {
 
-    int product_Id;
+    int product_id;
     String product_name;
-    String product_price;
+    int product_price;
     String product_description;
     String product_category;
     String product_img;

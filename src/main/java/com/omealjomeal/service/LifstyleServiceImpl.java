@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 
-@Service("LifestyleService")
+@Service("lifestyleService")
 public class LifstyleServiceImpl implements LifestyleService{
 
     @Autowired

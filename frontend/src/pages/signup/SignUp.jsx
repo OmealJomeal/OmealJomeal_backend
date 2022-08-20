@@ -370,7 +370,7 @@ const SingUp = () => {
         <div>
           <UnitBox>
             <Indicator>성별</Indicator>
-            <div class="checks">
+            <div className="checks">
               <input
                 onChange={onChangeHandler}
                 type="radio"
@@ -378,7 +378,7 @@ const SingUp = () => {
                 name="gender"
                 value="M"
               />
-              <label for="man">
+              <label htmlFor="man">
                 <div
                   style={{
                     width: "225px",
@@ -391,7 +391,7 @@ const SingUp = () => {
                 </div>
               </label>
             </div>
-            <div class="checks">
+            <div className="checks">
               <input
                 onChange={onChangeHandler}
                 type="radio"
@@ -399,7 +399,7 @@ const SingUp = () => {
                 name="gender"
                 value="W"
               />
-              <label for="woman">
+              <label htmlFor="woman">
                 <div
                   style={{
                     width: "225px",

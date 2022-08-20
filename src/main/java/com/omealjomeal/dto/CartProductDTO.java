@@ -8,16 +8,11 @@ import org.apache.ibatis.type.Alias;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Alias("PlatingDTO")
-public class PlatingDTO {
+@Alias("CartProductDTO")
+public class CartProductDTO {
 
-    int plating_id;
-    String plating_title;
-    String plating_image;
-    String plating_description;
-    String plating_time;
-
-    int user_id;
+    int cart_id;
+    int product_id;
 
 
 }

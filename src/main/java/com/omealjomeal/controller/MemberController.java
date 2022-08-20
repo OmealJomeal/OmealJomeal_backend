@@ -72,7 +72,6 @@ public class MemberController {
     @GetMapping("/api/user")
     public HashMap<String, Object> UserEdit(HttpSession session) throws Exception {
         MemberDTO mDTO = (MemberDTO) session.getAttribute("login");
-        System.out.println(mDTO);
         int lifestyle = mDTO.getUser_lifestyle();
         int interest = mDTO.getUser_interest();
         int food_favor = mDTO.getUser_food_favor();

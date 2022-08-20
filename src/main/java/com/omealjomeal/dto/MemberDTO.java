@@ -11,7 +11,7 @@ import org.apache.ibatis.type.Alias;
 @Alias("MemberDTO")
 public class MemberDTO {
 
-    int user_Id;
+    int user_id;
     String user_password;
     String user_name;
     String user_email;

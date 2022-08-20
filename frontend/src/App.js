@@ -12,6 +12,7 @@ import SignUp from "./pages/signup/SignUp";
 import Cart from "./pages/carts/Cart";
 import CreateFeed from "./pages/createfeed/CreateFeed";
 import ProductDetail from "./pages/productdetail/ProductDetail";
+import React from "react";
 
 function App() {
   return (

@@ -11,7 +11,7 @@ import org.apache.ibatis.type.Alias;
 @Alias("FeedDTO")
 public class FeedDTO {
 
-    int feed_Id;
+    int feed_id;
     String feed_title;
     String feed_image;
     String feed_description;
@@ -25,7 +25,7 @@ public class FeedDTO {
     String feed_lifestyle;
     String feed_interest;
     String feed_food_favor;
-    String user_Id;
+    String user_id;
 
 
 }
