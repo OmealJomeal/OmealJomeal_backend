@@ -31,24 +31,33 @@
 	<!--피드 조회-->
 	<select id="feedView" parameterType="int" resultMap="selectMapList">
 	<![CDATA[
-		select a.cart_id, a.total_price,
-			   a.user_id, cp.product_id,
-			   p.product_amount,p.product_category,p.product_description, p.product_time
-		from cart a, cartproduct cp, product p, member m
-		where a.cart_id = cp.cart_id
-		  and cp.product_id=p.product_id
-		  and a.user_id=m.user_id and a.user_id=#{user_id}
+		select f.feed_id, f.feed_title,
+			   f.feed_description, f.feed_recipe,f.feed_cooktime,
+			   f.feed_cooklevel,f.feed_time,
+			   f.feed_lifestyle,f.feed_interest,f.feed_food_favor,
+			   f.feed_food_time,
+			   fp.product_id,p.product_description,p.product_name
+		from feed f, feedproduct fp, product p, member m
+		where f.feed_id = fp.feed_id
+		  and fp.product_id=p.product_id
+		  and f.user_id=m.user_id and m.user_id=#{user_id}
 		]]>
 	</select>
 	<resultMap type="map" id="selectMapList">
-		<result column="cart_id"/>
-		<result column="total_price" />
-		<result column="user_id" />
-		<result column="product_id" />
-		<result column="product_amount" />
-		<result column="product_category" />
-		<result column="product_description" />
-		<result column="product_time" />
+		<result column="feed_id" property="feed_id"/>
+		<result column="feed_title" property="feed_title"/>
+		<result column="feed_description" property="feed_description"/>
+		<result column="feed_recipe" property="feed_recipe"/>
+		<result column="feed_cooktime" property="feed_cooktime"/>
+		<result column="feed_cooklevel" property="feed_cooklevel"/>
+		<result column="feed_time" property="feed_time"/>
+		<result column="feed_lifestyle" property="feed_lifestyle"/>
+		<result column="feed_interest" property="feed_interest"/>
+		<result column="feed_food_favor" property="feed_food_favor"/>
+		<result column="feed_food_time" property="feed_food_time"/>
+		<result column="product_id" property="product_id"/>
+		<result column="product_description" property="product_description"/>
+		<result column="product_name" property="product_name"/>
 	</resultMap>
 
 </mapper>

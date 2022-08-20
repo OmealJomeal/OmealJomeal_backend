@@ -94,4 +94,13 @@ public class FeedController {
         return map;
     }
 
+    @GetMapping("/api/feedDetail")
+//    public List<Map<String,String>> selectFeedList(HttpSession session) throws Exception{
+//        MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
+//        //피드 & feedProduct & product 조인해서 불러오기.
+//        List<Map<String,String>> map = feedService.feedView(memberDTO.getUser_id());
+//
+//        return map;
+//    }
+
 }

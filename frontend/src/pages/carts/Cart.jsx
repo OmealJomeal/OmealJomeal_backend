@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import CheckBox from "../../common/checkbox/CheckBox";
 import { AiOutlineShopping } from "react-icons/ai";
@@ -14,17 +14,20 @@ const Cart = () => {
     margin-bottom: 50px;
   `;
 
-  const numbers = [1, 2, 3, 4, 5];
+  const [cartProducts, setCartProducts] = useState(null);
 
-  const MapCartProduct = numbers.map((number, index) => (
-    <CartProduct key={index}></CartProduct>
-  ));
+  const MapCartProduct =
+    cartProducts &&
+    cartProducts.map((product, index) => (
+      <CartProduct product={product} key={index}></CartProduct>
+    ));
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/product")
+      .get("http://localhost:8080/api/cart")
       .then((response) => {
-        console.log(response);
+        console.log(response.data);
+        setCartProducts(response.data);
       })
       .catch((error) => {
         console.log(error);

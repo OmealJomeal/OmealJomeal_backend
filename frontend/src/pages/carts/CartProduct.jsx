@@ -1,7 +1,7 @@
 import React from "react";
 import CheckBox from "../../common/checkbox/CheckBox";
 
-const CartProduct = () => {
+const CartProduct = (props) => {
   return (
     <>
       <div
@@ -25,10 +25,14 @@ const CartProduct = () => {
         >
           <img
             style={{ width: "60px", height: "80px", marginLeft: "15px" }}
-            src={process.env.PUBLIC_URL + `/img/1_noneClear.png`}
+            src={
+              props.product &&
+              process.env.PUBLIC_URL +
+                `/img/${props.product.product_id}_noneClear.png`
+            }
           ></img>
           <div style={{ marginLeft: "25px", lineHeight: "81px" }}>
-            [미식당] 고구마 치즈볼 돈카츠 150g*2입 (소스포함)
+            {props.product && props.product.product_name}
           </div>
         </div>
       </div>

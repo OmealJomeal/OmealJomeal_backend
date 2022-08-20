@@ -23,7 +23,7 @@
 	<![CDATA[
 		select a.cart_id, a.total_price,
 			   a.user_id, cp.product_id,
-			   p.product_amount,p.product_category,p.product_description, p.product_time
+			   p.product_amount,p.product_category,p.product_description, p.product_time,p.product_name,p.product_price
 		from cart a, cartproduct cp, product p, member m
 		where a.cart_id = cp.cart_id
 		  and cp.product_id=p.product_id
@@ -31,13 +31,15 @@
 		]]>
 	</select>
 	<resultMap type="map" id="selectMapList">
-		<result column="cart_id"/>
-		<result column="total_price" />
-		<result column="user_id" />
-		<result column="product_id" />
-		<result column="product_amount" />
-		<result column="product_category" />
-		<result column="product_description" />
-		<result column="product_time" />
+		<result column="cart_id" property="cart_id"/>
+		<result column="total_price" property="total_price"/>
+		<result column="user_id" property="user_id"/>
+		<result column="product_id" property="product_id"/>
+		<result column="product_amount" property="product_amount"/>
+		<result column="product_category" property="product_category"/>
+		<result column="product_description" property="product_description"/>
+		<result column="product_time" property="product_time"/>
+		<result column="product_name" property="product_name"/>
+		<result column="product_price" property="product_price"/>
 	</resultMap>
 </mapper>

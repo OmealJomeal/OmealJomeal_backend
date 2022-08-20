@@ -24,7 +24,7 @@ public class CartDAO {
         return sqlSession.insert("com.config.CartMapper.cartProductInsert",product_id);
     }
 
-    public List<Map<String,String>> cartView(int user_id) throws Exception {
+    public List<Map<String,Object>> cartView(int user_id) throws Exception {
         return sqlSession.selectList("com.config.CartMapper.cartView",user_id);
     }
 

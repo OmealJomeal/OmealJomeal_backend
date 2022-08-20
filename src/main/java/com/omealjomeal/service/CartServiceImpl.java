@@ -29,7 +29,7 @@ public class CartServiceImpl implements CartService{
     }
 
     @Override
-    public List<Map<String,String>> cartView(int user_id) throws Exception {
+    public List<Map<String,Object>> cartView(int user_id) throws Exception {
         return dao.cartView(user_id);
     }
 

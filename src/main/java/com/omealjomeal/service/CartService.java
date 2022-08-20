@@ -12,7 +12,7 @@ public interface CartService {
     //글쓰기
     public int cartInsert(HashMap<String, Integer> cartMap) throws Exception;
     public int cartProductInsert(int product_id) throws Exception;
-    public List<Map<String,String>> cartView(int user_id) throws Exception;
+    public List<Map<String,Object>> cartView(int user_id) throws Exception;
 
 
 }
