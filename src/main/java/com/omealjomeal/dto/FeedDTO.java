@@ -22,10 +22,10 @@ public class FeedDTO {
     String feed_food_time;
 
     //참조키
-    String feed_lifestyle;
-    String feed_interest;
-    String feed_food_favor;
-    String user_id;
+    int feed_lifestyle;
+    int feed_interest;
+    int feed_food_favor;
+    int user_id;
 
 
 }

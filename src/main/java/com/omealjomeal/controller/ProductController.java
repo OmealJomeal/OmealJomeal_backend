@@ -23,7 +23,6 @@ import java.util.Map;
 @RestController
 public class ProductController {
 
-    HttpSession session;
     @Autowired
     ProductService productService;
     @Autowired
@@ -77,27 +76,28 @@ public class ProductController {
 
     // 상품 구매 ->장바구니
     @PostMapping("/api/cart")
-    public int productCart(@RequestBody ProductDTO productDTO) throws Exception{
+    public int productCart(HttpSession session,@RequestBody HashMap<String,Integer> map) throws Exception{
         // productDTO에는 product_price, product_amount, product_id
-        productDTO.setProduct_price(1000);
-        productDTO.setProduct_amount(10);
-        productDTO.setProduct_id(1);
-        int total_price = (int) productDTO.getProduct_amount() * (int) productDTO.getProduct_price();
+        int product_amount = map.get("product_amount");
+        int product_price = map.get("product_price");
+        int product_id = map.get("product_id");
+        int total_price = product_amount * product_price;
         MemberDTO mDTO = (MemberDTO) session.getAttribute("login");
         int user_id = mDTO.getUser_id();
-        CartDTO cDTO = new CartDTO();
-        cDTO.setTotal_price(total_price);
-        cDTO.setUser_id(user_id);
+        System.out.println(user_id);
+        HashMap<String, Integer> cartMap = new HashMap<>();
+        cartMap.put("total_price",total_price);
+        cartMap.put("user_id",user_id);
 
         //트랜잭션 고려
-        int cartCnt = cartService.cartInsert(cDTO);
-        int CartProductCnt = cartService.cartProductInsert(productDTO.getProduct_id());
+        int cartCnt = cartService.cartInsert(cartMap);
+        int CartProductCnt = cartService.cartProductInsert(product_id);
         return cartCnt;
     }
 
     //장바구니 조회
     @GetMapping("/api/cart")
-    public List<Map<String,String>> Cart() throws Exception {
+    public List<Map<String,String>> Cart(HttpSession session) throws Exception {
         MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
         System.out.println(memberDTO);
         List<Map<String,String>> map = cartService.cartView(memberDTO.getUser_id());

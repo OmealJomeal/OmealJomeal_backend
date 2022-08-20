@@ -16,7 +16,7 @@ const Main = () => {
 
   let navigate = useNavigate();
   const onClick = (e) => {
-    navigate(`/productdetail/:${e.target.id}`);
+    navigate(`/productdetail/${e.target.id}`);
   };
   return (
     <div>

@@ -10,7 +10,7 @@ import java.util.Map;
 public interface CartService {
 
     //글쓰기
-    public int cartInsert(CartDTO cartDTO) throws Exception;
+    public int cartInsert(HashMap<String, Integer> cartMap) throws Exception;
     public int cartProductInsert(int product_id) throws Exception;
     public List<Map<String,String>> cartView(int user_id) throws Exception;
 

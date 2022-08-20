@@ -19,8 +19,8 @@ public class CartServiceImpl implements CartService{
     CartDAO dao;
 
     @Override
-    public int cartInsert(CartDTO cartDTO) throws Exception {
-        return dao.cartInsert(cartDTO);
+    public int cartInsert(HashMap<String, Integer> cartMap) throws Exception {
+        return dao.cartInsert(cartMap);
     }
 
     @Override

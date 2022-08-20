@@ -16,8 +16,8 @@ public class CartDAO {
     @Autowired
     SqlSession sqlSession;
 
-    public int cartInsert(CartDTO cartDTO) throws Exception {
-        return sqlSession.insert("com.config.CartMapper.cartInsert",cartDTO);
+    public int cartInsert(HashMap<String, Integer> cartMap) throws Exception {
+        return sqlSession.insert("com.config.CartMapper.cartInsert",cartMap);
     }
 
     public int cartProductInsert(int product_id) throws Exception {
