@@ -20,4 +20,12 @@
 		]]>
 	</select>
 
+	<!--피드에 상품등록-->
+	<insert id="feedProductUpload" parameterType="FeedProductDTO">
+		<![CDATA[
+		insert into feedProduct ( feed_id, product_id )
+		values (#{feed_id},  #{product_id})
+		]]>
+	</insert>
+
 </mapper>

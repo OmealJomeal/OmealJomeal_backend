@@ -1,9 +1,6 @@
 package com.omealjomeal.controller;
 
-import com.omealjomeal.dto.CartDTO;
-import com.omealjomeal.dto.FeedDTO;
-import com.omealjomeal.dto.MemberDTO;
-import com.omealjomeal.dto.ProductDTO;
+import com.omealjomeal.dto.*;
 import com.omealjomeal.service.CartService;
 import com.omealjomeal.service.FeedService;
 import com.omealjomeal.service.LifestyleService;
@@ -41,7 +38,7 @@ public class FeedController {
                           @RequestParam("feed_cooktime") String feed_cooktime,
                           @RequestParam("feed_cooklevel") String feed_cooklevel,
                           @RequestParam("feed_food_time") String feed_food_time,
-                          @RequestParam("product_id") HashMap<String,Object> product_id,
+                          @RequestParam("product_id") HashMap<String,Integer> product_id,
                           @RequestParam("feed_lifestyle") HashMap<String,Integer> feed_lifestyle,
                           @RequestParam("feed_interest") HashMap<String, Integer> feed_interest,
                           @RequestParam("feed_food_favor") HashMap<String,Integer> feed_food_favor,
@@ -53,6 +50,7 @@ public class FeedController {
         feedDTO.setFeed_recipe(feed_recipe);
         feedDTO.setFeed_cooktime(feed_cooktime);
         feedDTO.setFeed_food_time(feed_food_time);
+        feedDTO.setFeed_cooklevel(feed_cooklevel);
 
         int lifestyle_ID = lifestyleService.findLifestyle(feed_lifestyle);
         int interest_ID = lifestyleService.findInterest(feed_interest);
@@ -66,9 +64,24 @@ public class FeedController {
         int feed_id = feedService.selectFeedId(feedDTO);
         feedImg.transferTo(new File(uploadPath,  feed_id + "_"+"ClearImg"+ ".png"));
         //feedProduct에 인서트..!
+        FeedProductDTO feedProductDTO = new FeedProductDTO();
+        feedProductDTO.setFeed_id(feed_id);
+        product_id.forEach((strKey, intValue)->{
+            feedProductDTO.setProduct_id(intValue);
+            try {
+                int feedProduct = feedService.feedProductUpload(feedProductDTO);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
 
-        
         return feedNum;
+    }
+
+    @GetMapping("/api/feed")
+    public List<Map<String,String>> selectFeedList(){
+        //피드 & feedProduct & product 조인해서 불러오기.
+        return null;
     }
 
 }

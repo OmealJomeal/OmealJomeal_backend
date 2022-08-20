@@ -1,6 +1,7 @@
 package com.omealjomeal.dao;
 
 import com.omealjomeal.dto.FeedDTO;
+import com.omealjomeal.dto.FeedProductDTO;
 import com.omealjomeal.dto.ProductDTO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,10 @@ public class FeedDAO {
     public int selectFeedId(FeedDTO feedDTO) throws Exception {
         return sqlSession.insert("com.config.FeedMapper.selectFeedId", feedDTO);
     }
+    public int feedProductUpload(FeedProductDTO feedProductDTO) throws Exception {
+        return sqlSession.insert("com.config.FeedMapper.feedProductUpload", feedProductDTO);
+    }
+
 
 
 
