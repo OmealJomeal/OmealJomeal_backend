@@ -27,6 +27,7 @@ public class FeedController {
     private final MemberService memberService;
 
     private final FeedService feedService;
+    private final LifestyleService lifestyleService;
 
     //requestPram
     //feed 업로드

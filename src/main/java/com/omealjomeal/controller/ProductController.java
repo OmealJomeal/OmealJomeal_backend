@@ -63,7 +63,6 @@ public class ProductController {
     @GetMapping("/api/productdetail/{product_id}")
     public ProductDTO productDetail(@PathVariable String product_id) throws Exception {
         ProductDTO productDTO = productService.selectProductDetail(product_id);
-        System.out.println(productDTO);
         return productDTO;
     }
 
@@ -84,7 +83,6 @@ public class ProductController {
         int total_price = product_amount * product_price;
         MemberDTO mDTO = (MemberDTO) session.getAttribute("login");
         int user_id = mDTO.getUser_id();
-        System.out.println(user_id);
         HashMap<String, Integer> cartMap = new HashMap<>();
         cartMap.put("total_price",total_price);
         cartMap.put("user_id",user_id);
@@ -100,7 +98,6 @@ public class ProductController {
     public List<Map<String,Object>> Cart(HttpSession session) throws Exception {
         MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
         List<Map<String,Object>> map = cartService.cartView(memberDTO.getUser_id());
-        System.out.println(map);
         return map;
     }
 
