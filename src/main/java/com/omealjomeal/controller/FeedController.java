@@ -55,8 +55,8 @@ public class FeedController {
         //feed-id 데이터베이스에서 받아와서 이미지 저장.
         int feedNum = feedService.feedUpload(feedDTO);
         int feed_id = feedService.selectFeedId(feedDTO);
-        System.out.println("feed_ID"+feed_id);
-        feedImg.transferTo(new File(uploadPath,  feed_id + "_"+"ClearImg"+ ".png"));
+
+        feedImg.transferTo(new File(uploadPath,  feed_id + "_"+"FeedImg"+ ".png"));
 
         //feedProduct 테이블에 insert..!
         FeedProductDTO feedProductDTO = new FeedProductDTO();
@@ -119,32 +119,76 @@ public class FeedController {
         int i = 0;
         Object[] lists= key.values().toArray();
         Arrays.sort(lists);//(7, 10)
-
+        List<Map<Object,Object>> mapRealResult = new ArrayList<>();
         for (int userID : key.keySet()) {
             Integer value = key.get(userID);
-                if (value <= 8) {
-                    List<Map<Object,Object>> map = feedService.feedViewMainFit(userID);
-                    for (Map<Object,Object> mapSSSS:map) {
-                        mapSave.add(mapSSSS);
-                    }
+            if (value <= 8) {
+                List<Map<Object, Object>> map = feedService.feedViewMainFit(userID);
+                for (Map<Object, Object> mapSSSS : map) {
+                    mapSave.add(mapSSSS);
                 }
+            }
+        }
                 //랜덤으로 mapSave불러와서 8개만 따로저장해서 반환.
                 Collections.shuffle(mapSave);
-            for (Map<Object,Object> mapResult:
-                 mapSave) {
-                System.out.println(mapResult);
+        for (int j = 0; j <8 ; j++) {
 
+
+            mapRealResult.add(mapSave.get(j));
+        }
+        return mapRealResult;
+    }
+
+    //피드목록 보기 메인 알고리즘 적용 맞춤취향
+    @GetMapping("/api/mainFeedNotFit")
+    public List<Map<Object,Object>> selectMainNotFeedList(HttpSession session) throws Exception{
+        int sum=0;
+        int user_id=0;
+
+        HashMap<Integer,Integer> key = new HashMap<>();
+        MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
+        int currentUserId = memberDTO.getUser_id();
+        Map<String,Integer> CurrentMemberViewMap = memberService.currentMemberView(currentUserId);
+        //membertable조회
+        // lifestyle, interest, food_favor 조인해서 조회.
+        List<HashMap<String,Integer>> memberViewMap = memberService.memberView(currentUserId);
+
+        for (HashMap<String,Integer> referenceMember:memberViewMap) {
+            for(String mapKey: referenceMember.keySet()){
+                if(Integer.parseInt(String.valueOf(referenceMember.get(mapKey))) >= 2){
+                    user_id= Integer.parseInt(String.valueOf(referenceMember.get(mapKey)));
+                }else {
+                    int referenceCurrent = Integer.parseInt(String.valueOf(CurrentMemberViewMap.get(mapKey)));
+                    int referenceOther = Integer.parseInt(String.valueOf(referenceMember.get(mapKey)));
+                    sum += Math.pow((int) (referenceOther-referenceCurrent),2);
+                }
             }
+            key.put(user_id,sum);
+            sum=0;
+        }
+        //{21:10, 3:7, 5:7,...}
+        List<Map<Object,Object>> mapSave = new ArrayList<>();
+        int i = 0;
+        Object[] lists= key.values().toArray();
+        Arrays.sort(lists,Collections.reverseOrder());//(7, 10)
+        List<Map<Object,Object>> mapRealResult = new ArrayList<>();
+        for (int userID : key.keySet()) {
+            Integer value = key.get(userID);
+            if (value >= 8) {
+                List<Map<Object, Object>> map = feedService.feedViewMainFit(userID);
+                for (Map<Object, Object> mapSSSS : map) {
+                    mapSave.add(mapSSSS);
+                }
             }
+        }
+        //랜덤으로 mapSave불러와서 8개만 따로저장해서 반환.
+        Collections.shuffle(mapSave);
+        for (int j = 0; j <8 ; j++) {
 
 
-//        for (Integer keysss : key.keySet()) {
-//            System.out.println(key.get(keysss));
-//        }
-
-
-//        return map;
-        return mapSave;
+            mapRealResult.add(mapSave.get(j));
+        }
+        return mapRealResult;
     }
 
     //피드목록 보기 베스트5 알고리즘 적용
