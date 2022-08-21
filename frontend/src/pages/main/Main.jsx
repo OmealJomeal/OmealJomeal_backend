@@ -19,7 +19,7 @@ const Main = () => {
 
   let navigate = useNavigate();
   const onClick = (e) => {
-    navigate(`/productdetail/${e.target.id}`);
+    navigate(`/feeddetail/${e.target.id}`);
   };
 
   const mainimages = [
@@ -53,6 +53,9 @@ const Main = () => {
 
   return (
     <>
+      <h2 onClick={onClick} id={1}>
+        Feed
+      </h2>
       <MainCarousel style={{ display: "flex", flexWrap: "nowrap" }}>
         {mainimages.map((src, index) => (
           <MainCarouselItem
@@ -342,10 +345,6 @@ const Main = () => {
           ></img>
         </div>
       </div>
-
-      {/* <h2 onClick={onClick} id={1}>
-        Product
-      </h2> */}
     </>
   );
 };

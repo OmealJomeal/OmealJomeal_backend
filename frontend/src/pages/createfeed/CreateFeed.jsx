@@ -82,7 +82,7 @@ const CreateFeed = () => {
       formData.append("feed_food_time", value.food_time);
     }
     if (formData.get("product_id") === null) {
-      formData.append("product_id", 1);
+      formData.append("product_id", [1, 2, 3, 4]);
     }
     axios
       .post("http://localhost:8080/api/product", formData)
@@ -285,7 +285,7 @@ const CreateFeed = () => {
             name="cooktime"
             value="1.5시간~"
           />
-          <label htmlFor=" 1.5시간~" style={{ padding: "0px 0px 0px 25px" }}>
+          <label htmlFor="1.5시간~" style={{ padding: "0px 0px 0px 30px" }}>
             <div
               style={{
                 width: "120px",
@@ -294,7 +294,7 @@ const CreateFeed = () => {
                 textAlign: "right",
               }}
             >
-              1.5시간~
+              1.5~ 시간
             </div>
           </label>
         </div>

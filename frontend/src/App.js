@@ -14,6 +14,7 @@ import CreateFeed from "./pages/createfeed/CreateFeed";
 import ProductDetail from "./pages/productdetail/ProductDetail";
 import CreateProduct from "./pages/CreateProduct/CreateProduct";
 import CurlyTable from "./pages/curlytable/CurlyTable";
+import FeedDetail from "./pages/feeddetail/FeedDetail";
 import React from "react";
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
                 path="/productdetail/:id"
                 element={<ProductDetail />}
               ></Route>
+              <Route path="/feeddetail/:id" element={<FeedDetail />}></Route>
             </Routes>
           </BrowserRouter>
         </ThemeProvider>

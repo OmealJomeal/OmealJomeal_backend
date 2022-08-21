@@ -100,6 +100,7 @@ public class ProductController {
     public List<Map<String,Object>> Cart(HttpSession session) throws Exception {
         MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
         List<Map<String,Object>> map = cartService.cartView(memberDTO.getUser_id());
+        System.out.println(map);
         return map;
     }
 

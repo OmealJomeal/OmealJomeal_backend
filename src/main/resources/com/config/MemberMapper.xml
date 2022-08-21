@@ -46,7 +46,7 @@
 	<!--유저 조회 추천요소 거리 계산-->
 	<select id="memberView" resultMap="selectMapList">
 	<![CDATA[
-		select m.user_id, l.lifestyle_id,i.interest_id,f.food_favor_id,l.gender,l.livealone,l.child, l.worker,l.couple,l.homemaker,l.baby,
+		select m.user_id,l.gender,l.livealone,l.child, l.worker,l.couple,l.homemaker,l.baby,
 			   i.pet,i.outdoor,i.health,i.baking,i.cooking,i.babycare,f.sweetness,f.bitter,f.sour_taste,f.salty,f.spicy
 		from member m, lifestyle l, interest i, food_favor f
 		where m.user_lifestyle = l.lifestyle_id and

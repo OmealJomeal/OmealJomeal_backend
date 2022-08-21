@@ -3,7 +3,7 @@ import styled, { ThemeProvider } from "styled-components";
 import theme from "../../theme";
 
 const NavItem = styled.div`
-  width: 25%;
+  width: 33.3%;
   height: 45px;
   font-size: 15px;
   font-weight: 300;
@@ -24,7 +24,7 @@ const ShadowBox = styled.div`
 `;
 
 const CategoryBar = styled.div`
-  width: 262.5px;
+  width: 350px;
   height: 130px;
   background-color: gray;
   z-index: 1;
@@ -53,9 +53,6 @@ const NavBar = () => {
           </NavItem>
           <NavItem as="a" href="/curlytable">
             컬리의 식탁
-          </NavItem>
-          <NavItem as="a" href="">
-            best 오늘의 meal
           </NavItem>
           <NavItem as="a" href="">
             컬리 플레이팅

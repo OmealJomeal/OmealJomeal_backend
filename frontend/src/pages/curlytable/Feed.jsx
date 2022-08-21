@@ -1,4 +1,5 @@
 import React from "react";
+import { BsHandThumbsUp } from "react-icons/bs";
 
 const Feed = () => {
   return (
@@ -8,7 +9,7 @@ const Feed = () => {
           style={{
             width: "600px",
             height: "150px",
-            margin: "70px 0px",
+            margin: "70px 0px 90px 0px",
             lineHeight: "25px",
             top: "10px",
             marginBottom: "150px",
@@ -29,6 +30,25 @@ const Feed = () => {
           <div style={{ fontSize: "14px", color: "#885EA7" }}>
             by 오픈 홈카페 |
             <span style={{ fontWeight: "bold" }}>솜솜이 (박성미)</span>
+          </div>
+        </div>
+        <div style={{ display: "flex" }}>
+          <BsHandThumbsUp
+            style={{
+              width: "30px",
+              height: "30px",
+              display: "block",
+              cursor: "pointer",
+            }}
+          ></BsHandThumbsUp>
+          <div
+            style={{
+              position: "relative",
+              left: "10px",
+              lineHeight: "30px",
+            }}
+          >
+            10
           </div>
         </div>
         <img

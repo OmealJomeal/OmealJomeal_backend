@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSwipeable } from "react-swipeable";
 import "./carousel.css";
+import { BsCart } from "react-icons/bs";
 
 // https://medium.com/tinyso/how-to-create-the-responsive-and-swipeable-carousel-slider-component-in-react-99f433364aa0
 
@@ -10,15 +11,15 @@ export const CarouselItem = ({ src, order }) => {
       id={`slide${order}`}
       className="carousel-item"
       style={{
-        width: "262.5px",
-        height: "400px",
+        width: "210px",
+        height: "230px",
         position: "relative",
       }}
     >
       <img
         src={src}
         style={{
-          width: "250px",
+          width: "175px",
           position: "relative",
           top: "-22px",
           display: "block",
@@ -27,12 +28,29 @@ export const CarouselItem = ({ src, order }) => {
       <div
         style={{
           position: "absolute",
-          bottom: "30px",
-          left: "5px",
+          bottom: "25px",
+          left: "15px",
           color: "#333",
         }}
       >
-        피드명
+        상품명
+      </div>
+      <div
+        style={{
+          width: "45px",
+          height: "45px",
+          zIndex: "8",
+          borderRadius: "100%",
+          backgroundColor: "#816E8D",
+          position: "absolute",
+          textAlign: "center",
+          lineHeight: "50px",
+          fontSize: "20px",
+          right: "25px",
+          bottom: "60px",
+        }}
+      >
+        <BsCart></BsCart>
       </div>
     </div>
   );
@@ -43,7 +61,7 @@ const Carousel = ({ children }) => {
   const [paused, setPaused] = useState(false);
 
   const updateIndex = (newIndex) => {
-    if (newIndex >= React.Children.count(children) - 3) {
+    if (newIndex >= React.Children.count(children) - 4) {
       newIndex = 0;
     }
 
@@ -78,7 +96,7 @@ const Carousel = ({ children }) => {
     >
       <div
         className="inner"
-        style={{ transform: `translateX(-${activeIndex * 25}%)` }}
+        style={{ transform: `translateX(-${activeIndex * 20}%)` }}
       >
         {React.Children.map(children, (child, index) => {
           return React.cloneElement(child, { width: "100%" });
@@ -98,7 +116,7 @@ const Carousel = ({ children }) => {
             border: "none",
             position: "absolute",
             left: "-20px",
-            top: "160px",
+            top: "80px",
             zIndex: "10",
             fontSize: "20px",
           }}
@@ -118,7 +136,7 @@ const Carousel = ({ children }) => {
             border: "none",
             position: "absolute",
             right: "-20px",
-            top: "160px",
+            top: "80px",
             fontSize: "20px",
           }}
         >

@@ -83,7 +83,6 @@ public class MemberController {
         map.put("lifestyle",lDTO);
         map.put("interest",iDTO);
         map.put("food_favor",fDTO);
-        System.out.println(map);
         return map;
     }
 

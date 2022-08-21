@@ -1,6 +1,20 @@
 import React from "react";
 import Carousel, { CarouselItem } from "./carousel";
 import Feed from "./Feed";
+import styled from "styled-components";
+
+const LoadFeedButton = styled.button`
+  width: 240px;
+  height: 55px;
+  flex-grow: 0;
+  margin: 20px 410px;
+  padding: 17px 91px;
+  border-radius: 3px;
+  background-color: #885ea7;
+  color: white;
+  font-weight: bold;
+  border: none;
+`;
 
 const CurlyTable = () => {
   const images = [
@@ -12,8 +26,17 @@ const CurlyTable = () => {
   return (
     <>
       <div style={{ width: "1050px", margin: "0px auto" }}>
-        <div>
-          <img src={process.env.PUBLIC_URL + "./img/createfeed.png"}></img>
+        <div
+          style={{
+            position: "fixed",
+            zIndex: "5",
+            bottom: "30px",
+            right: "100px",
+          }}
+        >
+          <a href="./createfeed">
+            <img src={process.env.PUBLIC_URL + "./img/createfeed.png"}></img>
+          </a>
         </div>
         <div
           style={{
@@ -26,8 +49,9 @@ const CurlyTable = () => {
             color: "#333",
           }}
         >
-          민경님을 위한 맞춤 추천
+          best 오늘의 meal
         </div>
+
         <Carousel style={{ display: "flex", flexWrap: "nowrap" }}>
           {images.map((src, index) => (
             <CarouselItem
@@ -37,7 +61,22 @@ const CurlyTable = () => {
             />
           ))}
         </Carousel>
+        <div
+          classame="carousel2"
+          style={{
+            textAlign: "center",
+            height: "100px",
+            lineHeight: "100px",
+            fontSize: "28px",
+            fontWeight: "bold",
+            marginTop: "40px",
+            color: "#333",
+          }}
+        >
+          실시간 컬리 피드
+        </div>
         <Feed></Feed>
+        <LoadFeedButton>더보기</LoadFeedButton>
       </div>
     </>
   );
