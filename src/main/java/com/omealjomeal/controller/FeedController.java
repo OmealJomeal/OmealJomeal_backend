@@ -106,22 +106,45 @@ public class FeedController {
                 if(Integer.parseInt(String.valueOf(referenceMember.get(mapKey))) >= 2){
                     user_id= Integer.parseInt(String.valueOf(referenceMember.get(mapKey)));
                 }else {
-                    System.out.println("gg"+Integer.parseInt(String.valueOf(referenceMember.get(mapKey))));
                     int referenceCurrent = Integer.parseInt(String.valueOf(CurrentMemberViewMap.get(mapKey)));
                     int referenceOther = Integer.parseInt(String.valueOf(referenceMember.get(mapKey)));
                   sum += Math.pow((int) (referenceOther-referenceCurrent),2);
                 }
             }
             key.put(user_id,sum);
-
             sum=0;
-
         }
+        //{21:10, 3:7, 5:7,...}
+        List<Map<Object,Object>> mapSave = new ArrayList<>();
+        int i = 0;
         Object[] lists= key.values().toArray();
-        Arrays.sort(lists);
-        System.out.println(lists[0]);
-        List<Map<Object,Object>> map = feedService.feedView();
-        return map;
+        Arrays.sort(lists);//(7, 10)
+
+        for (int userID : key.keySet()) {
+            Integer value = key.get(userID);
+                if (value <= 8) {
+                    List<Map<Object,Object>> map = feedService.feedViewMainFit(userID);
+                    for (Map<Object,Object> mapSSSS:map) {
+                        mapSave.add(mapSSSS);
+                    }
+                }
+                //랜덤으로 mapSave불러와서 8개만 따로저장해서 반환.
+                Collections.shuffle(mapSave);
+            for (Map<Object,Object> mapResult:
+                 mapSave) {
+                System.out.println(mapResult);
+
+            }
+            }
+
+
+//        for (Integer keysss : key.keySet()) {
+//            System.out.println(key.get(keysss));
+//        }
+
+
+//        return map;
+        return mapSave;
     }
 
     //피드목록 보기 베스트5 알고리즘 적용

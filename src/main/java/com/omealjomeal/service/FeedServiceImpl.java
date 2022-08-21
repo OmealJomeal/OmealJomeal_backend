@@ -40,5 +40,10 @@ public class FeedServiceImpl implements FeedService{
         return dao.feedView();
     }
 
+    @Override
+    public List<Map<Object, Object>> feedViewMainFit(int user_id) throws Exception {
+        return dao.feedViewMainFit(user_id);
+    }
+
 
 }

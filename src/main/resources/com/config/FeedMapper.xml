@@ -47,4 +47,13 @@
 		<result column="user_name" property="user_name"/>
 	</resultMap>
 
+	<select id="feedViewMainFit" resultMap="selectMapList" parameterType="int">
+	<![CDATA[
+		select f.feed_id, f.feed_title,
+			   f.feed_description,
+			   to_char(f.feed_time,'yy-mm-dd HH24:mi:ss') as feed_time,m.user_name
+		from feed f, member m
+		where  f.user_id=m.user_id and m.user_id=#{user_id}
+		]]>
+	</select>
 </mapper>
