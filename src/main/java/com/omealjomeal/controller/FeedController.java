@@ -78,7 +78,7 @@ public class FeedController {
     //피드 자세히보기
 //    @GetMapping("/api/feedDetail")
 
-    //피드 목록 보기.   실시간 컬리식탁!!
+    //피드 목록 보기.   실시간 컬리식탁!! 피드만보이게
     @GetMapping("/api/feed")
     public List<Map<Object,Object>> selectFeedList(HttpSession session) throws Exception{
         MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
@@ -111,6 +111,7 @@ public class FeedController {
                     user_id= referenceMember.get("user_id");
                 }else {
                   sum += Math.pow(((int)referenceMember.get(mapKey)-(int)CurrentMemberViewMap.get(mapKey)),2);
+                    System.out.println(sum);
                 }
                 key.put(user_id,sum);
                 mapValue.add(key);
@@ -124,7 +125,7 @@ public class FeedController {
         //[{salty=0, couple=0, gender=0, babycare=0, health=0, sweetness=0, spicy=0, bitter=0, interest_id=1, outdoor=0, lifestyle_id=1, baking=0, livealone=0, FOOD_FAVOR_ID=1, user_id=21, sour_taste=0, homemaker=0, baby=0, cooking=0, worker=0, pet=0, child=0}, {salty=0, couple=0, gender=0, babycare=0, health=0, sweetness=0, spicy=0, bitter=0, interest_id=1, outdoor=0, lifestyle_id=1, baking=0, livealone=0, FOOD_FAVOR_ID=1, user_id=15, sour_taste=0, homemaker=0, baby=0, cooking=0, worker=0, pet=0, child=0}, {salty=0, couple=0, gender=0, babycare=1, health=1, sweetness=0, spicy=0, bitter=1, interest_id=28, outdoor=1, lifestyle_id=14, baking=0, livealone=0, FOOD_FAVOR_ID=13, user_id=22, sour_taste=1, homemaker=1, baby=0, cooking=1, worker=1, pet=0, child=1}, {salty=0, couple=0, gender=0, babycare=1, health=1, sweetness=0, spicy=0, bitter=1, interest_id=28, outdoor=1, lifestyle_id=14, baking=0, livealone=0, FOOD_FAVOR_ID=13, user_id=23, sour_taste=1, homemaker=1, baby=0, cooking=1, worker=1, pet=0, child=1}, {salty=0, couple=0, gender=1, babycare=0, health=0, sweetness=0, spicy=0, bitter=0, interest_id=1, outdoor=0, lifestyle_id=33, baking=0, livealone=0, FOOD_FAVOR_ID=1, user_id=13, sour_taste=0, homemaker=0, baby=0, cooking=0, worker=0, pet=0, child=0}, {salty=0, couple=0, gender=1, babycare=0, health=0, sweetness=1, spicy=0, bitter=0, interest_id=33, outdoor=0, lifestyle_id=49, baking=0, livealone=1, FOOD_FAVOR_ID=17, user_id=14, sour_taste=0, homemaker=0, baby=0, cooking=0, worker=0, pet=1, child=0}, {salty=0, couple=0, gender=0, babycare=1, health=0, sweetness=0, spicy=1, bitter=1, interest_id=18, outdoor=1, lifestyle_id=66, baking=0, livealone=0, FOOD_FAVOR_ID=10, user_id=1, sour_taste=0, homemaker=1, baby=1, cooking=0, worker=0, pet=0, child=0}]
 
         List<Map<Object,Object>> map = feedService.feedView();
-        return map;
+        return mapValue;
     }
 
     //피드목록 보기 베스트5 알고리즘 적용
