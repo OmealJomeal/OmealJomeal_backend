@@ -6,21 +6,69 @@ import { FiMapPin } from "react-icons/fi";
 import CartProduct from "./CartProduct";
 import axios from "axios";
 
-const Cart = () => {
-  const Line = styled.div`
-    width: 740px;
-    height: 1.5px;
-    background-color: #333333;
-    margin-bottom: 50px;
-  `;
+const Line = styled.div`
+  width: 740px;
+  height: 1.5px;
+  background-color: #333333;
+  margin-bottom: 50px;
+`;
 
+const AddressButton = styled.button`
+  width: 300px;
+  height: 50px;
+  flex-grow: 0;
+  line-height: 0px;
+  padding: 16px 120px;
+  border-radius: 3px;
+  border: solid 1px #5f0080;
+  background-color: white;
+  color: #5f0080;
+
+  font-weight: bold;
+  &:hover {
+    background-color: #5f0080;
+    outline: none;
+    color: white;
+  }
+`;
+
+const OrderButton = styled.button`
+  width: 340px;
+  height: 56px;
+  flex-grow: 0;
+  margin: 20px 0px;
+  padding: 17px 91px;
+  border: none;
+  border-radius: 3px;
+  background-color: #5f0080;
+  color: white;
+  font-weight: bold;
+`;
+
+const Cart = () => {
   const [cartProducts, setCartProducts] = useState(null);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const MapCartProduct =
     cartProducts &&
     cartProducts.map((product, index) => (
-      <CartProduct product={product} key={index}></CartProduct>
+      <CartProduct
+        totalPrice={totalPrice}
+        setTotalPrice={setTotalPrice}
+        product={product}
+        key={index}
+      ></CartProduct>
     ));
+
+  const sumTotalPrice = () => {
+    if (cartProducts) {
+      for (let i = 0; i < cartProducts.length; i++) {
+        let total =
+          cartProducts[i].product_price * cartProducts[i].product_amount;
+        setTotalPrice(totalPrice + total);
+      }
+    }
+  };
 
   useEffect(() => {
     axios
@@ -32,6 +80,7 @@ const Cart = () => {
       .catch((error) => {
         console.log(error);
       });
+    sumTotalPrice();
   }, []);
 
   return (
@@ -50,7 +99,7 @@ const Cart = () => {
           장바구니
         </div>
         <div style={{ width: "1050px", height: "30px" }}></div>
-        <div style={{ width: "1050px", height: "30px", display: "flex" }}>
+        {/* <div style={{ width: "1050px", height: "30px", display: "flex" }}>
           <CheckBox
             type="checkbox"
             name="cooking"
@@ -68,7 +117,7 @@ const Cart = () => {
           >
             선택 삭제
           </div>
-        </div>
+        </div> */}
         <div style={{ width: "1050px", height: "10px" }}> </div>
         <div style={{ width: "1050px", display: "flex" }}>
           <div style={{ width: "740px" }}>
@@ -94,18 +143,85 @@ const Cart = () => {
               </div>
             </div>
             {MapCartProduct}
+            <CartProduct></CartProduct>
           </div>
           <div style={{ width: "310px" }}>
             <div style={{ width: "310px", height: "18px" }}></div>
             <div
               style={{
-                width: "310px",
+                width: "290px",
                 height: "155px",
-                padding: "10px",
+                padding: "20px 20px 40px 20px",
                 border: "solid #F2F2F2",
                 borderWidth: "2px",
               }}
-            ></div>
+            >
+              <div style={{ fontSize: "20px", display: "flex" }}>
+                <FiMapPin style={{ fontSize: "25px" }} />
+                &nbsp; &nbsp; &nbsp; 배송지
+              </div>
+              <div style={{ fontSize: "20px", margin: "30px 0px 10px 0px" }}>
+                <span style={{ color: "#5f0080", fontWeight: "bold" }}>
+                  배송지를 등록하고
+                </span>
+                <br /> 구매 가능한 상품을 확인하세요!
+              </div>
+              <AddressButton>주소 검색</AddressButton>
+            </div>
+            <div
+              style={{
+                width: "310px",
+                backgroundColor: "#FAFAFA",
+                padding: "12px",
+                color: "#333",
+              }}
+            >
+              <div
+                style={{
+                  height: "45px",
+                  display: "flex",
+                  fontSize: "18px",
+                }}
+              >
+                <div style={{ flexGrow: 1, lineHeight: "50px" }}>상품 금액</div>
+                <div style={{ lineHeight: "50px" }}>{totalPrice}원</div>
+              </div>
+              <div
+                style={{
+                  height: "45px",
+                  display: "flex",
+                  fontSize: "18px",
+                }}
+              >
+                <div style={{ flexGrow: 1, lineHeight: "50px" }}>
+                  상품 할인 금액
+                </div>
+                <div style={{ lineHeight: "50px" }}>0원</div>
+              </div>
+              <div
+                style={{
+                  height: "45px",
+                  display: "flex",
+                  fontSize: "18px",
+                }}
+              >
+                <div style={{ flexGrow: 1, lineHeight: "50px" }}>배송비</div>
+                <div style={{ lineHeight: "50px" }}>+3000원</div>
+              </div>
+              <div
+                style={{
+                  height: "45px",
+                  display: "flex",
+                  fontSize: "18px",
+                }}
+              >
+                <div style={{ flexGrow: 1, lineHeight: "50px" }}>
+                  결제 예정 금액
+                </div>
+                <div style={{ lineHeight: "50px" }}>{totalPrice + 3000}원</div>
+              </div>
+            </div>
+            <OrderButton>주문하기</OrderButton>
           </div>
         </div>
       </div>

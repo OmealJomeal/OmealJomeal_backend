@@ -1,13 +1,50 @@
 import React, { useState } from "react";
 import axios from "axios";
+import styled from "styled-components";
+import "./radio.css";
 
+const Indicator = styled.div`
+  width: 100px;
+  margin: 17px 40px 17px 0px;
+  font-size: 15px;
+`;
+
+const UnitBox = styled.div`
+  width: 700px;
+  height: 80px;
+  margin: 0px auto;
+  display: flex;
+`;
+
+const FeedUploadButton = styled.button`
+  width: 350px;
+  height: 56px;
+  flex-grow: 0;
+  margin: 20px auto 0px auto;
+  padding: 17px 91px;
+  border-radius: 3px;
+  background-color: #5f0080;
+  color: white;
+  font-weight: bold;
+`;
+
+const Line = styled.div`
+  width: 840px;
+  height: 1.5px;
+  background-color: #333;
+  margin-bottom: 50px;
+`;
 const CreateFeed = () => {
   const [value, setValue] = useState({
-    name: "",
-    price: "",
+    title: "",
     description: "",
-    category: "",
+    recipe: "",
+    cooktime: "",
+    cooklvel: 0,
+    food_time: 0,
   });
+
+  console.log(value);
 
   const onChangeHandler = (e) => {
     setValue((prevState) => {
@@ -19,32 +56,34 @@ const CreateFeed = () => {
 
   const formData = new FormData();
 
-  const onImageUpload = (e) => {
+  const onFeedImageUpload = (e) => {
     const img = e.target.files[0];
-    formData.append("product_img", img);
+    formData.append("feed_img", img);
     for (const keyValue of formData) console.log(keyValue); // ["img", File] File은 객체
   };
 
-  const onClearImageUpload = (e) => {
-    const img = e.target.files[0];
-    formData.append("product_clear_img", img);
-    for (const keyValue of formData) console.log(keyValue); // ["img", File] File은 객체
-  };
-
-  const onUploadProduct = () => {
-    if (formData.get("product_name") === null) {
-      formData.append("product_name", value.name);
+  const onUploadFeed = () => {
+    if (formData.get("feed_title") === null) {
+      formData.append("feed_title", value.title);
     }
-    if (formData.get("product_price") === null) {
-      formData.append("product_price", value.price);
+    if (formData.get("feed_description") === null) {
+      formData.append("feed_description", value.description);
     }
-    if (formData.get("product_description") === null) {
-      formData.append("product_description", value.description);
+    if (formData.get("feed_recipe") === null) {
+      formData.append("feed_recipe", value.recipe);
     }
-    if (formData.get("product_category") === null) {
-      formData.append("product_category", value.category);
+    if (formData.get("feed_cooktime") === null) {
+      formData.append("feed_cooktime", value.cooktime);
     }
-
+    if (formData.get("feed_cooklevel") === null) {
+      formData.append("feed_cooklevel", value.cooklevel);
+    }
+    if (formData.get("feed_food_time") === null) {
+      formData.append("feed_food_time", value.food_time);
+    }
+    if (formData.get("product_id") === null) {
+      formData.append("product_id", 1);
+    }
     axios
       .post("http://localhost:8080/api/product", formData)
       .then((response) => {
@@ -57,187 +96,279 @@ const CreateFeed = () => {
   };
 
   return (
-    <div>
-      <div style={{ width: "1050px", height: "100px" }}></div>
-      상품명 <input type="text" name="name" onChange={onChangeHandler}></input>
-      <br />
-      <br />
-      가격 <input type="text" name="price" onChange={onChangeHandler}></input>
-      <br />
-      <br />
-      상세설명
-      <textarea
-        type="text"
-        name="description"
-        onChange={onChangeHandler}
-        style={{ width: "500px", height: "300px" }}
-      ></textarea>
-      <br />
-      <br />
-      <div>카테고리</div>
-      <br />
-      <br />
-      <label>
+    <>
+      <div style={{ width: "840px", margin: "0px auto" }}>
+        <div
+          style={{
+            fontSize: "20px",
+            fontWeight: "bold",
+            width: "840px",
+            textAlign: "center",
+            marginTop: "100px",
+            marginBottom: "50px",
+          }}
+        >
+          글쓰기
+        </div>
+        <Line></Line>
+      </div>
+
+      <UnitBox>
+        <Indicator style={{ margin: "17px 0px" }}>
+          이미지 업로드(필수)
+        </Indicator>
+        <label
+          for="file"
+          style={{
+            width: "70px",
+            height: "30px",
+            display: "inline-block",
+            padding: "3px 5px",
+            color: "#aaa",
+            fontSize: "inherit",
+            lineHeight: "normal",
+            verticalAlign: "middle",
+            backgroundColor: "#fdfdfd",
+            cursor: "pointer",
+            border: "1px solid #aaa",
+            borderRadius: ".25em",
+            textAlign: "center",
+            lineHeight: "30px",
+            margin: "20px 10px",
+          }}
+        >
+          업로드
+        </label>
         <input
-          type="radio"
-          onChange={onChangeHandler}
-          name="category"
-          value="veg"
+          type="file"
+          accept="image/jpg,image/png,image/jpeg,image/gif"
+          name="product_clear_img"
+          onChange={onFeedImageUpload}
+          id="file"
+          style={{
+            width: "1px",
+            height: "1px",
+            margin: "-1px",
+            overflow: "hidden",
+            border: "0",
+            clip: "rect(0,0,0,0)",
+          }}
         ></input>
-        채소
-      </label>
-      <br />
-      <label>
-        <input
-          type="radio"
+      </UnitBox>
+      <UnitBox>
+        <Indicator>제목</Indicator>
+        <div>
+          <input
+            style={{
+              width: "599px",
+              height: "30px",
+              border: "1px solid #aaa;",
+              margin: "8px 0px",
+              outline: "none",
+              padding: "8px",
+              boxSizing: "border-box",
+            }}
+            type="text"
+            name="title"
+            onChange={onChangeHandler}
+          ></input>
+        </div>
+      </UnitBox>
+      <UnitBox style={{ height: "200px" }}>
+        <Indicator>상세설명</Indicator>
+        <textarea
+          type="text"
+          name="description"
           onChange={onChangeHandler}
-          name="category"
-          value="fruit"
-        ></input>
-        과일/견과/쌀
-      </label>
-      <br />
-      <label>
-        <input
-          type="radio"
+          style={{
+            width: "950px",
+            height: "180px",
+            border: "1px solid #aaa;",
+            borderRadius: "4px",
+            margin: "8px 0px",
+            outline: "none",
+            padding: "8px",
+            boxSizing: "border-box",
+          }}
+        ></textarea>
+      </UnitBox>
+      <div></div>
+      <UnitBox style={{ height: "200px" }}>
+        <Indicator>레시피</Indicator>
+        <textarea
+          type="text"
+          name="recipe"
           onChange={onChangeHandler}
-          name="category"
-          value="seafood"
-        ></input>
-        수산/해산/건어물
-      </label>
-      <br />
-      <label>
-        <input
-          type="radio"
-          onChange={onChangeHandler}
-          name="category"
-          value="meat"
-        ></input>
-        정육/계란
-      </label>
-      <br />
-      <label>
-        <input
-          type="radio"
-          onChange={onChangeHandler}
-          name="category"
-          value="soup"
-        ></input>
-        국/반찬/메인요리
-      </label>
-      <br />
-      <label>
-        <input
-          type="radio"
-          onChange={onChangeHandler}
-          name="category"
-          value="salad"
-        ></input>
-        샐러드/간편식
-      </label>
-      <br />
-      <label>
-        <input
-          type="radio"
-          onChange={onChangeHandler}
-          name="category"
-          value="noodle"
-        ></input>
-        면/양념/오일
-      </label>
-      <br />
-      <label>
-        <input
-          type="radio"
-          onChange={onChangeHandler}
-          name="category"
-          value="water"
-        ></input>
-        생수/음료/우유/커피
-      </label>
-      <br />
-      <label>
-        <input
-          type="radio"
-          onChange={onChangeHandler}
-          name="category"
-          value="snack"
-        ></input>
-        간식/과자/떡
-      </label>
-      <br />
-      <label>
-        <input
-          type="radio"
-          onChange={onChangeHandler}
-          name="category"
-          value="bakery"
-        ></input>
-        베이커리/치즈/델리
-      </label>
-      <br />
-      <label>
-        <input
-          type="radio"
-          onChange={onChangeHandler}
-          name="category"
-          value="health"
-        ></input>
-        건강식품
-      </label>
-      <br />
-      <label>
-        <input
-          type="radio"
-          onChange={onChangeHandler}
-          name="category"
-          value="wine"
-        ></input>
-        와인
-      </label>
-      <br />
-      <label>
-        <input
-          type="radio"
-          onChange={onChangeHandler}
-          name="category"
-          value="tradbeer"
-        ></input>
-        전통주
-      </label>
-      <br />
-      <label>
-        <input
-          type="radio"
-          onChange={onChangeHandler}
-          name="category"
-          value="utility"
-        ></input>
-        주방용품
-      </label>
-      <br />
-      <br />
-      <div>이미지</div>
-      <input
-        type="file"
-        accept="image/jpg,image/png,image/jpeg,image/gif"
-        name="product_img"
-        onChange={onImageUpload}
-      ></input>
-      <br />
-      <br />
-      <div>투명 배경 이미지</div>
-      <input
-        type="file"
-        accept="image/jpg,image/png,image/jpeg,image/gif"
-        name="product_clear_img"
-        onChange={onClearImageUpload}
-      ></input>
-      <br />
-      <br />
-      <button onClick={onUploadProduct}>상품 등록</button>
-    </div>
+          style={{
+            width: "950px",
+            height: "180px",
+            border: "1px solid #aaa;",
+            borderRadius: "4px",
+            margin: "8px 0px",
+            outline: "none",
+            padding: "8px",
+            boxSizing: "border-box",
+          }}
+        ></textarea>
+      </UnitBox>
+      <UnitBox style={{ height: "50px" }}></UnitBox>
+      <UnitBox>
+        <Indicator>조리 시간</Indicator>
+        <div className="checks">
+          <input
+            onChange={onChangeHandler}
+            type="radio"
+            id="0~0.5시간"
+            name="cooktime"
+            value="0~0.5시간"
+          />
+          <label htmlFor="0~0.5시간" style={{ padding: "0px 0px 0px 30px" }}>
+            <div
+              style={{
+                width: "120px",
+                height: "80px",
+                lineHeight: "45px",
+                textAlign: "right",
+              }}
+            >
+              0~0.5시간
+            </div>
+          </label>
+        </div>
+        <div className="checks">
+          <input
+            onChange={onChangeHandler}
+            type="radio"
+            id="0.5~1시간"
+            name="cooktime"
+            value="0.5~1시간"
+          />
+          <label htmlFor="0.5~1시간" style={{ padding: "0px 0px 0px 30px" }}>
+            <div
+              style={{
+                width: "120px",
+                height: "80px",
+                lineHeight: "45px",
+                textAlign: "right",
+              }}
+            >
+              0.5~1시간
+            </div>
+          </label>
+        </div>
+        <div className="checks">
+          <input
+            onChange={onChangeHandler}
+            type="radio"
+            id="1~1.5시간"
+            name="cooktime"
+            value="1~1.5시간"
+          />
+          <label htmlFor="1~1.5시간" style={{ padding: "0px 0px 0px 30px" }}>
+            <div
+              style={{
+                width: "120px",
+                height: "80px",
+                lineHeight: "45px",
+                textAlign: "right",
+              }}
+            >
+              1~1.5시간
+            </div>
+          </label>
+        </div>
+        <div className="checks">
+          <input
+            onChange={onChangeHandler}
+            type="radio"
+            id="1.5시간~"
+            name="cooktime"
+            value="1.5시간~"
+          />
+          <label htmlFor=" 1.5시간~" style={{ padding: "0px 0px 0px 25px" }}>
+            <div
+              style={{
+                width: "120px",
+                height: "80px",
+                lineHeight: "45px",
+                textAlign: "right",
+              }}
+            >
+              1.5시간~
+            </div>
+          </label>
+        </div>
+      </UnitBox>
+      <UnitBox>
+        <Indicator>조리 난이도</Indicator>
+        <div className="checks">
+          <input
+            onChange={onChangeHandler}
+            type="radio"
+            id="하"
+            name="cooklevel"
+            value="0"
+          />
+          <label htmlFor="하">
+            <div
+              style={{
+                width: "150px",
+                height: "80px",
+                lineHeight: "45px",
+                textAlign: "center",
+              }}
+            >
+              하
+            </div>
+          </label>
+        </div>
+        <div className="checks">
+          <input
+            onChange={onChangeHandler}
+            type="radio"
+            id="중"
+            name="cooklevel"
+            value="1"
+          />
+          <label htmlFor="중">
+            <div
+              style={{
+                width: "150px",
+                height: "80px",
+                lineHeight: "45px",
+                textAlign: "center",
+              }}
+            >
+              중
+            </div>
+          </label>
+        </div>
+        <div className="checks">
+          <input
+            onChange={onChangeHandler}
+            type="radio"
+            id="상"
+            name="cooklevel"
+            value="2"
+          />
+          <label htmlFor="상">
+            <div
+              style={{
+                width: "150px",
+                height: "80px",
+                lineHeight: "45px",
+                textAlign: "center",
+              }}
+            >
+              상
+            </div>
+          </label>
+        </div>
+      </UnitBox>
+      <UnitBox>
+        <FeedUploadButton onClick={onUploadFeed}>상품 등록</FeedUploadButton>
+      </UnitBox>
+    </>
   );
 };
 

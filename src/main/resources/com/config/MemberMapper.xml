@@ -42,4 +42,39 @@
 		SET (user_lifestyle,user_interest, user_food_favor) = (#{user_lifestyle},#{user_interest},#{user_food_favor})
 		WHERE user_email = #{email} AND user_password = #{password}
 	</update>
+
+	<!--유저 조회 추천요소 거리 계산-->
+	<select id="memberView" resultMap="selectMapList">
+	<![CDATA[
+		select m.user_id, l.lifestyle_id,i.interest_id,f.food_favor_id,l.gender,l.livealone,l.child, l.worker,l.couple,l.homemaker,l.baby,
+			   i.pet,i.outdoor,i.health,i.baking,i.cooking,i.babycare,f.sweetness,f.bitter,f.sour_taste,f.salty,f.spicy
+		from member m, lifestyle l, interest i, food_favor f
+		where m.user_lifestyle = l.lifestyle_id and
+			m.user_interest=i.interest_id and
+			m.user_food_favor=f.food_favor_id
+		]]>
+	</select>
+	<resultMap type="map" id="selectMapList">
+		<result column="user_id" property="user_id"/>
+		<result column="lifestyle_id" property="lifestyle_id"/>
+		<result column="interest_id" property="interest_id"/>
+		<result column="gender" property="gender"/>
+		<result column="livealone" property="livealone"/>
+		<result column="child" property="child"/>
+		<result column="worker" property="worker"/>
+		<result column="couple" property="couple"/>
+		<result column="homemaker" property="homemaker"/>
+		<result column="baby" property="baby"/>
+		<result column="pet" property="pet"/>
+		<result column="outdoor" property="outdoor"/>
+		<result column="health" property="health"/>
+		<result column="baking" property="baking"/>
+		<result column="cooking" property="cooking"/>
+		<result column="babycare" property="babycare"/>
+		<result column="sweetness" property="sweetness"/>
+		<result column="bitter" property="bitter"/>
+		<result column="sour_taste" property="sour_taste"/>
+		<result column="salty" property="salty"/>
+		<result column="spicy" property="spicy"/>
+	</resultMap>
 </mapper>

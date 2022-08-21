@@ -13,6 +13,7 @@ import Cart from "./pages/carts/Cart";
 import CreateFeed from "./pages/createfeed/CreateFeed";
 import ProductDetail from "./pages/productdetail/ProductDetail";
 import CreateProduct from "./pages/CreateProduct/CreateProduct";
+import CurlyTable from "./pages/curlytable/CurlyTable";
 import React from "react";
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
               <Route path="/cart" element={<Cart />}></Route>
               <Route path="/createfeed" element={<CreateFeed />}></Route>
               <Route path="/createproduct" element={<CreateProduct />}></Route>
+              <Route path="/curlytable" element={<CurlyTable />}></Route>
               <Route
                 path="/productdetail/:id"
                 element={<ProductDetail />}

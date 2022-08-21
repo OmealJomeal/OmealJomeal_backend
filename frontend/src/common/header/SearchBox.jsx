@@ -40,7 +40,10 @@ const SearchBox = () => {
             cursor: "pointer",
           }}
         >
-          <img alt="searchicon" src={require("../../assets/searchicon.png")} />
+          <img
+            alt="searchicon"
+            src={process.env.PUBLIC_URL + "./img/searchicon.png"}
+          />
         </button>
       </div>
     </>

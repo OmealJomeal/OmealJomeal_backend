@@ -29,7 +29,7 @@
 	</insert>
 
 	<!--피드 조회-->
-	<select id="feedView" parameterType="int" resultMap="selectMapList">
+	<select id="feedView" resultMap="selectMapList">
 	<![CDATA[
 		select f.feed_id, f.feed_title,
 			   f.feed_description, f.feed_recipe,f.feed_cooktime,
@@ -40,7 +40,8 @@
 		from feed f, feedproduct fp, product p, member m
 		where f.feed_id = fp.feed_id
 		  and fp.product_id=p.product_id
-		  and f.user_id=m.user_id and m.user_id=#{user_id}
+		  and f.user_id=m.user_id
+		order by feed_time desc
 		]]>
 	</select>
 	<resultMap type="map" id="selectMapList">

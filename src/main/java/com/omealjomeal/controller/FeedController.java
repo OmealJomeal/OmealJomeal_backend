@@ -1,11 +1,9 @@
 package com.omealjomeal.controller;
 
 import com.omealjomeal.dto.*;
-import com.omealjomeal.service.CartService;
-import com.omealjomeal.service.FeedService;
-import com.omealjomeal.service.LifestyleService;
-import com.omealjomeal.service.ProductService;
+import com.omealjomeal.service.*;
 import io.swagger.models.auth.In;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -17,19 +15,19 @@ import java.lang.reflect.Member;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+@RequiredArgsConstructor
 @RestController
 public class FeedController {
 
     @Value("${spring.servlet.multipart.location}")
     private String uploadPath;
 
-    @Autowired
-    LifestyleService lifestyleService;
+    //생성자 주입.
+    private final MemberService memberService;
 
-    @Autowired
-    FeedService feedService;
+    private final FeedService feedService;
 
+    //requestPram
     //feed 업로드
     @PostMapping("/api/feed")
     public int feedUpload(@RequestPart("feed_img") MultipartFile feedImg,
@@ -39,7 +37,7 @@ public class FeedController {
                           @RequestParam("feed_cooktime") String feed_cooktime,
                           @RequestParam("feed_cooklevel") String feed_cooklevel,
                           @RequestParam("feed_food_time") String feed_food_time,
-                          @RequestParam("product_id") HashMap<String,Integer> product_id,
+                          @RequestParam("product_id") String product_id,
                           HttpSession session
     ) throws Exception{
         MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
@@ -62,37 +60,51 @@ public class FeedController {
         //feedProduct 테이블에 insert..!
         FeedProductDTO feedProductDTO = new FeedProductDTO();
         feedProductDTO.setFeed_id(feed_id);
-        product_id.forEach((strKey, intValue)->{
-            feedProductDTO.setProduct_id(intValue);
-            try {
-                int feedProduct = feedService.feedProductUpload(feedProductDTO);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
+
+        //String str = "사과,배,귤_바나나_딸기 수박";
+        String[] results = product_id.split(",");
+        for (int i=1; i<results.length; i++){
+            int id = Integer.parseInt(results[i]);
+            feedProductDTO.setProduct_id(id);
+            int feedProduct = feedService.feedProductUpload(feedProductDTO);
+        }
 
         return feedNum;
     }
     //피드 자세히보기
 //    @GetMapping("/api/feedDetail")
 
-    //피드 목록 보기. 여기서 알고리즘 적용
+    //피드 목록 보기.   실시간 컬리식탁!!
     @GetMapping("/api/feed")
     public List<Map<String,String>> selectFeedList(HttpSession session) throws Exception{
         MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
         //피드 & feedProduct & product 조인해서 불러오기.
-        List<Map<String,String>> map = feedService.feedView(memberDTO.getUser_id());
-
+        List<Map<String,String>> map = feedService.feedView();
+        //알고리즘적용필요X.
         return map;
     }
 
-//    @GetMapping("/api/feedDetail")
-//    public List<Map<String,String>> selectFeedList(HttpSession session) throws Exception{
-//        MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
-//        //피드 & feedProduct & product 조인해서 불러오기.
-//        List<Map<String,String>> map = feedService.feedView(memberDTO.getUser_id());
-//
-//        return map;
-//    }
+    //피드목록 보기 메인 알고리즘 적용
+    @GetMapping("/api/mainFeed")
+    public List<Map<String,String>> selectMainFeedList(HttpSession session) throws Exception{
+        MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
+        //membertable조회
+        //user_id랑 lifestyle, interest, food_favor 조인해서
+        List<Map<String,Integer>> memberViewMap = memberService.memberView();
+        //피드 & feedProduct & product 조인해서 불러오기.
+        List<Map<String,String>> map = feedService.feedView();
+        return map;
+    }
 
+    //피드목록 보기 베스트5 알고리즘 적용
+    @GetMapping("/api/bestFeed")
+    public List<Map<String,String>> selectBestFeedList(HttpSession session) throws Exception{
+        MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
+        //membertable조회
+
+        //피드 & feedProduct & product 조인해서 불러오기.
+        List<Map<String,String>> map = feedService.feedView();
+        //알고리즘적용필요X.
+        return map;
+    }
 }

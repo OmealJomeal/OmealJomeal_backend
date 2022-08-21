@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Repository("memberDAO")
@@ -36,5 +37,10 @@ public class MemberDAO {
     // 일반회원 정보수정
     public int userEdit(MemberDTO dto) throws Exception {
         return sqlSession.update("com.config.MemberMapper.userEdit", dto);
+    }
+
+    //멤버전체 추천요소 조회
+    public List<Map<String,Integer>> memberView() throws Exception {
+        return sqlSession.selectList("com.config.MemberMapper.memberView");
     }
 }

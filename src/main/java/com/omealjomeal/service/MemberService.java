@@ -3,6 +3,7 @@ package com.omealjomeal.service;
 import com.omealjomeal.dto.MemberDTO;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public interface MemberService {
@@ -19,5 +20,7 @@ public interface MemberService {
     // 정보수정
     public int userEdit(MemberDTO dto) throws Exception;
 
+    //member 조회
+    public List<Map<String,Integer>> memberView() throws Exception;
 
 }

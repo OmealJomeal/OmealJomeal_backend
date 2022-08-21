@@ -2,18 +2,20 @@ package com.omealjomeal.service;
 
 import com.omealjomeal.dao.MemberDAO;
 import com.omealjomeal.dto.MemberDTO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+@RequiredArgsConstructor
 @Service("memberService")
 public class MemberServiceImpl implements MemberService{
 
-    @Autowired
-    MemberDAO memberDAO;
+    private final MemberDAO memberDAO;
 
     //로그인
     @Transactional
@@ -39,4 +41,10 @@ public class MemberServiceImpl implements MemberService{
     public int userEdit(MemberDTO dto) throws Exception {
         return memberDAO.userEdit(dto);
     }
+
+    @Override
+    public List<Map<String,Integer>> memberView() throws Exception {
+        return memberDAO.memberView();
+    }
+
 }

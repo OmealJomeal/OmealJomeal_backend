@@ -1,21 +1,24 @@
 package com.omealjomeal.service;
 
 import com.omealjomeal.dao.FeedDAO;
+import com.omealjomeal.dao.MemberDAO;
 import com.omealjomeal.dao.ProductDAO;
 import com.omealjomeal.dto.FeedDTO;
 import com.omealjomeal.dto.FeedProductDTO;
 import com.omealjomeal.dto.ProductDTO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
 
+@RequiredArgsConstructor
 @Service("feedService")
 public class FeedServiceImpl implements FeedService{
 
-    @Autowired
-    FeedDAO dao;
+    private final FeedDAO dao;
+    private final MemberDAO memberDAO;
 
     @Override
     public int feedUpload(FeedDTO feedDTO) throws Exception {
@@ -33,8 +36,8 @@ public class FeedServiceImpl implements FeedService{
     }
 
     @Override
-    public List<Map<String, String>> feedView(int user_id) throws Exception {
-        return dao.feedView(user_id);
+    public List<Map<String, String>> feedView() throws Exception {
+        return dao.feedView();
     }
 
 
