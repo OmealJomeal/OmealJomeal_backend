@@ -40,9 +40,6 @@ public class FeedController {
                           @RequestParam("feed_cooklevel") String feed_cooklevel,
                           @RequestParam("feed_food_time") String feed_food_time,
                           @RequestParam("product_id") HashMap<String,Integer> product_id,
-                          @RequestParam("feed_lifestyle") HashMap<String,Integer> feed_lifestyle,
-                          @RequestParam("feed_interest") HashMap<String, Integer> feed_interest,
-                          @RequestParam("feed_food_favor") HashMap<String,Integer> feed_food_favor,
                           HttpSession session
     ) throws Exception{
         MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
@@ -56,18 +53,13 @@ public class FeedController {
         feedDTO.setFeed_cooklevel(feed_cooklevel);
         feedDTO.setUser_id(user_id);
 
-        int lifestyle_ID = lifestyleService.findLifestyle(feed_lifestyle);
-        int interest_ID = lifestyleService.findInterest(feed_interest);
-        int food_favor_ID = lifestyleService.findFoodFavor(feed_food_favor);
-
-        feedDTO.setFeed_lifestyle(lifestyle_ID);
-        feedDTO.setFeed_interest(interest_ID);
-        feedDTO.setFeed_food_favor(food_favor_ID);
-
+        //feed 정보 피드 테이블에 insert
+        //feed-id 데이터베이스에서 받아와서 이미지 저장.
         int feedNum = feedService.feedUpload(feedDTO);
         int feed_id = feedService.selectFeedId(feedDTO);
         feedImg.transferTo(new File(uploadPath,  feed_id + "_"+"ClearImg"+ ".png"));
-        //feedProduct에 인서트..!
+
+        //feedProduct 테이블에 insert..!
         FeedProductDTO feedProductDTO = new FeedProductDTO();
         feedProductDTO.setFeed_id(feed_id);
         product_id.forEach((strKey, intValue)->{

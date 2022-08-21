@@ -99,9 +99,7 @@ public class ProductController {
     @GetMapping("/api/cart")
     public List<Map<String,Object>> Cart(HttpSession session) throws Exception {
         MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
-        System.out.println(memberDTO.getUser_id());
         List<Map<String,Object>> map = cartService.cartView(memberDTO.getUser_id());
-        System.out.println(map);
         return map;
     }
 
