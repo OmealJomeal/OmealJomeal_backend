@@ -44,14 +44,14 @@
 	</update>
 
 	<!--유저 조회 추천요소 거리 계산-->
-	<select id="memberView" resultMap="selectMapList">
+	<select id="memberView" resultMap="selectMapList" parameterType="int">
 	<![CDATA[
 		select m.user_id,l.gender,l.livealone,l.child, l.worker,l.couple,l.homemaker,l.baby,
 			   i.pet,i.outdoor,i.health,i.baking,i.cooking,i.babycare,f.sweetness,f.bitter,f.sour_taste,f.salty,f.spicy
 		from member m, lifestyle l, interest i, food_favor f
 		where m.user_lifestyle = l.lifestyle_id and
 			m.user_interest=i.interest_id and
-			m.user_food_favor=f.food_favor_id
+			m.user_food_favor=f.food_favor_id and m.user_id !=#{user_id}
 		]]>
 	</select>
 	<resultMap type="map" id="selectMapList">
@@ -77,4 +77,15 @@
 		<result column="salty" property="salty"/>
 		<result column="spicy" property="spicy"/>
 	</resultMap>
+
+	<select id="currentMemberView" resultMap="selectMapList" parameterType="int">
+	<![CDATA[
+		select m.user_id,l.gender,l.livealone,l.child, l.worker,l.couple,l.homemaker,l.baby,
+			   i.pet,i.outdoor,i.health,i.baking,i.cooking,i.babycare,f.sweetness,f.bitter,f.sour_taste,f.salty,f.spicy
+		from member m, lifestyle l, interest i, food_favor f
+		where m.user_lifestyle = l.lifestyle_id and
+			m.user_interest=i.interest_id and
+			m.user_food_favor=f.food_favor_id and m.user_id =#{user_id}
+		]]>
+	</select>
 </mapper>

@@ -24,7 +24,7 @@
 	<insert id="feedProductUpload" parameterType="FeedProductDTO">
 		<![CDATA[
 		insert into feedProduct ( feed_id, product_id )
-		values (#{feed_id},  #{product_id})
+		values (feed_seq.currval,  #{product_id})
 		]]>
 	</insert>
 
@@ -33,7 +33,7 @@
 	<![CDATA[
 		select f.feed_id, f.feed_title,
 			   f.feed_description, f.feed_recipe,f.feed_cooktime,
-			   f.feed_cooklevel,f.feed_time,
+			   f.feed_cooklevel,to_char(f.feed_time,'yy-mm-dd HH24:mi:ss') as feed_time,
 			   f.feed_lifestyle,f.feed_interest,f.feed_food_favor,
 			   f.feed_food_time,
 			   fp.product_id,p.product_description,p.product_name

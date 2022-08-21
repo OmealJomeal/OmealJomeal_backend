@@ -71,6 +71,18 @@ const Cart = () => {
   };
 
   useEffect(() => {
+    setCartProducts([
+      {
+        cart_id: 8,
+        product_amount: 1,
+        product_description: "두부",
+        product_id: 1,
+        product_name: "두부",
+        product_price: 500,
+        total_price: 500,
+        user_id: 1,
+      },
+    ]);
     axios
       .get("http://localhost:8080/api/cart")
       .then((response) => {

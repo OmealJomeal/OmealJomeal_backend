@@ -27,7 +27,7 @@ public class FeedServiceImpl implements FeedService{
 
     @Override
     public int selectFeedId(FeedDTO feedDTO) throws Exception {
-        return dao.feedUpload(feedDTO);
+        return dao.selectFeedId(feedDTO);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class FeedServiceImpl implements FeedService{
     }
 
     @Override
-    public List<Map<String, String>> feedView() throws Exception {
+    public List<Map<Object, Object>> feedView() throws Exception {
         return dao.feedView();
     }
 

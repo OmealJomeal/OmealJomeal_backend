@@ -13,6 +13,6 @@ public interface FeedService {
     public int feedUpload(FeedDTO feedDTO) throws Exception;
     public int selectFeedId(FeedDTO feedDTO) throws Exception;
     public int feedProductUpload(FeedProductDTO feedProductDTO) throws Exception;
-    public List<Map<String,String>> feedView() throws Exception;
+    public List<Map<Object,Object>> feedView() throws Exception;
 
 }

@@ -43,8 +43,13 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public List<Map<String,Integer>> memberView() throws Exception {
-        return memberDAO.memberView();
+    public List<Map<String,Integer>> memberView(int user_id) throws Exception {
+        return memberDAO.memberView(user_id);
+    }
+
+    @Override
+    public Map<String, Integer> currentMemberView(int user_id) throws Exception {
+        return memberDAO.currentMemberView(user_id);
     }
 
 }

@@ -21,6 +21,7 @@ public interface MemberService {
     public int userEdit(MemberDTO dto) throws Exception;
 
     //member 조회
-    public List<Map<String,Integer>> memberView() throws Exception;
+    public List<Map<String,Integer>> memberView(int user_id) throws Exception;
+    public Map<String,Integer> currentMemberView(int user_id) throws Exception;
 
 }

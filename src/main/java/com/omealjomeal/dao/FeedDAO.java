@@ -28,7 +28,7 @@ public class FeedDAO {
         return sqlSession.insert("com.config.FeedMapper.feedProductUpload", feedProductDTO);
     }
 
-    public List<Map<String, String>> feedView() throws Exception {
+    public List<Map<Object, Object>> feedView() throws Exception {
         return sqlSession.selectList("com.config.FeedMapper.feedView");
     }
 }
