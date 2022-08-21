@@ -40,7 +40,7 @@ public class MemberDAO {
     }
 
     //멤버전체 추천요소 조회
-    public List<Map<String,Integer>> memberView(int user_id) throws Exception {
+    public List<HashMap<String,Integer>> memberView(int user_id) throws Exception {
         return sqlSession.selectList("com.config.MemberMapper.memberView",user_id);
     }
 

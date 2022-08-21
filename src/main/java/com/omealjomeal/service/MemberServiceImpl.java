@@ -3,7 +3,6 @@ package com.omealjomeal.service;
 import com.omealjomeal.dao.MemberDAO;
 import com.omealjomeal.dto.MemberDTO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,7 +42,7 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public List<Map<String,Integer>> memberView(int user_id) throws Exception {
+    public List<HashMap<String, Integer>> memberView(int user_id) throws Exception {
         return memberDAO.memberView(user_id);
     }
 
