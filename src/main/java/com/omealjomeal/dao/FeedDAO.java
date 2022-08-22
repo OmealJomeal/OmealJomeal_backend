@@ -1,6 +1,7 @@
 package com.omealjomeal.dao;
 
 import com.omealjomeal.dto.FeedDTO;
+import com.omealjomeal.dto.FeedLikesDTO;
 import com.omealjomeal.dto.FeedProductDTO;
 import com.omealjomeal.dto.ProductDTO;
 import org.apache.ibatis.session.SqlSession;
@@ -41,5 +42,9 @@ public class FeedDAO {
     }
     public List<ProductDTO> feedDetailProductList(int feed_id) throws Exception {
         return sqlSession.selectList("com.config.FeedMapper.feedDetailProductList",feed_id);
+    }
+
+    public int feedLikesInsert(FeedLikesDTO feedLikesDTO) throws Exception {
+        return sqlSession.insert("com.config.FeedMapper.feedLikesInsert", feedLikesDTO);
     }
 }

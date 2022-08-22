@@ -4,6 +4,7 @@ import com.omealjomeal.dao.FeedDAO;
 import com.omealjomeal.dao.MemberDAO;
 import com.omealjomeal.dao.ProductDAO;
 import com.omealjomeal.dto.FeedDTO;
+import com.omealjomeal.dto.FeedLikesDTO;
 import com.omealjomeal.dto.FeedProductDTO;
 import com.omealjomeal.dto.ProductDTO;
 import lombok.RequiredArgsConstructor;
@@ -53,6 +54,11 @@ public class FeedServiceImpl implements FeedService{
     @Override
     public List<ProductDTO> feedDetailProductList(int feed_id) throws Exception {
         return dao.feedDetailProductList(feed_id);
+    }
+
+    @Override
+    public int feedLikesInsert(FeedLikesDTO feedLikesDTO) throws Exception {
+        return dao.feedLikesInsert(feedLikesDTO);
     }
 
 

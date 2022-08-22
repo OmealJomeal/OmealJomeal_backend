@@ -1,6 +1,7 @@
 package com.omealjomeal.service;
 
 import com.omealjomeal.dto.FeedDTO;
+import com.omealjomeal.dto.FeedLikesDTO;
 import com.omealjomeal.dto.FeedProductDTO;
 import com.omealjomeal.dto.ProductDTO;
 
@@ -17,5 +18,7 @@ public interface FeedService {
     public List<Map<Object,Object>> feedViewMainFit(int user_id) throws Exception;
     public FeedDTO feedDetail(int feed_id) throws Exception;
     public List<ProductDTO> feedDetailProductList(int feed_id) throws Exception;
+    public int feedLikesInsert(FeedLikesDTO feedLikesDTO) throws Exception;
+
 
 }

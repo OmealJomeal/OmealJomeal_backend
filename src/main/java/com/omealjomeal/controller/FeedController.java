@@ -93,7 +93,6 @@ public class FeedController {
         //피드 & feedProduct & product 조인해서 불러오기.
         List<Map<Object,Object>> map = feedService.feedView();
         System.out.println(map);
-        //알고리즘적용필요X.
         return map;
     }
 
@@ -149,7 +148,7 @@ public class FeedController {
         return mapRealResult;
     }
 
-    //피드목록 보기 메인 알고리즘 적용 맞춤취향
+    //피드목록 보기 메인 알고리즘 적용 반대취향
     @GetMapping("/api/mainFeedNotFit")
     public List<Map<Object,Object>> selectMainNotFeedList(HttpSession session) throws Exception{
         int sum=0;
@@ -163,6 +162,7 @@ public class FeedController {
         // lifestyle, interest, food_favor 조인해서 조회.
         List<HashMap<String,Integer>> memberViewMap = memberService.memberView(currentUserId);
 
+        // 추천 알고리즘
         for (HashMap<String,Integer> referenceMember:memberViewMap) {
             for(String mapKey: referenceMember.keySet()){
                 if(Integer.parseInt(String.valueOf(referenceMember.get(mapKey))) >= 2){
@@ -176,7 +176,6 @@ public class FeedController {
             key.put(user_id,sum);
             sum=0;
         }
-        //{21:10, 3:7, 5:7,...}
         List<Map<Object,Object>> mapSave = new ArrayList<>();
         int i = 0;
         Object[] lists= key.values().toArray();
@@ -191,11 +190,11 @@ public class FeedController {
                 }
             }
         }
-        //랜덤으로 mapSave불러와서 8개만 따로저장해서 반환.
+        //랜덤으로 mapSave불러와서 랜덤으로 섞어주고
         Collections.shuffle(mapSave);
         if (mapSave.size() != 0) {
             for (int j = 0; j < 8; j++) {
-
+                //8개의 데이터만 저장.
                 mapRealResult.add(mapSave.get(j));
             }
         }else{
@@ -214,5 +213,14 @@ public class FeedController {
         List<Map<Object,Object>> map = feedService.feedView();
         //알고리즘적용필요X.
         return map;
+    }
+    //피드 좋아요 추가
+    @PostMapping("/api/feedLikes")
+    public int feedLikes(HttpSession session,@RequestBody FeedLikesDTO feedLikesDTO) throws Exception{
+        MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
+        int currentUserId = memberDTO.getUser_id();
+        feedLikesDTO.setUser_id(currentUserId);
+        int feedLikes = feedService.feedLikesInsert(feedLikesDTO);
+        return feedLikes;
     }
 }
