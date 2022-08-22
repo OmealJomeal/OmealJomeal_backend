@@ -34,6 +34,7 @@ const FeedDetail = () => {
           style={{
             width: "1050px",
             margin: "80px auto 0px auto",
+            whiteSpace: "pre-wrap",
           }}
         >
           <div style={{ display: "flex" }}>

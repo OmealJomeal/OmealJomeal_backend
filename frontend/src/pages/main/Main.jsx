@@ -56,9 +56,6 @@ const Main = (props) => {
 
   return (
     <>
-      <h2 onClick={onClick} id={1}>
-        Feed
-      </h2>
       <MainCarousel style={{ display: "flex", flexWrap: "nowrap" }}>
         {mainimages.map((src, index) => (
           <MainCarouselItem

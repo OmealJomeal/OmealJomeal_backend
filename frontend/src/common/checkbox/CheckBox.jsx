@@ -3,7 +3,6 @@ const CheckBox = ({ label, checked, ...props }) => {
   const defaultChecked = checked ? checked : false;
   const [isChecked, setIsChecked] = useState(defaultChecked);
 
-  console.log(checked);
   return (
     <div className="checkbox-wrapper">
       <label>

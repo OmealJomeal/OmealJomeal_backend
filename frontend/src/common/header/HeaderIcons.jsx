@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FiMapPin } from "react-icons/fi";
+import { AiOutlineHeart } from "react-icons/ai";
+import { BsCart2 } from "react-icons/bs";
 
 const HeaderIcons = (props) => {
   let navigate = useNavigate();
@@ -24,20 +27,33 @@ const HeaderIcons = (props) => {
           bottom: "25%",
         }}
       >
-        <img
-          style={{ margin: "0 5px" }}
-          alt="searchicon"
-          src={process.env.PUBLIC_URL + "./img/headermap.png"}
+        <FiMapPin
+          style={{
+            margin: "0 9px",
+            width: "25px",
+            height: "25px",
+            color: "#777",
+          }}
         />
-        <img
-          style={{ margin: "0 5px" }}
-          alt="searchicon"
-          src={process.env.PUBLIC_URL + "./img/headerheart.png"}
+        <AiOutlineHeart
+          style={{
+            margin: "0 9px",
+            width: "30px",
+            height: "30px",
+            color: "#777",
+            position: "relative",
+            bottom: "-3px",
+          }}
         />
-        <img
-          style={{ margin: "0 5px" }}
-          alt="searchicon"
-          src={process.env.PUBLIC_URL + "./img/headercart.png"}
+        <BsCart2
+          style={{
+            margin: "0 9px",
+            width: "30px",
+            height: "30px",
+            color: "#777",
+            position: "relative",
+            cursor: "pointer",
+          }}
           onClick={onClickCart}
         />
       </div>

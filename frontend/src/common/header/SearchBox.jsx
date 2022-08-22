@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import { BiSearch } from "react-icons/bi";
 
 const Searchbox = styled.input`
-  width: 400px;
+  width: 380px;
+  padding: 0px 10px;
   height: 48px;
   border-color: ${(props) => props.theme.maincolor};
   border-radius: 6px;
@@ -40,9 +42,15 @@ const SearchBox = () => {
             cursor: "pointer",
           }}
         >
-          <img
-            alt="searchicon"
-            src={process.env.PUBLIC_URL + "./img/searchicon.png"}
+          <BiSearch
+            style={{
+              width: "27px",
+              height: "27px",
+              color: "#5F0080",
+              borderWidth: "2px",
+              position: "relative",
+              bottom: "-3px",
+            }}
           />
         </button>
       </div>

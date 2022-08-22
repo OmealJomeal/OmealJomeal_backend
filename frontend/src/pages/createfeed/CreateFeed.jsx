@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import "./radio.css";
+import SearchBox from "common/header/SearchBox";
 
 const Indicator = styled.div`
   width: 100px;
   margin: 17px 40px 17px 0px;
-  font-size: 15px;
+  font-size: 14px;
 `;
 
 const UnitBox = styled.div`
@@ -44,8 +45,6 @@ const CreateFeed = () => {
     food_time: 0,
   });
 
-  console.log(value);
-
   const onChangeHandler = (e) => {
     setValue((prevState) => {
       return { ...prevState, [e.target.name]: e.target.value };
@@ -61,6 +60,113 @@ const CreateFeed = () => {
     formData.append("feed_img", img);
     for (const keyValue of formData) console.log(keyValue); // ["img", File] File은 객체
   };
+
+  const [product_id, setProduct_id] = useState([]);
+
+  const [productList, setProductList] = useState(null);
+  const [search, setSearch] = useState("null");
+  const [selected, setSelected] = useState([]);
+  const [selectedId, setSelectedId] = useState([]);
+
+  const onChangeSearch = (e) => {
+    setSearch(e.target.value);
+    console.log(search.length);
+    if (search.length === 1 || 0) {
+      setSearch("null");
+    }
+  };
+
+  useEffect(() => {
+    if (search.length === 0) {
+      setSearch("null");
+    }
+  }, [search.length]);
+
+  console.log(search.length);
+
+  const filtered =
+    productList &&
+    productList.filter((product) => {
+      if (product.product_name.toLowerCase().includes(search)) {
+        return product;
+      }
+    });
+
+  const onClickSelect = (e) => {
+    if (selected.includes(e.target.id)) {
+    } else {
+      setSelected((selected) => [...selected, e.target.id]);
+      setSelectedId((selectedId) => [...selectedId, e.target.className]);
+    }
+  };
+
+  console.log(selectedId);
+
+  const showFiltered =
+    filtered &&
+    filtered.map((product) => {
+      return (
+        <div
+          style={{
+            margin: "0px 10px",
+            height: "20px",
+            display: "flex",
+          }}
+        >
+          <div
+            onClick={onClickSelect}
+            id={product.product_name}
+            className={product.product_id}
+            style={{
+              display: "block",
+              marginRight: "10px",
+              backgroundColor: "#885EA7",
+              color: "white",
+              width: "40px",
+              textAlign: "center",
+              borderRadius: "5px",
+              fontSize: "13px",
+            }}
+          >
+            선택
+          </div>
+          {product.product_name}
+        </div>
+      );
+    });
+
+  const showSelected =
+    selected &&
+    selected.map((name) => {
+      return (
+        <div
+          style={{
+            border: "solid #BA8CDC",
+            borderWidth: "1px",
+            padding: "2px 5px",
+            height: "25px",
+            margin: "0px 20px",
+            textAlign: "center",
+            borderRadius: "5px",
+            margin: "2px",
+          }}
+        >
+          {name}
+        </div>
+      );
+    });
+
+  useEffect(() => {
+    axios
+      .get("/api/product")
+      .then((response) => {
+        console.log(response);
+        setProductList(response.data);
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+      });
+  }, []);
 
   const onUploadFeed = () => {
     if (formData.get("feed_title") === null) {
@@ -82,18 +188,21 @@ const CreateFeed = () => {
       formData.append("feed_food_time", value.food_time);
     }
     if (formData.get("product_id") === null) {
-      formData.append("product_id", [1, 2, 3, 4]);
+      formData.append("product_id", selectedId);
     }
     axios
       .post("/api/feed", formData)
       .then((response) => {
         console.log(response);
+        setProductList(response.data);
       })
       .catch((error) => {
         console.log(error.response.data);
         for (const keyValue of formData) console.log(keyValue);
       });
   };
+
+  console.log(selectedId);
 
   return (
     <>
@@ -169,6 +278,31 @@ const CreateFeed = () => {
         ></textarea>
       </UnitBox>
       <UnitBox style={{ height: "50px" }}></UnitBox>
+      <UnitBox>
+        <Indicator>상품 검색</Indicator>
+        <div>
+          <input
+            style={{
+              width: "599px",
+              height: "30px",
+              border: "1px solid #aaa;",
+              margin: "8px 0px",
+              outline: "none",
+              padding: "8px",
+              boxSizing: "border-box",
+            }}
+            onChange={onChangeSearch}
+            type="text"
+            name="title"
+          ></input>
+        </div>
+      </UnitBox>
+      <UnitBox style={{ display: "flex", flexWrap: "wrap" }}>
+        {showFiltered}
+      </UnitBox>
+      <UnitBox style={{ display: "flex", flexWrap: "wrap" }}>
+        {showSelected}
+      </UnitBox>
       <UnitBox>
         <Indicator>조리 시간</Indicator>
         <div className="checks">
@@ -336,7 +470,7 @@ const CreateFeed = () => {
         ></input>
       </UnitBox>
       <UnitBox>
-        <FeedUploadButton onClick={onUploadFeed}>상품 등록</FeedUploadButton>
+        <FeedUploadButton onClick={onUploadFeed}>글 등록하기</FeedUploadButton>
       </UnitBox>
     </>
   );

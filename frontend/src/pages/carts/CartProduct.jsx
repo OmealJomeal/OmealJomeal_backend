@@ -15,7 +15,7 @@ const CountButton = styled.button`
 `;
 
 const CartProduct = (props) => {
-  console.log(props);
+  console.log(props.product_amount);
   const [count, setCount] = useState(props.product_amount);
   const onMinus = () => {
     if (count <= 1) {
@@ -51,9 +51,7 @@ const CartProduct = (props) => {
         >
           <img
             style={{ width: "90px", height: "120px", marginLeft: "15px" }}
-            src={
-              process.env.PUBLIC_URL + `/img/${props.product_id}_noneClear.png`
-            }
+            src={`/upload/product/${props.product_id}_noneClear.png`}
           ></img>
           <div
             style={{ marginLeft: "25px", lineHeight: "118px", width: "350px" }}

@@ -66,28 +66,6 @@ const Cart = () => {
     ));
 
   useEffect(() => {
-    setCartProducts([
-      {
-        cart_id: 8,
-        product_amount: 1,
-        product_description: "두부",
-        product_id: 1,
-        product_name: "두부",
-        product_price: 500,
-        total_price: 500,
-        user_id: 1,
-      },
-      {
-        cart_id: 9,
-        product_amount: 2,
-        product_description: "김치",
-        product_id: 1,
-        product_name: "김치",
-        product_price: 500,
-        total_price: 1600,
-        user_id: 1,
-      },
-    ]);
     axios
       .get("/api/cart")
       .then((response) => {
@@ -103,9 +81,6 @@ const Cart = () => {
     if (cartProducts != null) {
       let sumtotal = 0;
       for (let i = 0; i < cartProducts.length; i++) {
-        console.log(
-          cartProducts[i].product_price * cartProducts[i].product_amount
-        );
         const total =
           cartProducts[i].product_price * cartProducts[i].product_amount;
         sumtotal += total;
