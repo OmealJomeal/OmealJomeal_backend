@@ -1,14 +1,10 @@
 package com.omealjomeal.service;
 
-import com.omealjomeal.dao.MemberDAO;
 import com.omealjomeal.dao.ProductDAO;
-import com.omealjomeal.dto.MemberDTO;
 import com.omealjomeal.dto.ProductDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.HashMap;
 import java.util.List;
 
 @Service("productService")

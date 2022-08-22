@@ -7,19 +7,18 @@ import com.omealjomeal.dto.LifestyleDTO;
 import com.omealjomeal.dto.MemberDTO;
 import com.omealjomeal.service.LifestyleService;
 import com.omealjomeal.service.MemberService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 
+@RequiredArgsConstructor
 @RestController
 public class MemberController {
 
-    @Autowired
-    MemberService memberService;
+    private final MemberService memberService;
 
-    @Autowired
-    LifestyleService lifestyleService;
+    private final LifestyleService lifestyleService;
 
     @PostMapping("/api/login")
     public MemberDTO login(HttpSession session, @RequestBody HashMap<String, Object> map) throws Exception {

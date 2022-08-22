@@ -33,9 +33,11 @@
 	<![CDATA[
 		select f.feed_id, f.feed_title,
 			   f.feed_description,
-			   to_char(f.feed_time,'yy-mm-dd HH24:mi:ss') as feed_time,m.user_name
-		from feed f, member m
-		where  f.user_id=m.user_id
+			   to_char(f.feed_time,'yy-mm-dd HH24:mi:ss') as feed_time,m.user_name,
+			   count(case when likes_category=0 then 1 end) as countLikes
+		from feed f, member m,feedlikes fl
+		where  f.user_id=m.user_id and f.feed_id=fl.feed_id
+		group by f.feed_id, f.feed_title,f.feed_description, f.feed_time,m.user_name
 		order by feed_time desc
 		]]>
 	</select>
@@ -45,6 +47,7 @@
 		<result column="feed_description" property="feed_description"/>
 		<result column="feed_time" property="feed_time"/>
 		<result column="user_name" property="user_name"/>
+		<result column="countLikes" property="countLikes"/>
 	</resultMap>
 
 	<select id="feedViewMainFit" resultMap="selectMapList" parameterType="int">
@@ -92,5 +95,17 @@
 		]]>
 	</select>
 
+	<select id="feedViewTop" resultMap="selectMapList">
+	<![CDATA[
+		select f.feed_id, f.feed_title,
+			   f.feed_description,
+			   to_char(f.feed_time,'yy-mm-dd HH24:mi:ss') as feed_time,m.user_name,
+			   count(case when likes_category=0 then 1 end) as countLikes
+		from feed f, member m,feedlikes fl
+		where  f.user_id=m.user_id and f.feed_id=fl.feed_id and rownum<=4
+		group by f.feed_id, f.feed_title,f.feed_description, f.feed_time,m.user_name
+		order by countLikes desc
+		]]>
+	</select>
 
 </mapper>

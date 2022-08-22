@@ -3,7 +3,6 @@ package com.omealjomeal.dao;
 import com.omealjomeal.dto.FoodFavorDTO;
 import com.omealjomeal.dto.InterestDTO;
 import com.omealjomeal.dto.LifestyleDTO;
-import com.omealjomeal.dto.MemberDTO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

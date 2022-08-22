@@ -2,16 +2,12 @@ package com.omealjomeal.controller;
 
 import com.omealjomeal.dto.*;
 import com.omealjomeal.service.*;
-import io.swagger.models.auth.In;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.servlet.http.HttpSession;
 import java.io.File;
-import java.lang.reflect.Member;
 import java.util.*;
 
 @RequiredArgsConstructor
@@ -83,19 +79,16 @@ public class FeedController {
         List<ProductDTO> feedDetailProductList = feedService.feedDetailProductList(feed_id);
         feedDetailMap.put("feedDetail", feedDetail);
         feedDetailMap.put("feedDetailProductList", feedDetailProductList);
-        System.out.println(feedDetailMap);
         return feedDetailMap;
     }
-    //피드 목록 보기.   실시간 컬리식탁!! 피드만보이게
+    //피드 목록 보기. 실시간 컬리식탁!! 피드만보이게
     @GetMapping("/api/feed")
-    public List<Map<Object,Object>> selectFeedList(HttpSession session) throws Exception{
-        MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
-        //피드 & feedProduct & product 조인해서 불러오기.
+    public List<Map<Object,Object>> selectFeedList() throws Exception{
         List<Map<Object,Object>> map = feedService.feedView();
         return map;
     }
 
-    //피드목록 보기 메인 알고리즘 적용 맞춤취향
+    //피드목록 보기 메인 알고리즘 적용 맞춤취향 거리가 8이하인 유저의 피드를 불러옴.
     @GetMapping("/api/mainFeedFit")
     public List<Map<Object,Object>> selectMainFeedList(HttpSession session) throws Exception{
         int sum=0;
@@ -139,16 +132,14 @@ public class FeedController {
         }
                 //랜덤으로 mapSave불러와서 8개만 따로저장해서 반환.
                 Collections.shuffle(mapSave);
-        if (mapSave.size() != 0) {
+        if (mapSave.size() >= 8) {
         for (int j = 0; j <8 ; j++) {
             mapRealResult.add(mapSave.get(j));
-        }}else{
-                mapRealResult = null;
-            }
+        }}
         return mapRealResult;
     }
 
-    //피드목록 보기 메인 알고리즘 적용 반대취향
+    //피드목록 보기 메인 알고리즘 적용 반대취향 거리가 8이상인 유저의 피드를 불러옴.
     @GetMapping("/api/mainFeedNotFit")
     public List<Map<Object,Object>> selectMainNotFeedList(HttpSession session) throws Exception{
         int sum=0;
@@ -203,15 +194,10 @@ public class FeedController {
         return mapRealResult;
     }
 
-    //피드목록 보기 베스트5 알고리즘 적용
+    //피드목록 보기 베스트4 좋아요 갯수로 판정. //매일 일주일 동안 좋아요 갯수가 가장 많은 기준으로 변경?
     @GetMapping("/api/bestFeed")
-    public List<Map<Object,Object>> selectBestFeedList(HttpSession session) throws Exception{
-        MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
-        //membertable조회
-
-        //피드 & feedProduct & product 조인해서 불러오기.
-        List<Map<Object,Object>> map = feedService.feedView();
-        //알고리즘적용필요X.
+    public List<Map<Object,Object>> selectBestFeedList() throws Exception{
+        List<Map<Object,Object>> map = feedService.feedViewTop();
         return map;
     }
     //피드 좋아요 추가
@@ -224,6 +210,8 @@ public class FeedController {
         int feedLikes = feedService.feedLikesInsert(feedLikesDTO);
         return feedLikes;
     }
+
+    //좋아요 눌렀던 피드인지 아닌지 확인 후 피드 좋아요 추가 or alert
     @GetMapping("/api/feedLikes/{feed_id}")
     public FeedLikesDTO checkFeedLikes(HttpSession session,@PathVariable int feed_id) throws Exception{
         MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
@@ -237,5 +225,4 @@ public class FeedController {
 
     }
 
-    //좋아요 누름 -> 유저가 좋아요 누른적 있는지 없는지 확인 후 -> 없으면 포스트
 }

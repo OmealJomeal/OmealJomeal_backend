@@ -1,12 +1,10 @@
 package com.omealjomeal.dao;
 
-import com.omealjomeal.dto.MemberDTO;
 import com.omealjomeal.dto.ProductDTO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
 import java.util.List;
 
 @Repository("productDAO")

@@ -11,7 +11,7 @@ public interface MemberService {
     //로그인
     public MemberDTO selectMember(HashMap<String, Object> map) throws Exception;
 
-    // 일반회원가입
+    // 회원가입
     public int generalSignUp(HashMap<String, Object> map) throws Exception;
 
     // 아이디 중복 체크

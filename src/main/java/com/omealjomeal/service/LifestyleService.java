@@ -3,8 +3,6 @@ package com.omealjomeal.service;
 import com.omealjomeal.dto.FoodFavorDTO;
 import com.omealjomeal.dto.InterestDTO;
 import com.omealjomeal.dto.LifestyleDTO;
-import com.omealjomeal.dto.MemberDTO;
-
 import java.util.HashMap;
 
 public interface LifestyleService {

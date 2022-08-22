@@ -2,13 +2,11 @@ package com.omealjomeal.service;
 
 import com.omealjomeal.dao.FeedDAO;
 import com.omealjomeal.dao.MemberDAO;
-import com.omealjomeal.dao.ProductDAO;
 import com.omealjomeal.dto.FeedDTO;
 import com.omealjomeal.dto.FeedLikesDTO;
 import com.omealjomeal.dto.FeedProductDTO;
 import com.omealjomeal.dto.ProductDTO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -66,5 +64,8 @@ public class FeedServiceImpl implements FeedService{
         return dao.checkFeedLikes(feedLikesDTO);
     }
 
-
+    @Override
+    public List<Map<Object, Object>> feedViewTop() throws Exception {
+        return dao.feedViewTop();
+    }
 }

@@ -40,7 +40,7 @@ const CreateFeed = () => {
     description: "",
     recipe: "",
     cooktime: "",
-    cooklvel: 0,
+    cooklevel: 0,
     food_time: 0,
   });
 

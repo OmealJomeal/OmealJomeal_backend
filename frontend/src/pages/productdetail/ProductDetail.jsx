@@ -118,16 +118,17 @@ const ProductDetail = () => {
       product_amount: count,
       product_id: parseInt(id),
     };
-    axios
-      .post("/api/cart", data)
-      .then((response) => {
-        console.log(response);
-        window.confirm("상품을 장바구니에 담겠습니까?");
-      })
-      .catch((error) => {
-        console.log(data);
-        console.log(error);
-      });
+    if (window.confirm("상품을 장바구니에 담겠습니까?")) {
+      axios
+        .post("/api/cart", JSON.stringify(data))
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(data);
+          console.log(error);
+        });
+    }
   };
 
   return (

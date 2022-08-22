@@ -1,8 +1,5 @@
 package com.omealjomeal.service;
 
-import com.omealjomeal.dto.CartDTO;
-import com.omealjomeal.dto.ProductDTO;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

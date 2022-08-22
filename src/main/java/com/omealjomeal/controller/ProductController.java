@@ -1,37 +1,30 @@
 package com.omealjomeal.controller;
 
-import com.omealjomeal.dto.CartDTO;
 import com.omealjomeal.dto.MemberDTO;
 import com.omealjomeal.dto.ProductDTO;
 import com.omealjomeal.service.CartService;
 import com.omealjomeal.service.ProductService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
-import java.lang.reflect.Member;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+@RequiredArgsConstructor
 @RestController
 public class ProductController {
 
-    @Autowired
-    ProductService productService;
-    @Autowired
-    CartService cartService;
+    private final ProductService productService;
+    private final CartService cartService;
 
     @Value("${spring.servlet.multipart.location}")
     private String uploadPath;
 
-    // 상품 등록
+    // 상품 등록. 나중에 마켓컬리에서 사용할 수 있도록 기능을 구현하였습니다.
     @PostMapping("/api/product")
     public int productImg(@RequestPart("product_img") MultipartFile files,
                             @RequestPart("product_clear_img") MultipartFile clear_img,
@@ -73,7 +66,7 @@ public class ProductController {
         return productList;
     }
 
-    // 상품 구매 ->장바구니
+    // 장바구니추가
     @PostMapping("/api/cart")
     public int productCart(HttpSession session,@RequestBody HashMap<String,Integer> map) throws Exception{
         // productDTO에는 product_price, product_amount, product_id
@@ -102,6 +95,5 @@ public class ProductController {
     }
 
     //상품 검색도 만들어야함.
-
 
 }

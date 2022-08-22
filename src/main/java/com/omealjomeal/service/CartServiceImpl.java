@@ -1,9 +1,6 @@
 package com.omealjomeal.service;
 
 import com.omealjomeal.dao.CartDAO;
-import com.omealjomeal.dao.ProductDAO;
-import com.omealjomeal.dto.CartDTO;
-import com.omealjomeal.dto.ProductDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -118,11 +118,11 @@ const CurlyTable = (props) => {
             >
               <Feed
                 key={index}
+                id={feed.feed_id}
                 title={feed.feed_title}
                 description={feed.feed_description}
                 name={feed.user_name}
                 time={feed.feed_time}
-                id={feed.feed_id}
               />
             </a>
           ))}
