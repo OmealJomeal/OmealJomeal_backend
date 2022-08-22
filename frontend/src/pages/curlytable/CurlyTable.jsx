@@ -34,7 +34,7 @@ const CurlyTable = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/feed")
+      .get("/api/feed")
       .then((response) => {
         console.log(response);
         setFeedList(response.data);

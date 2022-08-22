@@ -198,7 +198,7 @@ const SingUp = () => {
       email: value.email,
     };
     axios
-      .post("http://localhost:8080/api/checkEmail", JSON.stringify(data), {
+      .post("/api/checkEmail", JSON.stringify(data), {
         headers: {
           "Content-Type": "application/json",
           data,
@@ -256,7 +256,7 @@ const SingUp = () => {
       },
     };
     axios
-      .post("http://localhost:8080/api/user", JSON.stringify(data), {
+      .post("/api/user", JSON.stringify(data), {
         headers: {
           "Content-Type": "application/json",
           data,

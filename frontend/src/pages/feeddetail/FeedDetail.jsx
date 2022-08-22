@@ -26,7 +26,7 @@ const FeedDetail = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/productdetail/${id}`)
+      .get(`/api/productdetail/${id}`)
       .then((response) => {
         console.log(response);
         setProduct(response.data);

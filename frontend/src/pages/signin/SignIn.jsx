@@ -55,7 +55,7 @@ const SignIn = (props) => {
       password: password,
     };
     axios
-      .post("http://localhost:8080/api/login", JSON.stringify(data), {
+      .post("/api/login", JSON.stringify(data), {
         headers: {
           "Content-Type": "application/json",
           data,
@@ -64,7 +64,8 @@ const SignIn = (props) => {
       .then((response) => {
         console.log(response);
         if (response.data !== "") {
-          navigate("/");
+          alert("로그인 되셨습니다");
+          window.location.replace("/");
         } else {
           alert("존재하지 않는 아이디나 비밀번호입니다.");
         }

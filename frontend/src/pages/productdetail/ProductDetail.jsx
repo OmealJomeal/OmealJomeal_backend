@@ -63,7 +63,7 @@ const ProductDetail = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/productdetail/${id}`)
+      .get(`/api/productdetail/${id}`)
       .then((response) => {
         console.log(response);
         setProduct(response.data);
@@ -119,7 +119,7 @@ const ProductDetail = () => {
       product_id: parseInt(id),
     };
     axios
-      .post("http://localhost:8080/api/cart", data)
+      .post("/api/cart", data)
       .then((response) => {
         console.log(response);
         window.confirm("상품을 장바구니에 담겠습니까?");
@@ -153,7 +153,9 @@ const ProductDetail = () => {
             >
               <img
                 alt="product_image"
-                src={process.env.PUBLIC_URL + `/img/${id}_noneClear.png`}
+                src={`/home/ubuntu/OmealJomeal/upload/product/${
+                  product && product.product_id
+                }_noneClear.png`}
               />
             </div>
           </div>

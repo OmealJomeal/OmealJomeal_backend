@@ -46,7 +46,7 @@ const CreateProduct = () => {
     }
 
     axios
-      .post("http://localhost:8080/api/product", formData)
+      .post("/api/product", formData)
       .then((response) => {
         console.log(response);
       })

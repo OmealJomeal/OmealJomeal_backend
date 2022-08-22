@@ -53,8 +53,8 @@ public class ProductController {
         int product_id = productService.selectProductID(productDTO);
 
         //트랜잭션 고민.
-        files.transferTo(new File(uploadPath,  product_id + "_"+"noneClear"+ ".png"));
-        clear_img.transferTo(new File(uploadPath,  product_id + "_"+"clearImg"+ ".png"));
+        files.transferTo(new File(uploadPath + "product",  product_id + "_"+"noneClear"+ ".png"));
+        clear_img.transferTo(new File(uploadPath +"product",  product_id + "_"+"clearImg"+ ".png"));
 
         return n;
     }

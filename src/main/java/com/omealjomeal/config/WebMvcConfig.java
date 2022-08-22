@@ -1,5 +1,6 @@
 package com.omealjomeal.config;
 
+import io.swagger.models.HttpMethod;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -37,7 +38,11 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping("/**")
-				.allowedOrigins("http://localhost:3000")
-				.allowedMethods("GET", "POST","PUT","DELETE");
+				.allowedOrigins("*")
+				.allowedMethods(
+						HttpMethod.GET.name(),
+						HttpMethod.POST.name(),
+						HttpMethod.PUT.name(),
+						HttpMethod.DELETE.name());
 	}
 }

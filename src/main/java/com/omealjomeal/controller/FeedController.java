@@ -55,7 +55,7 @@ public class FeedController {
         int feedNum = feedService.feedUpload(feedDTO);
         int feed_id = feedService.selectFeedId(feedDTO);
 
-        feedImg.transferTo(new File(uploadPath,  feed_id + "_"+"FeedImg"+ ".png"));
+        feedImg.transferTo(new File(uploadPath +"feed",  feed_id + "_"+"FeedImg"+ ".png"));
 
         //feedProduct 테이블에 insert..!
         FeedProductDTO feedProductDTO = new FeedProductDTO();
@@ -140,11 +140,12 @@ public class FeedController {
         }
                 //랜덤으로 mapSave불러와서 8개만 따로저장해서 반환.
                 Collections.shuffle(mapSave);
+        if (mapSave.size() != 0) {
         for (int j = 0; j <8 ; j++) {
-
-
             mapRealResult.add(mapSave.get(j));
-        }
+        }}else{
+                mapRealResult = null;
+            }
         return mapRealResult;
     }
 

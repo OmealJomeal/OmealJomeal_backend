@@ -87,7 +87,7 @@ const MyPage = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/user")
+      .get("/api/user")
       .then((response) => {
         console.log("마이페이지", response);
         setMyfav(response.data);
@@ -189,7 +189,7 @@ const MyPage = () => {
       },
     };
     axios
-      .put("http://localhost:8080/api/user", JSON.stringify(data), {
+      .put("/api/user", JSON.stringify(data), {
         headers: {
           "Content-Type": "application/json",
           data,

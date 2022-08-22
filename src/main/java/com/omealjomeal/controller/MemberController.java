@@ -87,7 +87,6 @@ public class MemberController {
     @PutMapping("/api/user")
     public int UserEdit(HttpSession session, @RequestBody HashMap<String, Object> map) throws Exception {
 
-        System.out.println(map);
         MemberDTO mDTO = (MemberDTO) session.getAttribute("login");
 
         HashMap<String, Integer> LifeStyleMap = (HashMap<String, Integer>) map.get("lifestyle");

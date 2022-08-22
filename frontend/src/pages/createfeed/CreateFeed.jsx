@@ -85,7 +85,7 @@ const CreateFeed = () => {
       formData.append("product_id", [1, 2, 3, 4]);
     }
     axios
-      .post("http://localhost:8080/api/feed", formData)
+      .post("/api/feed", formData)
       .then((response) => {
         console.log(response);
       })
