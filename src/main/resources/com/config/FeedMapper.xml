@@ -84,5 +84,13 @@
 		]]>
 	</insert>
 
+	<select id="checkFeedLikes" resultType="FeedLikesDTO" parameterType="FeedLikesDTO">
+	<![CDATA[
+		select *
+		from feedlikes
+		where feed_id = #{feed_id} and user_id = #{user_id}
+		]]>
+	</select>
+
 
 </mapper>

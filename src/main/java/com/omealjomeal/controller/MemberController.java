@@ -9,11 +9,8 @@ import com.omealjomeal.service.LifestyleService;
 import com.omealjomeal.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpSession;
-import java.lang.reflect.Member;
 import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 public class MemberController {
@@ -90,9 +87,9 @@ public class MemberController {
     @PutMapping("/api/user")
     public int UserEdit(HttpSession session, @RequestBody HashMap<String, Object> map) throws Exception {
 
+        System.out.println(map);
         MemberDTO mDTO = (MemberDTO) session.getAttribute("login");
-        mDTO.setUser_email(mDTO.getUser_email());
-        mDTO.setUser_password(mDTO.getUser_password());
+
         HashMap<String, Integer> LifeStyleMap = (HashMap<String, Integer>) map.get("lifestyle");
         HashMap<String, Integer> interestMap = (HashMap<String, Integer>) map.get("interest");
         HashMap<String, Integer> foodFavorMap = (HashMap<String, Integer>) map.get("food_favor");
@@ -102,12 +99,9 @@ public class MemberController {
         int food_favor_ID = lifestyleService.findFoodFavor(foodFavorMap);
         //새로 받아온 요소들을 기존의 세션값에 업데이트를 시켜줘야하고, user테이블에 새로 업데이트시켜줘야한다.
         mDTO.setUser_lifestyle(lifestyle_ID);
-        mDTO.setUser_lifestyle(interest_ID);
-        mDTO.setUser_lifestyle(food_favor_ID);
+        mDTO.setUser_interest(interest_ID);
+        mDTO.setUser_food_favor(food_favor_ID);
         session.setAttribute("login", mDTO);
         return memberService.userEdit(mDTO);
     }
-
-
-
 }

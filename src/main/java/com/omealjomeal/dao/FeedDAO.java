@@ -47,4 +47,8 @@ public class FeedDAO {
     public int feedLikesInsert(FeedLikesDTO feedLikesDTO) throws Exception {
         return sqlSession.insert("com.config.FeedMapper.feedLikesInsert", feedLikesDTO);
     }
+
+    public FeedLikesDTO checkFeedLikes(FeedLikesDTO feedLikesDTO) throws Exception {
+        return sqlSession.selectOne("com.config.FeedMapper.checkFeedLikes",feedLikesDTO);
+    }
 }

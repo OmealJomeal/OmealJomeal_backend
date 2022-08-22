@@ -1,17 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 const CheckBox = ({ label, checked, ...props }) => {
   const defaultChecked = checked ? checked : false;
   const [isChecked, setIsChecked] = useState(defaultChecked);
 
-  console.log(checked);
+  useEffect(() => {
+    setIsChecked(!isChecked);
+  }, [checked]);
+
   return (
     <div className="checkbox-wrapper">
       <label>
         <input
           type="checkbox"
-          checked={isChecked}
-          onChange={() => setIsChecked((prev) => !prev)}
-          className={isChecked ? "checked" : ""}
+          // checked={isChecked}
+          // onChange={() => setIsChecked((prev) => !prev)}
+          className={isChecked ? "" : "checked"}
           {...props}
         />
         <span

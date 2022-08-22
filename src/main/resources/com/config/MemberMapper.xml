@@ -37,10 +37,10 @@
 	</select>
 
 	<!-- 추천요소 업데이트 -->
-	<update id="userEdit" parameterType="hashmap">
+	<update id="userEdit" parameterType="MemberDTO">
 		UPDATE member
-		SET (user_lifestyle,user_interest, user_food_favor) = (#{user_lifestyle},#{user_interest},#{user_food_favor})
-		WHERE user_email = #{email} AND user_password = #{password}
+		SET user_lifestyle=#{user_lifestyle},user_interest=#{user_interest}, user_food_favor=#{user_food_favor}
+		WHERE user_email = #{user_email}
 	</update>
 
 	<!--유저 조회 추천요소 거리 계산-->

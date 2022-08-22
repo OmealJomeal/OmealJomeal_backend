@@ -9,7 +9,7 @@ const Feed = (props) => {
           style={{
             width: "600px",
             height: "150px",
-            margin: "20px 0px 50px 0px",
+            margin: "20px 0px 45px 0px",
             lineHeight: "25px",
             top: "10px",
             paddingBottom: "5px",

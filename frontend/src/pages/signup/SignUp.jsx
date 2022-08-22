@@ -138,6 +138,8 @@ const SingUp = () => {
             return { ...prevState, [e.target.name]: !prevState.child };
           case "worker":
             return { ...prevState, [e.target.name]: !prevState.worker };
+          case "couple":
+            return { ...prevState, [e.target.name]: !prevState.couple };
           case "homemaker":
             return { ...prevState, [e.target.name]: !prevState.homemaker };
           case "baby":
@@ -460,6 +462,14 @@ const SingUp = () => {
                   type="checkbox"
                   name="homemaker"
                   label="가정주부에요"
+                ></CheckBox>
+              </SelectBox>
+              <SelectBox>
+                <CheckBox
+                  onClick={onToggle}
+                  type="checkbox"
+                  name="baby"
+                  label="영유아가 있어요"
                 ></CheckBox>
               </SelectBox>
             </div>

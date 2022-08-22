@@ -217,10 +217,25 @@ public class FeedController {
     //피드 좋아요 추가
     @PostMapping("/api/feedLikes")
     public int feedLikes(HttpSession session,@RequestBody FeedLikesDTO feedLikesDTO) throws Exception{
+        //feedLikesDTO = FEEDLIKES_ID, FEED_ID, USER_ID, LIKES_CATEGORY
         MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
         int currentUserId = memberDTO.getUser_id();
         feedLikesDTO.setUser_id(currentUserId);
         int feedLikes = feedService.feedLikesInsert(feedLikesDTO);
         return feedLikes;
     }
+    @GetMapping("/api/feedLikes/{feed_id}")
+    public FeedLikesDTO checkFeedLikes(HttpSession session,@PathVariable int feed_id) throws Exception{
+        MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
+        int currentUserId = memberDTO.getUser_id();
+        FeedLikesDTO feedLikesDTO = new FeedLikesDTO();
+        feedLikesDTO.setFeed_id(feed_id);
+        feedLikesDTO.setUser_id(currentUserId);
+
+        FeedLikesDTO result = feedService.checkFeedLikes(feedLikesDTO);
+        return result;
+
+    }
+
+    //좋아요 누름 -> 유저가 좋아요 누른적 있는지 없는지 확인 후 -> 없으면 포스트
 }

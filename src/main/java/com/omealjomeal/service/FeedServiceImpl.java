@@ -61,5 +61,10 @@ public class FeedServiceImpl implements FeedService{
         return dao.feedLikesInsert(feedLikesDTO);
     }
 
+    @Override
+    public FeedLikesDTO checkFeedLikes(FeedLikesDTO feedLikesDTO) throws Exception {
+        return dao.checkFeedLikes(feedLikesDTO);
+    }
+
 
 }
