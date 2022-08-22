@@ -1,6 +1,18 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const HeaderIcons = () => {
+const HeaderIcons = (props) => {
+  let navigate = useNavigate();
+
+  const onClickCart = () => {
+    if (props.logined === "") {
+      alert("로그인이 필요한 작업입니다.");
+        navigate("signin");
+    } else {
+      navigate("cart");
+    }
+  };
+
   return (
     <>
       <div
@@ -22,13 +34,12 @@ const HeaderIcons = () => {
           alt="searchicon"
           src={process.env.PUBLIC_URL + "./img/headerheart.png"}
         />
-        <a href="/cart">
-          <img
-            style={{ margin: "0 5px" }}
-            alt="searchicon"
-            src={process.env.PUBLIC_URL + "./img/headercart.png"}
-          />
-        </a>
+        <img
+          style={{ margin: "0 5px" }}
+          alt="searchicon"
+          src={process.env.PUBLIC_URL + "./img/headercart.png"}
+          onClick={onClickCart}
+        />
       </div>
     </>
   );

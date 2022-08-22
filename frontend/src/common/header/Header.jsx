@@ -4,7 +4,7 @@ import SearchBox from "./SearchBox";
 import HeaderNav from "./HeaderNav";
 import HeaderIcons from "./HeaderIcons";
 
-const Header = () => {
+const Header = (props) => {
   return (
     <>
       <Promition />
@@ -17,8 +17,8 @@ const Header = () => {
           position: "relative",
         }}
       >
-        <HeaderNav />
-        <HeaderIcons />
+        <HeaderNav logined={props.logined} />
+        <HeaderIcons logined={props.logined} />
         <SearchBox />
       </div>
     </>

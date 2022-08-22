@@ -15,15 +15,30 @@ import ProductDetail from "./pages/productdetail/ProductDetail";
 import CreateProduct from "./pages/CreateProduct/CreateProduct";
 import CurlyTable from "./pages/curlytable/CurlyTable";
 import FeedDetail from "./pages/feeddetail/FeedDetail";
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 function App() {
+  const [logined, setLogined] = useState("logined");
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/api/loginSession")
+      .then((response) => {
+        console.log("로그인 세션", response);
+        setLogined(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <>
       <div className="AppFonts">
         <ThemeProvider theme={theme}>
           <BrowserRouter>
-            <Header />
+            <Header logined={logined} />
             <NavBar />
             <Routes className="App">
               <Route path="/" element={<Main />}></Route>

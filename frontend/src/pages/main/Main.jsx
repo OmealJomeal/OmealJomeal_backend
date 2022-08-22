@@ -5,7 +5,7 @@ import axios from "axios";
 import MainCarousel, { MainCarouselItem } from "./maincarousel";
 import ColumnCarousel, { ColumnCarouselItem } from "./columncarousel";
 
-const Main = () => {
+const Main = (props) => {
   useEffect(() => {
     axios
       .get("http://localhost:8080/api/loginSession")
@@ -15,7 +15,8 @@ const Main = () => {
       .catch((error) => {
         console.log(error);
       });
-  });
+    navigate("/main");
+  }, []);
 
   let navigate = useNavigate();
   const onClick = (e) => {
