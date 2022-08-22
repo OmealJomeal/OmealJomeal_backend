@@ -92,7 +92,6 @@ public class FeedController {
         MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
         //피드 & feedProduct & product 조인해서 불러오기.
         List<Map<Object,Object>> map = feedService.feedView();
-        System.out.println(map);
         return map;
     }
 

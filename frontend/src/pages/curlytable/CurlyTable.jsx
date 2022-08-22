@@ -3,6 +3,7 @@ import Carousel, { CarouselItem } from "./carousel";
 import Feed from "./Feed";
 import styled from "styled-components";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const LoadFeedButton = styled.button`
   width: 240px;
@@ -17,7 +18,7 @@ const LoadFeedButton = styled.button`
   border: none;
 `;
 
-const CurlyTable = () => {
+const CurlyTable = (props) => {
   const images = [
     "https://picsum.photos/250/320?random=1",
     "https://picsum.photos/250/320?random=2",
@@ -44,22 +45,15 @@ const CurlyTable = () => {
       });
   }, []);
 
-  const upLoadedFeed = () => {
-    feedList &&
-      feedList.slice(count, count + 5).map((feed, index) => (
-        <a
-          href={`./feeddetail/:${feed.feed_id}`}
-          style={{ textDecoration: "none", color: "#333" }}
-        >
-          <Feed
-            key={index}
-            title={feed.feed_title}
-            description={feed.feed_description}
-            name={feed.user_name}
-            time={feed.feed_time}
-          />
-        </a>
-      ));
+  let navigate = useNavigate();
+
+  const onClickWrite = () => {
+    if (props.logined === "") {
+      alert("로그인이 필요한 작업입니다.");
+      navigate("/signin");
+    } else {
+      navigate("/createfeed");
+    }
   };
 
   return (
@@ -73,9 +67,10 @@ const CurlyTable = () => {
             right: "100px",
           }}
         >
-          <a href="./createfeed">
-            <img src={process.env.PUBLIC_URL + "./img/createfeed.png"}></img>
-          </a>
+          <img
+            onClick={onClickWrite}
+            src={process.env.PUBLIC_URL + "./img/createfeed.png"}
+          ></img>
         </div>
         <div
           style={{
@@ -127,6 +122,7 @@ const CurlyTable = () => {
                 description={feed.feed_description}
                 name={feed.user_name}
                 time={feed.feed_time}
+                id={feed.feed_id}
               />
             </a>
           ))}

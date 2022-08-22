@@ -7,8 +7,8 @@
 <!--	상품등록-->
 	<insert id="feedUpload" parameterType="FeedDTO">
 		<![CDATA[
-		insert into feed ( feed_id, feed_title, feed_description, feed_recipe, FEED_COOKTIME, FEED_COOKLEVEL, FEED_TIME,FEED_LIFESTYLE,FEED_INTEREST,FEED_FOOD_FAVOR,FEED_FOOD_TIME,USER_ID  )
-		values (feed_seq.nextval,  #{feed_title}, #{feed_description}, #{feed_recipe}, #{feed_cooktime}, #{feed_cooklevel}, sysdate,#{feed_lifestyle},#{feed_interest},#{feed_food_favor},#{feed_food_time},#{user_id} )
+		insert into feed ( feed_id, feed_title, feed_description, feed_recipe, FEED_COOKTIME, FEED_COOKLEVEL, FEED_TIME,FEED_FOOD_TIME,USER_ID  )
+		values (feed_seq.nextval,  #{feed_title}, #{feed_description}, #{feed_recipe}, #{feed_cooktime}, #{feed_cooklevel}, sysdate,#{feed_food_time},#{user_id} )
 		]]>
 	</insert>
 

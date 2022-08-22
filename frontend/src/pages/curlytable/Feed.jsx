@@ -46,8 +46,8 @@ const Feed = (props) => {
           </div>
         </div>
         <img
-          alt="column"
-          src={process.env.PUBLIC_URL + "./img/column4.png"}
+          alt={`${props.id}`}
+          src={`/upload/feed/${props.id}_FeedImg.png`}
           style={{
             position: "absolute",
             right: "0px",

@@ -48,7 +48,10 @@ function App() {
               <Route path="/cart" element={<Cart />}></Route>
               <Route path="/createfeed" element={<CreateFeed />}></Route>
               <Route path="/createproduct" element={<CreateProduct />}></Route>
-              <Route path="/curlytable" element={<CurlyTable />}></Route>
+              <Route
+                path="/curlytable"
+                element={<CurlyTable logined={logined} />}
+              ></Route>
               <Route
                 path="/productdetail/:id"
                 element={<ProductDetail />}

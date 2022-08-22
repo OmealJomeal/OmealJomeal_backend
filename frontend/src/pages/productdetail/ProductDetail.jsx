@@ -153,7 +153,7 @@ const ProductDetail = () => {
             >
               <img
                 alt="product_image"
-                src={`/home/ubuntu/OmealJomeal/upload/product/${
+                src={`/upload/product/${
                   product && product.product_id
                 }_noneClear.png`}
               />
