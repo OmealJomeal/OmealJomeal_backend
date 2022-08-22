@@ -112,19 +112,6 @@ const CreateFeed = () => {
         </div>
         <Line></Line>
       </div>
-
-      <UnitBox>
-        <Indicator style={{ margin: "17px 0px" }}>
-          이미지 업로드(필수)
-        </Indicator>
-        <input
-          type="file"
-          accept="image/jpg,image/png,image/jpeg,image/gif"
-          name="feed_img"
-          onChange={onFeedImageUpload}
-          id="file"
-        ></input>
-      </UnitBox>
       <UnitBox>
         <Indicator>제목</Indicator>
         <div>
@@ -334,6 +321,19 @@ const CreateFeed = () => {
             </div>
           </label>
         </div>
+      </UnitBox>
+      <UnitBox>
+        <Indicator style={{ margin: "17px 0px" }}>
+          이미지 업로드(필수)
+        </Indicator>
+        <input
+          type="file"
+          accept="image/jpg,image/png,image/jpeg,image/gif"
+          name="feed_img"
+          onChange={onFeedImageUpload}
+          style={{ position: "relative", top: "30px", left: "20px" }}
+          id="file"
+        ></input>
       </UnitBox>
       <UnitBox>
         <FeedUploadButton onClick={onUploadFeed}>상품 등록</FeedUploadButton>

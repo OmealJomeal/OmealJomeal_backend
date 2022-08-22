@@ -45,5 +45,15 @@ public class FeedServiceImpl implements FeedService{
         return dao.feedViewMainFit(user_id);
     }
 
+    @Override
+    public FeedDTO feedDetail(int feed_id) throws Exception {
+        return dao.feedDetail(feed_id);
+    }
+
+    @Override
+    public List<ProductDTO> feedDetailProductList(int feed_id) throws Exception {
+        return dao.feedDetailProductList(feed_id);
+    }
+
 
 }

@@ -25,7 +25,6 @@ public class FeedController {
     private final MemberService memberService;
 
     private final FeedService feedService;
-    private final LifestyleService lifestyleService;
 
     //requestPram
     //feed 업로드
@@ -73,9 +72,20 @@ public class FeedController {
 
         return feedNum;
     }
-    //피드 자세히보기
-//    @GetMapping("/api/feedDetail")
+    //피드 자세히보기 feed_id값으로 feed 정보 & product 배열 두개 받아서 hashmap저장.
+    @GetMapping("/api/feedDetail/{feed_id}")
+    public Map<Object,Object> feedDetail(@PathVariable int feed_id) throws Exception{
+        //feed_id에 해당하는 feedDTO 정보 가져오기
+        FeedDTO feedDetail = feedService.feedDetail(feed_id);
+        Map<Object,Object> feedDetailMap = new HashMap<>();
 
+        //feed_id에 해당하는 product_id 로 product 정보 가져오기.
+        List<ProductDTO> feedDetailProductList = feedService.feedDetailProductList(feed_id);
+        feedDetailMap.put("feedDetail", feedDetail);
+        feedDetailMap.put("feedDetailProductList", feedDetailProductList);
+        System.out.println(feedDetailMap);
+        return feedDetailMap;
+    }
     //피드 목록 보기.   실시간 컬리식탁!! 피드만보이게
     @GetMapping("/api/feed")
     public List<Map<Object,Object>> selectFeedList(HttpSession session) throws Exception{
@@ -183,10 +193,13 @@ public class FeedController {
         }
         //랜덤으로 mapSave불러와서 8개만 따로저장해서 반환.
         Collections.shuffle(mapSave);
-        for (int j = 0; j <8 ; j++) {
+        if (mapSave.size() != 0) {
+            for (int j = 0; j < 8; j++) {
 
-
-            mapRealResult.add(mapSave.get(j));
+                mapRealResult.add(mapSave.get(j));
+            }
+        }else{
+            mapRealResult = null;
         }
         return mapRealResult;
     }

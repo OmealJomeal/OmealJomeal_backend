@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Carousel, { CarouselItem } from "./carousel";
 import Feed from "./Feed";
 import styled from "styled-components";
+import axios from "axios";
 
 const LoadFeedButton = styled.button`
   width: 240px;
@@ -23,6 +24,44 @@ const CurlyTable = () => {
     "https://picsum.photos/250/320?random=3",
     "https://picsum.photos/250/320?random=4",
   ];
+
+  const [feedList, setFeedList] = useState(null);
+  const [count, setCount] = useState(5);
+
+  const onClickLoad = () => {
+    setCount(count + 5);
+  };
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/api/feed")
+      .then((response) => {
+        console.log(response);
+        setFeedList(response.data);
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+      });
+  }, []);
+
+  const upLoadedFeed = () => {
+    feedList &&
+      feedList.slice(count, count + 5).map((feed, index) => (
+        <a
+          href={`./feeddetail/:${feed.feed_id}`}
+          style={{ textDecoration: "none", color: "#333" }}
+        >
+          <Feed
+            key={index}
+            title={feed.feed_title}
+            description={feed.feed_description}
+            name={feed.user_name}
+            time={feed.feed_time}
+          />
+        </a>
+      ));
+  };
+
   return (
     <>
       <div style={{ width: "1050px", margin: "0px auto" }}>
@@ -70,13 +109,31 @@ const CurlyTable = () => {
             fontSize: "28px",
             fontWeight: "bold",
             marginTop: "40px",
+            marginBottom: "40px",
             color: "#333",
           }}
         >
           실시간 컬리 피드
         </div>
-        <Feed></Feed>
-        <LoadFeedButton>더보기</LoadFeedButton>
+        {feedList &&
+          feedList.slice(0, count).map((feed, index) => (
+            <a
+              href={`./feeddetail/:${feed.feed_id}`}
+              style={{ textDecoration: "none", color: "#333" }}
+            >
+              <Feed
+                key={index}
+                title={feed.feed_title}
+                description={feed.feed_description}
+                name={feed.user_name}
+                time={feed.feed_time}
+              />
+            </a>
+          ))}
+        {count - 5 < (feedList && feedList.length) &&
+        (feedList && feedList.length) < count ? null : (
+          <LoadFeedButton onClick={onClickLoad}>더보기</LoadFeedButton>
+        )}
       </div>
     </>
   );

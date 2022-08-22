@@ -52,23 +52,18 @@ const Cart = () => {
   const MapCartProduct =
     cartProducts &&
     cartProducts.map((product, index) => (
-      <CartProduct
-        totalPrice={totalPrice}
-        setTotalPrice={setTotalPrice}
-        product={product}
-        key={index}
-      ></CartProduct>
+      <>
+        <CartProduct
+          totalPrice={totalPrice}
+          setTotalPrice={setTotalPrice}
+          product_price={product.product_price}
+          product_amount={product.product_amount}
+          product_name={product.product_name}
+          product_id={product.product_id}
+          key={index}
+        ></CartProduct>
+      </>
     ));
-
-  const sumTotalPrice = () => {
-    if (cartProducts) {
-      for (let i = 0; i < cartProducts.length; i++) {
-        let total =
-          cartProducts[i].product_price * cartProducts[i].product_amount;
-        setTotalPrice(totalPrice + total);
-      }
-    }
-  };
 
   useEffect(() => {
     setCartProducts([
@@ -82,6 +77,16 @@ const Cart = () => {
         total_price: 500,
         user_id: 1,
       },
+      {
+        cart_id: 9,
+        product_amount: 2,
+        product_description: "김치",
+        product_id: 1,
+        product_name: "김치",
+        product_price: 500,
+        total_price: 1600,
+        user_id: 1,
+      },
     ]);
     axios
       .get("http://localhost:8080/api/cart")
@@ -92,8 +97,22 @@ const Cart = () => {
       .catch((error) => {
         console.log(error);
       });
-    sumTotalPrice();
   }, []);
+
+  useEffect(() => {
+    if (cartProducts != null) {
+      let sumtotal = 0;
+      for (let i = 0; i < cartProducts.length; i++) {
+        console.log(
+          cartProducts[i].product_price * cartProducts[i].product_amount
+        );
+        const total =
+          cartProducts[i].product_price * cartProducts[i].product_amount;
+        sumtotal += total;
+      }
+      setTotalPrice(sumtotal);
+    }
+  }, [cartProducts]);
 
   return (
     <>
@@ -155,7 +174,6 @@ const Cart = () => {
               </div>
             </div>
             {MapCartProduct}
-            <CartProduct></CartProduct>
           </div>
           <div style={{ width: "310px" }}>
             <div style={{ width: "310px", height: "18px" }}></div>

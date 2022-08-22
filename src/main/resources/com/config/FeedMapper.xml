@@ -56,4 +56,25 @@
 		where  f.user_id=m.user_id and m.user_id=#{user_id}
 		]]>
 	</select>
+
+	<select id="feedDetail" resultType="FeedDTO" parameterType="int">
+	<![CDATA[
+		select feed_id, feed_title,
+			   feed_description,feed_recipe,feed_cooktime,feed_cooklevel,feed_food_time,user_id,
+			   to_char(feed_time,'yy-mm-dd HH24:mi:ss') as feed_time
+		from feed
+		where feed_id=#{feed_id}
+		]]>
+	</select>
+
+	<select id="feedDetailProductList" resultType="ProductDTO" parameterType="int">
+	<![CDATA[
+		select p. product_id,
+			   p.product_name, p.PRODUCT_PRICE,p.PRODUCT_DESCRIPTION,p.PRODUCT_CATEGORY,p.PRODUCT_AMOUNT,
+			   p.PRODUCT_TIME
+		from feedproduct fp, product p
+		where fp.product_id=p.product_id and fp.feed_id=#{feed_id}
+		]]>
+	</select>
+
 </mapper>

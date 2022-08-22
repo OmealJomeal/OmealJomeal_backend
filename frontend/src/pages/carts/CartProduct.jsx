@@ -15,20 +15,19 @@ const CountButton = styled.button`
 `;
 
 const CartProduct = (props) => {
-  const [count, setCount] = useState(
-    props.product && props.product.product_amount
-  );
+  console.log(props);
+  const [count, setCount] = useState(props.product_amount);
   const onMinus = () => {
-    if (count <= 1 && props.product) {
+    if (count <= 1) {
     } else {
       setCount(count - 1);
-      props.setTotalPrice(props.totalPrice - props.product.product_price);
+      props.setTotalPrice(props.totalPrice - props.product_price);
     }
   };
 
   const onPlus = () => {
-    setCount(count + 1 && props.product);
-    props.setTotalPrice(props.totalPrice + props.product.product_price);
+    setCount(count + 1);
+    props.setTotalPrice(props.totalPrice + props.product_price);
   };
   return (
     <>
@@ -37,7 +36,7 @@ const CartProduct = (props) => {
           width: "740px",
           height: "80px",
           display: "flex",
-          margin: "10px 0px",
+          margin: "10px 0px 50px 0px",
         }}
       >
         <CheckBox
@@ -53,15 +52,13 @@ const CartProduct = (props) => {
           <img
             style={{ width: "90px", height: "120px", marginLeft: "15px" }}
             src={
-              props.product &&
-              process.env.PUBLIC_URL +
-                `/img/${props.product.product_id}_noneClear.png`
+              process.env.PUBLIC_URL + `/img/${props.product_id}_noneClear.png`
             }
           ></img>
           <div
             style={{ marginLeft: "25px", lineHeight: "118px", width: "350px" }}
           >
-            {props.product && props.product.product_name}
+            {props.product_name}
           </div>
           <div style={{ margin: "46px 0px", width: "200px" }}>
             <CountButton onClick={onMinus} style={{ marginRight: "25px" }}>
