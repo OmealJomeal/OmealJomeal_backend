@@ -20,7 +20,7 @@ const SearchBox = () => {
     <>
       <div
         style={{
-          margin: "auto",
+          margin: "auto 400px auto 160px",
           width: "400px",
           height: "48px",
           display: "flex",

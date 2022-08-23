@@ -7,48 +7,37 @@ import { useNavigate } from "react-router-dom";
 
 // https://medium.com/tinyso/how-to-create-the-responsive-and-swipeable-carousel-slider-component-in-react-99f433364aa0
 
-export const CarouselItem = (props) => {
-  const onClickCart = () => {
-    const data = {
-      product_id: parseInt(props.id),
-      product_price: props.price,
-      product_amount: 1,
-    };
-    if (window.confirm("상품을 장바구니에 담겠습니까?")) {
-      axios
-        .post("/api/cart", JSON.stringify(data), {
-          headers: {
-            "Content-Type": "application/json",
-            data,
-          },
-        })
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(data);
-          console.log(error);
-        });
-    }
-  };
+export const FoodCarouselItem = (props) => {
+  // const onClickCart = () => {
+  //   const data = {
+  //     product_id: parseInt(props.id),
+  //     product_price: props.price,
+  //     product_amount: 1,
+  //   };
+  //   if (window.confirm("상품을 장바구니에 담겠습니까?")) {
+  //     axios
+  //       .post("/api/cart", JSON.stringify(data), {
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           data,
+  //         },
+  //       })
+  //       .then((response) => {
+  //         console.log(response);
+  //       })
+  //       .catch((error) => {
+  //         console.log(data);
+  //         console.log(error);
+  //       });
+  //   }
+  // };
 
   let navigate = useNavigate();
 
   // navigate(`/productdetail/${props.id}`);
 
   const onClickImage = () => {
-    if (props.category === "main_dish") {
-      props.setPlateId(props.id);
-      console.log(props.category);
-    }
-    if (props.category === "table_mat") {
-      props.setMatId(props.id);
-      console.log(props.category);
-    }
-    if (props.category === "spoon") {
-      props.setSpoonId(props.id);
-      console.log(props.category);
-    }
+    props.setFoodImg(props.src);
   };
 
   return (
@@ -63,7 +52,7 @@ export const CarouselItem = (props) => {
     >
       <img
         alt={props.id}
-        src={`/upload/product/${props.id}_noneClear.png`}
+        src={props.src}
         style={{
           width: "175px",
           height: "175px",
@@ -95,29 +84,11 @@ export const CarouselItem = (props) => {
           {props.price}&nbsp;원
         </div>
       )}
-      <div
-        style={{
-          width: "45px",
-          height: "45px",
-          zIndex: "8",
-          borderRadius: "100%",
-          backgroundColor: "#816E8D",
-          position: "absolute",
-          textAlign: "center",
-          lineHeight: "50px",
-          fontSize: "20px",
-          right: "25px",
-          bottom: "60px",
-        }}
-        onClick={onClickCart}
-      >
-        <BsCart></BsCart>
-      </div>
     </div>
   );
 };
 
-const Carousel = ({ children }) => {
+const FoodCarousel = ({ children }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [paused, setPaused] = useState(false);
 
@@ -208,4 +179,4 @@ const Carousel = ({ children }) => {
   );
 };
 
-export default Carousel;
+export default FoodCarousel;

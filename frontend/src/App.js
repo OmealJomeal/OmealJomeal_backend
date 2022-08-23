@@ -40,7 +40,7 @@ function App() {
         <ThemeProvider theme={theme}>
           <BrowserRouter>
             <Header logined={logined} />
-            <NavBar />
+            <NavBar logined={logined} />
             <Routes className="App">
               <Route path="/" element={<Main logined={logined} />}></Route>
               <Route path="/signin" element={<SignIn />}></Route>

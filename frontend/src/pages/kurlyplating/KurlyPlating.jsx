@@ -3,8 +3,10 @@ import KurlyTable from "./KurlyTable";
 import KurlyPlate from "./KurlyPlate";
 import KurlyMat from "./KurlyMat";
 import KurlySpoon from "./KurlySpoon";
+import KurlyFood from "./KurlyFood";
 import styled from "styled-components";
 import Carousel, { CarouselItem } from "./carousel";
+import FoodCarousel, { FoodCarouselItem } from "./foodcarousel";
 import axios from "axios";
 
 const TableButton = styled.div`
@@ -66,6 +68,7 @@ const KurlyPlating = () => {
   const [plateId, setPlateId] = useState(null);
   const [matId, setMatId] = useState(null);
   const [spoonId, setSpoonId] = useState(null);
+  const [foodImg, setFoodImg] = useState(null);
 
   const onClickTable = (e) => {
     setTable(e.target.id);
@@ -97,6 +100,17 @@ const KurlyPlating = () => {
       }
     });
 
+  const images = [
+    "/img/food1.png",
+    "/img/food2.png",
+    "/img/food3.png",
+    "/img/food4.png",
+    "/img/food5.png",
+    "/img/food6.png",
+    "/img/food7.png",
+    "/img/food8.png",
+  ];
+
   return (
     <>
       <div style={{ width: "1050px", margin: "0 auto" }}>
@@ -107,13 +121,13 @@ const KurlyPlating = () => {
             {plateId !== null ? <KurlyPlate id={plateId}></KurlyPlate> : null}
             {matId !== null ? <KurlyMat id={matId}></KurlyMat> : null}
             {spoonId !== null ? <KurlySpoon id={spoonId}></KurlySpoon> : null}
+            {foodImg !== null ? <KurlyFood src={foodImg}></KurlyFood> : null}
           </div>
 
           <div
             style={{
               display: "flex",
               width: "900px",
-              margin: "0 45px",
               marginTop: "10px",
             }}
           >
@@ -187,6 +201,20 @@ const KurlyPlating = () => {
         </div>
         <div style={{ height: "80px" }}></div>
         <SelectButton style={{ width: "100%" }}>음식 올리기</SelectButton>
+        <div>
+          <FoodCarousel style={{ display: "flex", flexWrap: "nowrap" }}>
+            {images.map((image, index) => (
+              <FoodCarouselItem
+                key={`CarouselItem${index}`}
+                order={index + 1}
+                category={"food"}
+                src={image}
+                setPlateId={setPlateId}
+                setFoodImg={setFoodImg}
+              />
+            ))}
+          </FoodCarousel>
+        </div>
       </div>
     </>
   );

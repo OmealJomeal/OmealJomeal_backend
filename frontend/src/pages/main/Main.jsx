@@ -93,7 +93,7 @@ const Main = (props) => {
                 color: "#333",
               }}
             >
-              민경님을 위한 맞춤 추천
+              회원님을 위한 맞춤 추천
             </div>
             <Carousel style={{ display: "flex", flexWrap: "nowrap" }}>
               {feedFit &&

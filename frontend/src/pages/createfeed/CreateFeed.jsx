@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import "./radio.css";
+import { useNavigate } from "react-router-dom";
 
 const Indicator = styled.div`
   width: 100px;
@@ -165,6 +166,8 @@ const CreateFeed = () => {
       });
   }, []);
 
+  let navigate = useNavigate();
+
   const onUploadFeed = () => {
     if (formData.get("feed_title") === null) {
       formData.append("feed_title", value.title);
@@ -196,6 +199,7 @@ const CreateFeed = () => {
         console.log(error.response.data);
         for (const keyValue of formData) console.log(keyValue);
       });
+    navigate("/curlytable");
   };
 
   console.log(selectedId);

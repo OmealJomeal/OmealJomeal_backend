@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../../theme";
+import { useNavigate } from "react-router-dom";
 
 const NavItem = styled.div`
   width: 33.3%;
@@ -32,7 +33,7 @@ const CategoryBar = styled.div`
   position: absolute;
 `;
 
-const NavBar = () => {
+const NavBar = (props) => {
   const [isHover, setIsHover] = useState(false);
 
   const handleMouseEnter = () => {
@@ -40,6 +41,17 @@ const NavBar = () => {
   };
   const handleMouseLeave = () => {
     setIsHover(false);
+  };
+
+  let navigate = useNavigate();
+
+  const onClickPlating = () => {
+    if (props.logined === "") {
+      alert("로그인이 필요한 작업입니다.");
+      navigate("/signin");
+    } else {
+      navigate("/kurlyplating");
+    }
   };
   return (
     <>
@@ -54,9 +66,7 @@ const NavBar = () => {
           <NavItem as="a" href="/curlytable">
             컬리의 식탁
           </NavItem>
-          <NavItem as="a" href="/kurlyplating">
-            컬리 플레이팅
-          </NavItem>
+          <NavItem onClick={onClickPlating}>컬리 플레이팅</NavItem>
         </div>
         <ShadowBox />
         <div style={{ width: "1050px", margin: "0 auto" }}>
