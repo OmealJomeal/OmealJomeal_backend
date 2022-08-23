@@ -20,6 +20,7 @@ public interface FeedService {
     public List<ProductDTO> feedDetailProductList(int feed_id) throws Exception;
     public int feedLikesInsert(FeedLikesDTO feedLikesDTO) throws Exception;
     public FeedLikesDTO checkFeedLikes(FeedLikesDTO feedLikesDTO) throws Exception;
+    public int feedDelete(int feed_id) throws Exception;
 
 
 }

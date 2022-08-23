@@ -33,11 +33,11 @@
 	<![CDATA[
 		select f.feed_id, f.feed_title,
 			   f.feed_description,
-			   to_char(f.feed_time,'yy-mm-dd HH24:mi:ss') as feed_time,m.user_name,
+			   to_char(f.feed_time,'yy-mm-dd HH24:mi:ss') as feed_time,m.user_name,m.user_id,
 			   count(case when likes_category=0 then 1 end) as countLikes
 		from feed f, member m,feedlikes fl
 		where  f.user_id=m.user_id and f.feed_id=fl.feed_id
-		group by f.feed_id, f.feed_title,f.feed_description, f.feed_time,m.user_name
+		group by f.feed_id, f.feed_title,f.feed_description, f.feed_time,m.user_name,m.user_id
 		order by feed_time desc
 		]]>
 	</select>
@@ -56,11 +56,11 @@
 	<![CDATA[
 		select f.feed_id, f.feed_title,
 			   f.feed_description,
-			   to_char(f.feed_time,'yy-mm-dd HH24:mi:ss') as feed_time,m.user_name,
+			   to_char(f.feed_time,'yy-mm-dd HH24:mi:ss') as feed_time,m.user_name,m.user_id,
 			   count(case when likes_category=0 then 1 end) as countLikes
 		from feed f, member m,feedlikes fl
 		where  f.user_id=m.user_id and f.feed_id=fl.feed_id and f.feed_id=#{feed_id}
-		group by f.feed_id, f.feed_title,f.feed_description, f.feed_time,m.user_name
+		group by f.feed_id, f.feed_title,f.feed_description, f.feed_time,m.user_name,m.user_id
 		]]>
 	</select>
 
@@ -115,4 +115,11 @@
 		<result column="user_name" property="user_name"/>
 		<result column="countLikes" property="countLikes"/>
 	</resultMap>
+
+	<delete id="feedDelete" parameterType="int">
+		<![CDATA[
+		delete from feed
+		where feed_id = #{feed_id}
+		]]>
+	</delete>
 </mapper>

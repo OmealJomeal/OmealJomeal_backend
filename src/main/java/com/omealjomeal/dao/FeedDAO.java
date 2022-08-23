@@ -58,4 +58,8 @@ public class FeedDAO {
     public int feedLikesInsertDefault(FeedDTO feedDTO) throws Exception {
         return sqlSession.insert("com.config.FeedMapper.feedLikesInsertDefault", feedDTO);
     }
+
+    public int feedDelete(int feed_id) throws Exception {
+        return sqlSession.delete("com.config.FeedMapper.feedDelete",feed_id);
+    }
 }

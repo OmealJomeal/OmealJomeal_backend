@@ -103,13 +103,13 @@ public class FeedController {
 
         for (HashMap<String,Integer> referenceMember:memberViewMap) {
             for(String mapKey: referenceMember.keySet()){
-                if(mapKey == "user_id"){
+                if(mapKey.equals("user_id")){
                     user_id= Integer.parseInt(String.valueOf(referenceMember.get(mapKey)));
                 }else {
                     int referenceCurrent = Integer.parseInt(String.valueOf(CurrentMemberViewMap.get(mapKey)));
                     int referenceOther = Integer.parseInt(String.valueOf(referenceMember.get(mapKey)));
                   sum += Math.pow((int) (referenceOther-referenceCurrent),2);
-                    System.out.println(Integer.parseInt(String.valueOf(referenceMember.get(mapKey)))+"_"+mapKey+"_"+ referenceCurrent+"_"+referenceOther+"_"+sum);
+//                    System.out.println(Integer.parseInt(String.valueOf(referenceMember.get(mapKey)))+"_"+mapKey+"_"+ referenceCurrent+"_"+referenceOther+"_"+sum);
                 }
             }
             key.put(user_id,sum);
@@ -154,7 +154,7 @@ public class FeedController {
         // 추천 알고리즘
         for (HashMap<String,Integer> referenceMember:memberViewMap) {
             for(String mapKey: referenceMember.keySet()){
-                if(Integer.parseInt(String.valueOf(referenceMember.get(mapKey))) >= 2){
+                if(mapKey.equals("user_id")){
                     user_id= Integer.parseInt(String.valueOf(referenceMember.get(mapKey)));
                 }else {
                     int referenceCurrent = Integer.parseInt(String.valueOf(CurrentMemberViewMap.get(mapKey)));
@@ -181,13 +181,11 @@ public class FeedController {
         }
         //랜덤으로 mapSave불러와서 랜덤으로 섞어주고
         Collections.shuffle(mapSave);
-        if (mapSave.size() != 0) {
+        if (mapSave.size() >= 8) {
             for (int j = 0; j < 8; j++) {
                 //8개의 데이터만 저장.
                 mapRealResult.add(mapSave.get(j));
             }
-        }else{
-            mapRealResult = null;
         }
         return mapRealResult;
     }
@@ -217,10 +215,33 @@ public class FeedController {
         FeedLikesDTO feedLikesDTO = new FeedLikesDTO();
         feedLikesDTO.setFeed_id(feed_id);
         feedLikesDTO.setUser_id(currentUserId);
-
         FeedLikesDTO result = feedService.checkFeedLikes(feedLikesDTO);
         return result;
-
     }
 
+    //피드 삭제
+    @DeleteMapping("/api/feed/{feed_id}")
+    public String feedDelete(HttpSession session,@PathVariable int feed_id) throws Exception{
+        String mesg=null;
+        MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
+        Map<Object,Object> feedDetail = feedService.feedDetail(feed_id);
+        int feed_user_id = (int) feedDetail.get("user_id");
+        int session_user_id = memberDTO.getUser_id();
+        if(feed_user_id == session_user_id){
+            //피드 쓴 작성자 아이디랑 현재 로그인 한 아이디 확인해서 같으면 삭제 실행.
+            int feedDelete = feedService.feedDelete(feed_id);
+            System.out.println(feedDelete == 1);
+            //삭제성공하면 1
+            if(feedDelete == 1){
+                mesg="제거완료";
+            }else{
+                //삭제 성공 못하면
+                mesg="제거실패";
+            }
+        }
+        //피드아이디랑 현재 로그인 한 아이디가 다르면
+        mesg="자신이 쓴 글만 삭제 할 수 있습니다.";
+
+        return mesg;
+    }
 }

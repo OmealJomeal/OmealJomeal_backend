@@ -66,6 +66,11 @@ public class FeedServiceImpl implements FeedService{
     }
 
     @Override
+    public int feedDelete(int feed_id) throws Exception {
+        return dao.feedDelete(feed_id);
+    }
+
+    @Override
     public List<Map<Object, Object>> feedViewTop() throws Exception {
         return dao.feedViewTop();
     }
