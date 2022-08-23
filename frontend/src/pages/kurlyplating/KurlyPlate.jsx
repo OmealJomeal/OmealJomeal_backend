@@ -10,6 +10,7 @@ const KurlyPlate = (props) => {
           position: "absolute",
           bottom: "80px",
           left: "220px",
+          zIndex: "2",
         }}
         src={`/upload/product/${props.id}_clearImg.png`}
       ></img>

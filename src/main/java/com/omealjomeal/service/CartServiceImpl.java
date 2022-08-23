@@ -34,4 +34,9 @@ public class CartServiceImpl implements CartService{
         return dao.cartViewCheck(map);
     }
 
+    @Override
+    public int cartDelete(int cart_id) throws Exception {
+        return dao.cartDelete(cart_id);
+    }
+
 }

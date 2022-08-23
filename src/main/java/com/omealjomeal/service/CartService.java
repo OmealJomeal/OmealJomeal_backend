@@ -10,6 +10,6 @@ public interface CartService {
     public int cartInsert(HashMap<String, Integer> cartMap) throws Exception;
     public List<Map<String,Object>> cartView(int user_id) throws Exception;
     public int cartViewCheck(HashMap<String, Integer> map) throws Exception;
-
+    public int cartDelete(int cart_id) throws Exception;
 
 }

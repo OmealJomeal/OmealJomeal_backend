@@ -10,6 +10,7 @@ const KurlyMat = (props) => {
           position: "absolute",
           bottom: "20px",
           left: "150px",
+          zIndex: "1",
         }}
         src={`/upload/product/${props.id}_clearImg.png`}
       ></img>

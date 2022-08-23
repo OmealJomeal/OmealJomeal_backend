@@ -114,6 +114,7 @@
 		<result column="feed_time" property="feed_time"/>
 		<result column="user_name" property="user_name"/>
 		<result column="countLikes" property="countLikes"/>
+		<result column="user_id" property="user_id"/>
 	</resultMap>
 
 	<delete id="feedDelete" parameterType="int">

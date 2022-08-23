@@ -27,6 +27,7 @@ export const CarouselItem = (props) => {
         src={`/upload/feed/${props.id}_FeedImg.png`}
         style={{
           width: "250px",
+          height: "320px",
           position: "relative",
           top: "-22px",
           display: "block",

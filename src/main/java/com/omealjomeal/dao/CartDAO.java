@@ -28,4 +28,8 @@ public class CartDAO {
     public int cartViewCheck(HashMap<String, Integer> map) throws Exception {
         return sqlSession.selectOne("com.config.CartMapper.cartViewCheck",map);
     }
+
+    public int cartDelete(int cart_id) throws Exception {
+        return sqlSession.delete("com.config.CartMapper.cartDelete",cart_id);
+    }
 }

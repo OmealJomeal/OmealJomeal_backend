@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.lang.reflect.Member;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -93,6 +94,11 @@ public class ProductController {
         return map;
     }
 
-    //상품 검색도 만들어야함.
+    //장바구니 삭제
+    @DeleteMapping("/api/cart/{cart_id}")
+    public int cartDelete(@PathVariable int cart_Id) throws Exception {
+        int cartDelete = cartService.cartDelete(cart_Id);
+        return cartDelete;
+    }
 
 }

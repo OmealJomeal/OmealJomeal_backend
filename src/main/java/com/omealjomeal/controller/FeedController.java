@@ -225,12 +225,11 @@ public class FeedController {
         String mesg=null;
         MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
         Map<Object,Object> feedDetail = feedService.feedDetail(feed_id);
-        int feed_user_id = (int) feedDetail.get("user_id");
+        int feed_user_id = Integer.parseInt(String.valueOf(feedDetail.get("user_id")));
         int session_user_id = memberDTO.getUser_id();
         if(feed_user_id == session_user_id){
             //피드 쓴 작성자 아이디랑 현재 로그인 한 아이디 확인해서 같으면 삭제 실행.
             int feedDelete = feedService.feedDelete(feed_id);
-            System.out.println(feedDelete == 1);
             //삭제성공하면 1
             if(feedDelete == 1){
                 mesg="제거완료";
@@ -238,9 +237,10 @@ public class FeedController {
                 //삭제 성공 못하면
                 mesg="제거실패";
             }
+        }else{
+            //피드아이디랑 현재 로그인 한 아이디가 다르면
+            mesg="자신이 쓴 글만 삭제 할 수 있습니다.";
         }
-        //피드아이디랑 현재 로그인 한 아이디가 다르면
-        mesg="자신이 쓴 글만 삭제 할 수 있습니다.";
 
         return mesg;
     }

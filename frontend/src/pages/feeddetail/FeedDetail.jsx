@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 const FeedDetail = (props) => {
   const { id } = useParams();
   const [feed, setFeed] = useState(null);
-  const [likes, setLikes] = useState(0);
+  const [likes, setLikes] = useState(null);
 
   let navigate = useNavigate();
 
@@ -56,13 +56,25 @@ const FeedDetail = (props) => {
       .then((response) => {
         console.log(response.data);
         setFeed(response.data);
+        setLikes(response.data.feedDetail.countLikes);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
 
-  console.log(feed);
+  const onClickDelete = () => {
+    if (window.confirm("게시글을 삭제하시겠습니까?")) {
+      axios
+        .delete(`/api/feed/${id}`)
+        .then(function (response) {
+          console.log("삭제", response);
+        })
+        .catch(function (error) {
+          console.log("삭제", error);
+        });
+    }
+  };
 
   return (
     <>
@@ -74,6 +86,23 @@ const FeedDetail = (props) => {
             whiteSpace: "pre-wrap",
           }}
         >
+          {props.logined.user_id === feed.feedDetail.user_id ? (
+            <div
+              style={{
+                backgroundColor: "#C8A3E3",
+                width: "70px",
+                height: "25px",
+                textAlign: "center",
+                color: "white",
+                position: "relative",
+                left: "980px",
+              }}
+              onClick={onClickDelete}
+            >
+              삭제
+            </div>
+          ) : null}
+
           <div style={{ display: "flex" }}>
             <div
               style={{
@@ -82,10 +111,7 @@ const FeedDetail = (props) => {
               }}
             >
               <img
-                style={{
-                  width: "430px",
-                  height: "515px",
-                }}
+                style={{ width: "300px" }}
                 alt={id}
                 src={`/upload/feed/${id}_FeedImg.png`}
               />

@@ -10,6 +10,7 @@ const KurlyFood = (props) => {
           position: "absolute",
           bottom: "125px",
           left: "265px",
+          zIndex: "3",
         }}
         src={`${props.src}`}
       ></img>

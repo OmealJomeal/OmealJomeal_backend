@@ -199,7 +199,7 @@ const CreateFeed = () => {
         console.log(error.response.data);
         for (const keyValue of formData) console.log(keyValue);
       });
-    navigate("/curlytable");
+    window.location.replace("/curlytable");
   };
 
   console.log(selectedId);
