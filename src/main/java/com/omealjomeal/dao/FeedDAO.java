@@ -37,7 +37,7 @@ public class FeedDAO {
         return sqlSession.selectList("com.config.FeedMapper.feedViewMainFit",user_id);
     }
 
-    public FeedDTO feedDetail(int feed_id) throws Exception {
+    public Map<Object,Object> feedDetail(int feed_id) throws Exception {
         return sqlSession.selectOne("com.config.FeedMapper.feedDetail",feed_id);
     }
     public List<ProductDTO> feedDetailProductList(int feed_id) throws Exception {

@@ -35,7 +35,6 @@ public class ProductController {
                             @RequestParam("product_category") String product_category
                             )
             throws Exception {
-        System.out.println(product_category);
         ProductDTO productDTO = new ProductDTO();
         productDTO.setProduct_name(product_name);
         int product_price = Integer.parseInt(product_pric);

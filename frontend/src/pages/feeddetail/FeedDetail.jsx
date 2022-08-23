@@ -4,13 +4,50 @@ import axios from "axios";
 import Carousel, { CarouselItem } from "./carousel";
 import styled from "styled-components";
 import { BsHandThumbsUp } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
-const FeedDetail = () => {
+const FeedDetail = (props) => {
   const { id } = useParams();
   const [feed, setFeed] = useState(null);
+  const [likes, setLikes] = useState(0);
+
+  let navigate = useNavigate();
 
   const onThumbClick = () => {
-    window.confirm("좋아요를 누릅니다");
+    if (props.logined === "") {
+      alert("로그인이 필요한 작업입니다.");
+      navigate("/signin");
+    } else {
+      axios
+        .get(`/api/feedLikes/${id}`)
+        .then((response) => {
+          console.log("좋아요 클릭 시 get", response);
+          if (response.data === "") {
+            const data = {
+              feed_id: id,
+            };
+            axios
+              .post("/api/feedLikes", JSON.stringify(data), {
+                headers: {
+                  "Content-Type": "application/json",
+                  data,
+                },
+              })
+              .then((response) => {
+                console.log("좋아요 중복 확인", response.data);
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+            setLikes(likes + 1);
+          } else {
+            alert("이미 좋아요를 누른 게시글입니다");
+          }
+        })
+        .catch((error) => {
+          console.log("좋아요 클릭 시 get", error.response.data);
+        });
+    }
   };
 
   useEffect(() => {
@@ -150,7 +187,7 @@ const FeedDetail = () => {
                         lineHeight: "30px",
                       }}
                     >
-                      10
+                      {likes}
                     </div>
                   </div>
                 </div>

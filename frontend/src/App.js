@@ -58,7 +58,10 @@ function App() {
                 path="/productdetail/:id"
                 element={<ProductDetail />}
               ></Route>
-              <Route path="/feeddetail/:id" element={<FeedDetail />}></Route>
+              <Route
+                path="/feeddetail/:id"
+                element={<FeedDetail logined={logined} />}
+              ></Route>
             </Routes>
           </BrowserRouter>
         </ThemeProvider>

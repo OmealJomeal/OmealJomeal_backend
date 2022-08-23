@@ -46,7 +46,7 @@ public class FeedServiceImpl implements FeedService{
     }
 
     @Override
-    public FeedDTO feedDetail(int feed_id) throws Exception {
+    public Map<Object,Object> feedDetail(int feed_id) throws Exception {
         return dao.feedDetail(feed_id);
     }
 

@@ -71,7 +71,7 @@ public class FeedController {
     @GetMapping("/api/feedDetail/{feed_id}")
     public Map<Object,Object> feedDetail(@PathVariable int feed_id) throws Exception{
         //feed_id에 해당하는 feedDTO 정보 가져오기
-        FeedDTO feedDetail = feedService.feedDetail(feed_id);
+        Map<Object,Object> feedDetail = feedService.feedDetail(feed_id);
         Map<Object,Object> feedDetailMap = new HashMap<>();
 
         //feed_id에 해당하는 product_id 로 product 정보 가져오기.

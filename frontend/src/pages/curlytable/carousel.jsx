@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useSwipeable } from "react-swipeable";
 import "./carousel.css";
-import { BsCart } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 // https://medium.com/tinyso/how-to-create-the-responsive-and-swipeable-carousel-slider-component-in-react-99f433364aa0
 
 export const CarouselItem = (props) => {
+  let navigate = useNavigate();
+
+  const onClickFeed = (e) => {
+    navigate(`/feeddetail/${props.id}`);
+  };
+
   return (
     <div
       id={`slide${props.order}`}
@@ -15,6 +21,7 @@ export const CarouselItem = (props) => {
         height: "400px",
         position: "relative",
       }}
+      onClick={onClickFeed}
     >
       <img
         src={`/upload/feed/${props.id}_FeedImg.png`}

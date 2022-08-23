@@ -52,13 +52,15 @@
 		]]>
 	</select>
 
-	<select id="feedDetail" resultType="FeedDTO" parameterType="int">
+	<select id="feedDetail" resultMap="selectMapList" parameterType="int">
 	<![CDATA[
-		select feed_id, feed_title,
-			   feed_description,feed_recipe,feed_cooktime,feed_cooklevel,feed_food_time,user_id,
-			   to_char(feed_time,'yy-mm-dd HH24:mi:ss') as feed_time
-		from feed
-		where feed_id=#{feed_id}
+		select f.feed_id, f.feed_title,
+			   f.feed_description,
+			   to_char(f.feed_time,'yy-mm-dd HH24:mi:ss') as feed_time,m.user_name,
+			   count(case when likes_category=0 then 1 end) as countLikes
+		from feed f, member m,feedlikes fl
+		where  f.user_id=m.user_id and f.feed_id=fl.feed_id and f.feed_id=#{feed_id}
+		group by f.feed_id, f.feed_title,f.feed_description, f.feed_time,m.user_name
 		]]>
 	</select>
 
@@ -75,7 +77,7 @@
 	<insert id="feedLikesInsert" parameterType="FeedLikesDTO">
 		<![CDATA[
 		insert into FEEDLIKES ( FEEDLIKES_ID, FEED_ID, USER_ID, LIKES_CATEGORY)
-		values (feedlikes_seq.nextval,  #{feed_id}, #{user_id}, 0)
+		values (feedlikes_seq.nextval, #{feed_id}, #{user_id}, 0)
 		]]>
 	</insert>
 	<insert id="feedLikesInsertDefault" parameterType="FeedDTO">

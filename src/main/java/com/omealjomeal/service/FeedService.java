@@ -16,7 +16,7 @@ public interface FeedService {
     public List<Map<Object,Object>> feedView() throws Exception;
     public List<Map<Object,Object>> feedViewTop() throws Exception;
     public List<Map<Object,Object>> feedViewMainFit(int user_id) throws Exception;
-    public FeedDTO feedDetail(int feed_id) throws Exception;
+    public Map<Object,Object> feedDetail(int feed_id) throws Exception;
     public List<ProductDTO> feedDetailProductList(int feed_id) throws Exception;
     public int feedLikesInsert(FeedLikesDTO feedLikesDTO) throws Exception;
     public FeedLikesDTO checkFeedLikes(FeedLikesDTO feedLikesDTO) throws Exception;
