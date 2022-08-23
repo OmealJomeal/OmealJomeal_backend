@@ -33,19 +33,14 @@
 	<![CDATA[
 		select f.feed_id, f.feed_title,
 			   f.feed_description,
-			   to_char(f.feed_time,'yy-mm-dd HH24:mi:ss') as feed_time,m.user_name
-		from feed f, member m
-		where  f.user_id=m.user_id
-		order by feed_time desc
+			   to_char(f.feed_time,'yy-mm-dd HH24:mi:ss') as feed_time,m.user_name,
+			   count(case when likes_category=0 then 1 end) as countLikes
+		from feed f, member m,feedlikes fl
+		where  f.user_id=m.user_id and f.feed_id=fl.feed_id
+		group by f.feed_id, f.feed_title,f.feed_description, f.feed_time,m.user_name
+		order by feed_time desc;
 		]]>
 	</select>
-	<resultMap type="map" id="selectMapList">
-		<result column="feed_id" property="feed_id"/>
-		<result column="feed_title" property="feed_title"/>
-		<result column="feed_description" property="feed_description"/>
-		<result column="feed_time" property="feed_time"/>
-		<result column="user_name" property="user_name"/>
-	</resultMap>
 
 	<select id="feedViewMainFit" resultMap="selectMapList" parameterType="int">
 	<![CDATA[
@@ -83,16 +78,22 @@
 		values (feedlikes_seq.nextval,  #{feed_id}, #{user_id}, #{likes_category})
 		]]>
 	</insert>
+	<insert id="feedLikesInsertDefault" parameterType="FeedDTO">
+		<![CDATA[
+		insert into FEEDLIKES ( FEEDLIKES_ID, FEED_ID, USER_ID, LIKES_CATEGORY)
+		values (feedlikes_seq.nextval, feed_seq.currval, #{user_id}, 100)
+		]]>
+	</insert>
 
 	<select id="checkFeedLikes" resultType="FeedLikesDTO" parameterType="FeedLikesDTO">
 	<![CDATA[
 		select *
 		from feedlikes
-		where feed_id = #{feed_id} and user_id = #{user_id}
+		where feed_id = #{feed_id} and user_id = #{user_id} and likes_category=0
 		]]>
 	</select>
 
-	<select id="feedViewTop" resultMap="selectMapTopList">
+	<select id="feedViewTop" resultMap="selectMapList">
 	<![CDATA[
 		select f.feed_id, f.feed_title,
 			   f.feed_description,
@@ -104,7 +105,7 @@
 		order by countLikes desc
 		]]>
 	</select>
-	<resultMap type="map" id="selectMapTopList">
+	<resultMap type="map" id="selectMapList">
 		<result column="feed_id" property="feed_id"/>
 		<result column="feed_title" property="feed_title"/>
 		<result column="feed_description" property="feed_description"/>

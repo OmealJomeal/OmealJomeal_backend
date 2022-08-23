@@ -63,7 +63,6 @@ public class FeedController {
             int id = Integer.parseInt(results[i]);
             feedProductDTO.setProduct_id(id);
             int feedProduct = feedService.feedProductUpload(feedProductDTO);
-            System.out.println("feedproduct"+feedProduct);
         }
 
         return feedNum;
@@ -104,22 +103,21 @@ public class FeedController {
 
         for (HashMap<String,Integer> referenceMember:memberViewMap) {
             for(String mapKey: referenceMember.keySet()){
-                if(Integer.parseInt(String.valueOf(referenceMember.get(mapKey))) >= 2){
+                if(mapKey == "user_id"){
                     user_id= Integer.parseInt(String.valueOf(referenceMember.get(mapKey)));
                 }else {
                     int referenceCurrent = Integer.parseInt(String.valueOf(CurrentMemberViewMap.get(mapKey)));
                     int referenceOther = Integer.parseInt(String.valueOf(referenceMember.get(mapKey)));
                   sum += Math.pow((int) (referenceOther-referenceCurrent),2);
+                    System.out.println(Integer.parseInt(String.valueOf(referenceMember.get(mapKey)))+"_"+mapKey+"_"+ referenceCurrent+"_"+referenceOther+"_"+sum);
                 }
             }
             key.put(user_id,sum);
             sum=0;
         }
-        //{21:10, 3:7, 5:7,...}
         List<Map<Object,Object>> mapSave = new ArrayList<>();
-        int i = 0;
         Object[] lists= key.values().toArray();
-        Arrays.sort(lists);//(7, 10)
+        Arrays.sort(lists);
         List<Map<Object,Object>> mapRealResult = new ArrayList<>();
         for (int userID : key.keySet()) {
             Integer value = key.get(userID);

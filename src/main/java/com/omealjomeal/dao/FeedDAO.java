@@ -55,4 +55,7 @@ public class FeedDAO {
     public List<Map<Object, Object>> feedViewTop() throws Exception {
         return sqlSession.selectList("com.config.FeedMapper.feedViewTop");
     }
+    public int feedLikesInsertDefault(FeedDTO feedDTO) throws Exception {
+        return sqlSession.insert("com.config.FeedMapper.feedLikesInsertDefault", feedDTO);
+    }
 }

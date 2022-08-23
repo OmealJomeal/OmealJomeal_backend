@@ -21,6 +21,7 @@ public class FeedServiceImpl implements FeedService{
 
     @Override
     public int feedUpload(FeedDTO feedDTO) throws Exception {
+        dao.feedLikesInsertDefault(feedDTO);
         return dao.feedUpload(feedDTO);
     }
 
