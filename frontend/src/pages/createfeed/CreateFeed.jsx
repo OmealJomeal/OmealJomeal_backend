@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import "./radio.css";
-import SearchBox from "common/header/SearchBox";
 
 const Indicator = styled.div`
   width: 100px;
@@ -61,8 +60,6 @@ const CreateFeed = () => {
     for (const keyValue of formData) console.log(keyValue); // ["img", File] File은 객체
   };
 
-  const [product_id, setProduct_id] = useState([]);
-
   const [productList, setProductList] = useState(null);
   const [search, setSearch] = useState("null");
   const [selected, setSelected] = useState([]);
@@ -82,7 +79,7 @@ const CreateFeed = () => {
     }
   }, [search.length]);
 
-  console.log(search.length);
+  console.log(productList);
 
   const filtered =
     productList &&
@@ -194,7 +191,6 @@ const CreateFeed = () => {
       .post("/api/feed", formData)
       .then((response) => {
         console.log(response);
-        setProductList(response.data);
       })
       .catch((error) => {
         console.log(error.response.data);

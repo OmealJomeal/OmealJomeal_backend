@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { BsHandThumbsUp } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
@@ -49,7 +49,7 @@ const Feed = (props) => {
                 lineHeight: "30px",
               }}
             >
-              10
+              {props.countlikes}
             </div>
           </div>
           <img

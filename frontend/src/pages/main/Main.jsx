@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Carousel, { CarouselItem } from "./carousel";
 import axios from "axios";
@@ -6,6 +6,9 @@ import MainCarousel, { MainCarouselItem } from "./maincarousel";
 import ColumnCarousel, { ColumnCarouselItem } from "./columncarousel";
 
 const Main = (props) => {
+  const [feedFit, setFeedFit] = useState(null);
+  const [feedNotFit, setFeedNotFit] = useState(null);
+
   useEffect(() => {
     if (props.logined === "") {
     } else {
@@ -13,17 +16,22 @@ const Main = (props) => {
         .get("/api/mainFeedFit")
         .then((response) => {
           console.log("추천 게시물", response);
+          setFeedFit(response.data);
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+        });
+      axios
+        .get("/api/mainFeedNotFit")
+        .then((response) => {
+          console.log("비추천 게시물", response);
+          setFeedNotFit(response.data);
         })
         .catch((error) => {
           console.log(error.response.data);
         });
     }
   }, []);
-
-  let navigate = useNavigate();
-  const onClick = (e) => {
-    navigate(`/feeddetail/${e.target.id}`);
-  };
 
   const mainimages = [
     "https://picsum.photos/1050/370?random=1",
@@ -88,13 +96,15 @@ const Main = (props) => {
               민경님을 위한 맞춤 추천
             </div>
             <Carousel style={{ display: "flex", flexWrap: "nowrap" }}>
-              {images.map((src, index) => (
-                <CarouselItem
-                  key={`CarouselItem${index}`}
-                  order={index + 1}
-                  src={src}
-                />
-              ))}
+              {feedFit &&
+                feedFit.map((feed, index) => (
+                  <CarouselItem
+                    key={`CarouselItem${index}`}
+                    order={index + 1}
+                    id={feed.feed_id}
+                    title={feed.feed_title}
+                  />
+                ))}
             </Carousel>
             <div
               classame="carousel2"
@@ -111,13 +121,15 @@ const Main = (props) => {
               오늘은 조금 다른 메뉴 어때요?
             </div>
             <Carousel style={{ display: "flex", flexWrap: "nowrap" }}>
-              {images.map((src, index) => (
-                <CarouselItem
-                  key={`CarouselItem${index}`}
-                  order={index + 1}
-                  src={src}
-                />
-              ))}
+              {feedNotFit &&
+                feedNotFit.map((feed, index) => (
+                  <CarouselItem
+                    key={`CarouselItem${index}`}
+                    order={index + 1}
+                    id={feed.feed_id}
+                    title={feed.feed_title}
+                  />
+                ))}
             </Carousel>
           </>
         )}

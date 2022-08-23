@@ -38,7 +38,7 @@
 		from feed f, member m,feedlikes fl
 		where  f.user_id=m.user_id and f.feed_id=fl.feed_id
 		group by f.feed_id, f.feed_title,f.feed_description, f.feed_time,m.user_name
-		order by feed_time desc;
+		order by feed_time desc
 		]]>
 	</select>
 
@@ -75,7 +75,7 @@
 	<insert id="feedLikesInsert" parameterType="FeedLikesDTO">
 		<![CDATA[
 		insert into FEEDLIKES ( FEEDLIKES_ID, FEED_ID, USER_ID, LIKES_CATEGORY)
-		values (feedlikes_seq.nextval,  #{feed_id}, #{user_id}, #{likes_category})
+		values (feedlikes_seq.nextval,  #{feed_id}, #{user_id}, 0)
 		]]>
 	</insert>
 	<insert id="feedLikesInsertDefault" parameterType="FeedDTO">

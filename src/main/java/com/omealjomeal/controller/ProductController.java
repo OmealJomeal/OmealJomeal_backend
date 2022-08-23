@@ -1,5 +1,6 @@
 package com.omealjomeal.controller;
 
+import com.omealjomeal.dto.CartDTO;
 import com.omealjomeal.dto.MemberDTO;
 import com.omealjomeal.dto.ProductDTO;
 import com.omealjomeal.service.CartService;
@@ -70,19 +71,18 @@ public class ProductController {
     @PostMapping("/api/cart")
     public int productCart(HttpSession session,@RequestBody HashMap<String,Integer> map) throws Exception{
         // productDTO에는 product_price, product_amount, product_id
-        int product_amount = map.get("product_amount");
-        int product_price = map.get("product_price");
-        int product_id = map.get("product_id");
-        int total_price = product_amount * product_price;
+        int total_price = map.get("product_amount") * map.get("product_price");
         MemberDTO mDTO = (MemberDTO) session.getAttribute("login");
         int user_id = mDTO.getUser_id();
-        HashMap<String, Integer> cartMap = new HashMap<>();
-        cartMap.put("total_price",total_price);
-        cartMap.put("user_id",user_id);
 
-        //트랜잭션 고려
-        int cartCnt = cartService.cartInsert(cartMap);
-        int CartProductCnt = cartService.cartProductInsert(product_id);
+        map.put("total_price",total_price);
+        map.put("user_id",user_id);
+        int cartCnt=0;
+        int cart_id = cartService.cartViewCheck(map);
+        if (cart_id==0) {
+            //트랜잭션 고려
+            cartCnt = cartService.cartInsert(map);
+        }
         return cartCnt;
     }
 

@@ -54,7 +54,7 @@ const NavBar = () => {
           <NavItem as="a" href="/curlytable">
             컬리의 식탁
           </NavItem>
-          <NavItem as="a" href="">
+          <NavItem as="a" href="/kurlyplating">
             컬리 플레이팅
           </NavItem>
         </div>

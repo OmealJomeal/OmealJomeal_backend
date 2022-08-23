@@ -19,15 +19,9 @@ const LoadFeedButton = styled.button`
 `;
 
 const CurlyTable = (props) => {
-  const images = [
-    "https://picsum.photos/250/320?random=1",
-    "https://picsum.photos/250/320?random=2",
-    "https://picsum.photos/250/320?random=3",
-    "https://picsum.photos/250/320?random=4",
-  ];
-
   const [feedList, setFeedList] = useState(null);
   const [count, setCount] = useState(5);
+  const [bestFeed, setBestFeed] = useState(null);
 
   const onClickLoad = () => {
     setCount(count + 5);
@@ -39,6 +33,15 @@ const CurlyTable = (props) => {
       .then((response) => {
         console.log(response);
         setFeedList(response.data);
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+      });
+    axios
+      .get("/api/bestFeed")
+      .then((response) => {
+        console.log("top4", response);
+        setBestFeed(response.data);
       })
       .catch((error) => {
         console.log(error.response.data);
@@ -87,13 +90,15 @@ const CurlyTable = (props) => {
         </div>
 
         <Carousel style={{ display: "flex", flexWrap: "nowrap" }}>
-          {images.map((src, index) => (
-            <CarouselItem
-              key={`CarouselItem${index}`}
-              order={index + 1}
-              src={src}
-            />
-          ))}
+          {bestFeed &&
+            bestFeed.map((feed, index) => (
+              <CarouselItem
+                key={`CarouselItem${index}`}
+                order={index + 1}
+                id={feed.feed_id}
+                title={feed.feed_title}
+              />
+            ))}
         </Carousel>
         <div
           classame="carousel2"
@@ -123,6 +128,7 @@ const CurlyTable = (props) => {
                 description={feed.feed_description}
                 name={feed.user_name}
                 time={feed.feed_time}
+                countlikes={feed.countLikes}
               />
             </a>
           ))}

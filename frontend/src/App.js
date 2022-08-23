@@ -15,6 +15,7 @@ import ProductDetail from "./pages/productdetail/ProductDetail";
 import CreateProduct from "./pages/CreateProduct/CreateProduct";
 import CurlyTable from "./pages/curlytable/CurlyTable";
 import FeedDetail from "./pages/feeddetail/FeedDetail";
+import KurlyPlating from "pages/kurlyplating/KurlyPlating";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -48,6 +49,7 @@ function App() {
               <Route path="/cart" element={<Cart />}></Route>
               <Route path="/createfeed" element={<CreateFeed />}></Route>
               <Route path="/createproduct" element={<CreateProduct />}></Route>
+              <Route path="/kurlyplating" element={<KurlyPlating />}></Route>
               <Route
                 path="/curlytable"
                 element={<CurlyTable logined={logined} />}
