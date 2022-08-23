@@ -212,9 +212,29 @@ const CreateProduct = () => {
           type="radio"
           onChange={onChangeHandler}
           name="category"
-          value="utility"
+          value="main_dish"
         ></input>
-        주방용품
+        주방용품 - 플레이트
+      </label>
+      <br />
+      <label>
+        <input
+          type="radio"
+          onChange={onChangeHandler}
+          name="category"
+          value="table_mat"
+        ></input>
+        주방용품 - 테이블 매트
+      </label>
+      <br />
+      <label>
+        <input
+          type="radio"
+          onChange={onChangeHandler}
+          name="category"
+          value="spoon"
+        ></input>
+        주방용품 - 커트러리
       </label>
       <br />
       <br />

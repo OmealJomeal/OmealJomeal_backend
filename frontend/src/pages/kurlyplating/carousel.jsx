@@ -34,8 +34,21 @@ export const CarouselItem = (props) => {
 
   let navigate = useNavigate();
 
+  // navigate(`/productdetail/${props.id}`);
+
   const onClickImage = () => {
-    navigate(`/productdetail/${props.id}`);
+    if (props.category === "main_dish") {
+      props.setPlateId(props.id);
+      console.log(props.category);
+    }
+    if (props.category === "table_mat") {
+      props.setMatId(props.id);
+      console.log(props.category);
+    }
+    if (props.category === "spoon") {
+      props.setSpoonId(props.id);
+      console.log(props.category);
+    }
   };
 
   return (

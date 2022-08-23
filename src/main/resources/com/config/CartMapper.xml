@@ -49,7 +49,7 @@
 		from cart a, cartproduct cp, product p, member m
 		where a.cart_id = cp.cart_id
 		  and cp.product_id=p.product_id
-		  and a.user_id=m.user_id and a.user_id=#{user_id} and p.product_id=#{product_id};
+		  and a.user_id=m.user_id and a.user_id=#{user_id} and p.product_id=#{product_id}
 		]]>
 	</select>
 

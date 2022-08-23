@@ -20,8 +20,7 @@ public class CartServiceImpl implements CartService{
     @Transactional
     @Override
     public int cartInsert(HashMap<String, Integer> cartMap) throws Exception {
-        dao.cartProductInsert(cartMap.get("product_id"));
-        return dao.cartInsert(cartMap);
+        return dao.cartInsert(cartMap) & dao.cartProductInsert(cartMap.get("product_id"));
     }
 
 
