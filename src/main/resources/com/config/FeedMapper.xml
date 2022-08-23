@@ -117,6 +117,9 @@
 		<result column="user_name" property="user_name"/>
 		<result column="countLikes" property="countLikes"/>
 		<result column="user_id" property="user_id"/>
+		<result column="feed_recipe" property="feed_recipe"/>
+		<result column="feed_cooklevel" property="feed_cooklevel"/>
+		<result column="feed_cooktime" property="feed_cooktime"/>
 	</resultMap>
 
 	<delete id="feedDelete" parameterType="int">
