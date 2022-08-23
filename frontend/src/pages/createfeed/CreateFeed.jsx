@@ -194,12 +194,12 @@ const CreateFeed = () => {
       .post("/api/feed", formData)
       .then((response) => {
         console.log(response);
+        window.location.replace("/curlytable");
       })
       .catch((error) => {
         console.log(error.response.data);
         for (const keyValue of formData) console.log(keyValue);
       });
-    window.location.replace("/curlytable");
   };
 
   console.log(selectedId);

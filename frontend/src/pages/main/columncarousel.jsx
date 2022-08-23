@@ -19,7 +19,7 @@ export const ColumnCarouselItem = ({ src, order }) => {
         style={{
           width: "520px",
           position: "relative",
-          top: "-22px",
+          top: "70px",
           display: "block",
         }}
       />
@@ -67,7 +67,10 @@ const ColumnCarousel = ({ children }) => {
     >
       <div
         className="inner"
-        style={{ transform: `translateX(-${activeIndex * 50}%)` }}
+        style={{
+          height: "330px",
+          transform: `translateX(-${activeIndex * 50}%)`,
+        }}
       >
         {React.Children.map(children, (child, index) => {
           return React.cloneElement(child, { width: "100%" });
@@ -87,7 +90,7 @@ const ColumnCarousel = ({ children }) => {
             border: "none",
             position: "absolute",
             left: "-20px",
-            top: "190px",
+            top: "140px",
             zIndex: "10",
             fontSize: "20px",
           }}
@@ -107,7 +110,7 @@ const ColumnCarousel = ({ children }) => {
             border: "none",
             position: "absolute",
             right: "-20px",
-            top: "190px",
+            top: "140px",
             fontSize: "20px",
           }}
         >

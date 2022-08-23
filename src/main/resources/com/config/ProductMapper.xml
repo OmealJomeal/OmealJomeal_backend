@@ -8,7 +8,7 @@
 	<insert id="insert" parameterType="ProductDTO">
 		<![CDATA[
 		insert into product ( product_id, product_name, product_price, product_description, product_category, product_img, product_clear_img,product_time )
-		values (product_seq.nextval,  #{product_name}, #{product_price}, #{product_description}, #{product_category}, #{product_img}, #{product_clear_img},sysdate )
+		values (product_seq.nextval+50,  #{product_name}, #{product_price}, #{product_description}, #{product_category}, #{product_img}, #{product_clear_img},sysdate )
 		]]>
 	</insert>
 

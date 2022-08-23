@@ -16,6 +16,7 @@ import CreateProduct from "./pages/CreateProduct/CreateProduct";
 import CurlyTable from "./pages/curlytable/CurlyTable";
 import FeedDetail from "./pages/feeddetail/FeedDetail";
 import KurlyPlating from "pages/kurlyplating/KurlyPlating";
+import Footer from "common/footer/Footer";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -63,6 +64,7 @@ function App() {
                 element={<FeedDetail logined={logined} />}
               ></Route>
             </Routes>
+            {/* <Footer></Footer> */}
           </BrowserRouter>
         </ThemeProvider>
       </div>

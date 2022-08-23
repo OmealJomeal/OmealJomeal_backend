@@ -96,8 +96,8 @@ public class ProductController {
 
     //장바구니 삭제
     @DeleteMapping("/api/cart/{cart_id}")
-    public int cartDelete(@PathVariable int cart_Id) throws Exception {
-        int cartDelete = cartService.cartDelete(cart_Id);
+    public int cartDelete(@PathVariable int cart_id) throws Exception {
+        int cartDelete = cartService.cartDelete(cart_id);
         return cartDelete;
     }
 

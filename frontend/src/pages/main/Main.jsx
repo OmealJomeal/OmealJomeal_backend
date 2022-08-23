@@ -33,46 +33,23 @@ const Main = (props) => {
     }
   }, []);
 
-  const mainimages = [
-    "https://picsum.photos/1050/370?random=1",
-    "https://picsum.photos/1050/370?random=2",
-    "https://picsum.photos/1050/370?random=3",
-    "https://picsum.photos/1050/370?random=4",
-    "https://picsum.photos/1050/370?random=5",
-    "https://picsum.photos/1050/370?random=6",
-    "https://picsum.photos/1050/370?random=7",
-    "https://picsum.photos/1050/370?random=8",
-  ];
+  const mainimages = ["/img/maincarousel1.png", "/img/maincarousel2.png"];
 
-  const images = [
-    "https://picsum.photos/250/320?random=1",
-    "https://picsum.photos/250/320?random=2",
-    "https://picsum.photos/250/320?random=3",
-    "https://picsum.photos/250/320?random=4",
-    "https://picsum.photos/250/320?random=5",
-    "https://picsum.photos/250/320?random=6",
-    "https://picsum.photos/250/320?random=7",
-    "https://picsum.photos/250/320?random=8",
-  ];
-
-  const columnimages = [
-    "https://picsum.photos/250/320?random=1",
-    "https://picsum.photos/250/320?random=2",
-    "https://picsum.photos/250/320?random=3",
-    "https://picsum.photos/250/320?random=4",
-  ];
+  const columnimages = ["/img/columncarousel1.png", "/img/columncarousel2.png"];
 
   return (
     <>
-      <MainCarousel style={{ display: "flex", flexWrap: "nowrap" }}>
-        {mainimages.map((src, index) => (
-          <MainCarouselItem
-            key={`CarouselItem${index}`}
-            order={index + 1}
-            src={src}
-          />
-        ))}
-      </MainCarousel>
+      <div>
+        <MainCarousel style={{ display: "flex", flexWrap: "nowrap" }}>
+          {mainimages.map((src, index) => (
+            <MainCarouselItem
+              key={`CarouselItem${index}`}
+              order={index + 1}
+              src={src}
+            />
+          ))}
+        </MainCarousel>
+      </div>
       <div
         style={{
           width: "1050px",

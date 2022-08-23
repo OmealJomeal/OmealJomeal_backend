@@ -69,6 +69,7 @@ const FeedDetail = (props) => {
         .delete(`/api/feed/${id}`)
         .then(function (response) {
           console.log("삭제", response);
+          window.location.replace("/curlytable");
         })
         .catch(function (error) {
           console.log("삭제", error);

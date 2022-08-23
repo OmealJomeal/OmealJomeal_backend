@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import CheckBox from "../../common/checkbox/CheckBox";
 import styled from "styled-components";
+import axios from "axios";
 
 const CountButton = styled.button`
   width: 23px;
@@ -28,6 +29,20 @@ const CartProduct = (props) => {
   const onPlus = () => {
     setCount(count + 1);
     props.setTotalPrice(props.totalPrice + props.product_price);
+  };
+
+  const onClickDelete = () => {
+    if (window.confirm("장바구니에서 해당 상품을 삭제하시겠습니까?")) {
+      axios
+        .delete(`/api/cart/${props.cart_id}`)
+        .then(function (response) {
+          console.log("장바구니 삭제", response);
+          window.location.replace("/cart");
+        })
+        .catch(function (error) {
+          console.log("장바구니 삭제", error);
+        });
+    }
   };
   return (
     <>
@@ -76,6 +91,7 @@ const CartProduct = (props) => {
               cursor: "pointer",
               color: "#CCC",
             }}
+            onClick={onClickDelete}
           >
             X
           </div>

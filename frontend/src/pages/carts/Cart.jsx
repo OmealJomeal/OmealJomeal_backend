@@ -60,6 +60,7 @@ const Cart = () => {
           product_amount={product.product_amount}
           product_name={product.product_name}
           product_id={product.product_id}
+          cart_id={product.cart_id}
           key={index}
         ></CartProduct>
       </>

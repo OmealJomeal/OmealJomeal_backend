@@ -11,17 +11,11 @@ export const MainCarouselItem = ({ src, order }) => {
       className="carousel-item"
       style={{
         width: "100%",
-        position: "relative",
       }}
     >
       <img
         src={src}
-        style={{
-          width: "100%",
-          position: "relative",
-          top: "-22px",
-          display: "block",
-        }}
+        style={{ width: "1200px", position: "relative", top: "150px" }}
       />
     </div>
   );
@@ -60,16 +54,13 @@ const MainCarousel = ({ children }) => {
   });
 
   return (
-    <div
-      {...handlers}
-      className="carousel"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      style={{ position: "relative" }}
-    >
+    <div {...handlers} className="carousel" style={{ position: "relative" }}>
       <div
         className="inner"
-        style={{ transform: `translateX(-${activeIndex * 100}%)` }}
+        style={{
+          transform: `translateX(-${activeIndex * 100}%)`,
+          height: "500px",
+        }}
       >
         {React.Children.map(children, (child, index) => {
           return React.cloneElement(child, { width: "100%" });

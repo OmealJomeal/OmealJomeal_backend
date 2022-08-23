@@ -55,12 +55,14 @@
 	<select id="feedDetail" resultMap="selectMapList" parameterType="int">
 	<![CDATA[
 		select f.feed_id, f.feed_title,
-			   f.feed_description,
+			   f.feed_description,f.feed_recipe,f.feed_cooklevel,f.feed_cooktime,
 			   to_char(f.feed_time,'yy-mm-dd HH24:mi:ss') as feed_time,m.user_name,m.user_id,
+
 			   count(case when likes_category=0 then 1 end) as countLikes
 		from feed f, member m,feedlikes fl
 		where  f.user_id=m.user_id and f.feed_id=fl.feed_id and f.feed_id=#{feed_id}
-		group by f.feed_id, f.feed_title,f.feed_description, f.feed_time,m.user_name,m.user_id
+		group by f.feed_id, f.feed_title,f.feed_description, f.feed_time,m.user_name
+			   ,m.user_id,f.feed_cooktime,f.feed_cooklevel,f.feed_recipe
 		]]>
 	</select>
 
