@@ -12,7 +12,7 @@
         ]]>
 	</select>
 
-    <!-- 일반회원가입 -->
+    <!-- 회원가입 -->
     <insert id="generalSignUp" parameterType="hashmap">
    	<![CDATA[
         INSERT	INTO member (user_id,user_password,user_name,user_email, user_phone, user_address, user_gender, user_lifestyle, user_interest, user_food_favor, user_access_time)
