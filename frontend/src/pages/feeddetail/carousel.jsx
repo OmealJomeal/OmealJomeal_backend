@@ -9,21 +9,26 @@ import { useNavigate } from "react-router-dom";
 
 export const CarouselItem = (props) => {
   const onClickCart = () => {
-    const data = {
-      product_id: parseInt(props.id),
-      product_price: props.price,
-      product_amount: 1,
-    };
-    if (window.confirm("상품을 장바구니에 담겠습니까?")) {
-      axios
-        .post("/api/cart", JSON.stringify(data), {
-          headers: {
-            "Content-Type": "application/json",
-            data,
-          },
-        })
-        .then((response) => {})
-        .catch((error) => {});
+    if (props.logined === "") {
+      alert("로그인이 필요한 작업입니다.");
+      navigate("/signin");
+    } else {
+      const data = {
+        product_id: parseInt(props.id),
+        product_price: props.price,
+        product_amount: 1,
+      };
+      if (window.confirm("상품을 장바구니에 담겠습니까?")) {
+        axios
+          .post("/api/cart", JSON.stringify(data), {
+            headers: {
+              "Content-Type": "application/json",
+              data,
+            },
+          })
+          .then((response) => {})
+          .catch((error) => {});
+      }
     }
   };
 

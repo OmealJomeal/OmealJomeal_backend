@@ -229,6 +229,7 @@ const FeedDetail = (props) => {
                   id={product.product_id}
                   name={product.product_name}
                   price={product.product_price}
+                  logined={props.logined}
                 />
               ))}
           </Carousel>

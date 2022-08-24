@@ -133,7 +133,6 @@ public class FeedController {
 
             Collections.shuffle(mapSave);
         for (int j = 0; j <mapSave.size() && j <8; j++) {
-            System.out.println(j);
             mapRealResult.add(mapSave.get(j));
         }}
         return mapRealResult;

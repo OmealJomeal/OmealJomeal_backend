@@ -17,7 +17,6 @@ import java.util.Map;
 public class FeedServiceImpl implements FeedService{
 
     private final FeedDAO dao;
-    private final MemberDAO memberDAO;
 
     @Override
     public int feedUpload(FeedDTO feedDTO) throws Exception {

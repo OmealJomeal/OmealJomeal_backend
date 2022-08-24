@@ -4,17 +4,17 @@ import com.omealjomeal.dao.LifestyleDAO;
 import com.omealjomeal.dto.FoodFavorDTO;
 import com.omealjomeal.dto.InterestDTO;
 import com.omealjomeal.dto.LifestyleDTO;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 
+@RequiredArgsConstructor
 @Service("lifestyleService")
 public class LifstyleServiceImpl implements LifestyleService{
 
-    @Autowired
-    LifestyleDAO lifestyleDAO;
+
+    private final LifestyleDAO lifestyleDAO;
 
 
     @Override

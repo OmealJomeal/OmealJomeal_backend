@@ -39,6 +39,7 @@ export const CarouselItem = (props) => {
           bottom: "30px",
           left: "5px",
           color: "#333",
+          fontWeight: "bold",
         }}
       >
         {props.title}

@@ -74,6 +74,12 @@ const SignIn = (props) => {
       });
   };
 
+  const onKeyPress = (e) => {
+    if (e.key === "Enter") {
+      axios_post();
+    }
+  };
+
   return (
     <>
       <div
@@ -100,6 +106,7 @@ const SignIn = (props) => {
           required
           onChange={onChangePassword}
           value={password}
+          onKeyPress={onKeyPress}
           type="password"
         ></InputBox>
         <div
