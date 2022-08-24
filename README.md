@@ -40,3 +40,7 @@ Server: Tomcat 9.0, Oracle Cloud
 성향이 비슷한 다른 유저의 피드 게시물을 추천해줍니다.<br/>
 또 성향이 유사하지 않은 다른 유저의 피드 게시물도 추천해줌으로서 색다른 추천 또한 해줍니다.<br/>
 성향 유사도는 18차원(18 = 입력받는 성향의 개수)의 유클리드 거리를 사용하여 계산합니다.
+
+
+## DDL
+[OmealJomeal_DDL.txt](https://github.com/OmealJomeal/OmealJomeal_backend/files/9414544/OmealJomeal_DDL.txt)
