@@ -24,6 +24,10 @@ Server: Tomcat 9.0, Oracle Cloud
 ## 오밀조밀 테이블 데이터 셋
 [오밀조밀 table.pdf](https://github.com/OmealJomeal/OmealJomeal_backend/files/9413085/table.pdf)
 
+
+## DDL
+[OmealJomeal_DDL.txt](https://github.com/OmealJomeal/OmealJomeal_backend/files/9414544/OmealJomeal_DDL.txt)
+
 ## 플로우 차트
 ![플로우차트](https://user-images.githubusercontent.com/95620153/186335011-3d3b28d9-1b18-4d08-8086-369cb8927410.png)
 
@@ -42,5 +46,3 @@ Server: Tomcat 9.0, Oracle Cloud
 성향 유사도는 18차원(18 = 입력받는 성향의 개수)의 유클리드 거리를 사용하여 계산합니다.
 
 
-## DDL
-[OmealJomeal_DDL.txt](https://github.com/OmealJomeal/OmealJomeal_backend/files/9414544/OmealJomeal_DDL.txt)
