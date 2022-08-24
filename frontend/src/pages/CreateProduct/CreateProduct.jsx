@@ -22,13 +22,11 @@ const CreateProduct = () => {
   const onImageUpload = (e) => {
     const img = e.target.files[0];
     formData.append("product_img", img);
-    for (const keyValue of formData) console.log(keyValue); // ["img", File] File은 객체
   };
 
   const onClearImageUpload = (e) => {
     const img = e.target.files[0];
     formData.append("product_clear_img", img);
-    for (const keyValue of formData) console.log(keyValue); // ["img", File] File은 객체
   };
 
   const onUploadProduct = () => {
@@ -47,12 +45,9 @@ const CreateProduct = () => {
 
     axios
       .post("/api/product", formData)
-      .then((response) => {
-        console.log(response);
-      })
+      .then((response) => {})
       .catch((error) => {
         console.log(error.response.data);
-        for (const keyValue of formData) console.log(keyValue);
       });
   };
 

@@ -70,12 +70,9 @@ const Cart = () => {
     axios
       .get("/api/cart")
       .then((response) => {
-        console.log(response.data);
         setCartProducts(response.data);
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   }, []);
 
   useEffect(() => {

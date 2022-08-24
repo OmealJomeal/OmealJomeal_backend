@@ -34,13 +34,10 @@ const HeaderNav = (props) => {
     axios
       .get("/api/logout")
       .then((response) => {
-        console.log("로그인 세션", response);
         alert("로그아웃 되셨습니다.");
         setLogined("");
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   };
 
   useEffect(() => {

@@ -27,12 +27,9 @@ function App() {
     axios
       .get("/api/loginSession")
       .then((response) => {
-        console.log("로그인 세션", response);
         setLogined(response.data);
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   }, []);
 
   return (
@@ -57,14 +54,14 @@ function App() {
               ></Route>
               <Route
                 path="/productdetail/:id"
-                element={<ProductDetail />}
+                element={<ProductDetail logined={logined} />}
               ></Route>
               <Route
                 path="/feeddetail/:id"
                 element={<FeedDetail logined={logined} />}
               ></Route>
             </Routes>
-            {/* <Footer></Footer> */}
+            <Footer></Footer>
           </BrowserRouter>
         </ThemeProvider>
       </div>

@@ -84,12 +84,9 @@ const KurlyPlating = () => {
     axios
       .get("/api/product")
       .then((response) => {
-        console.log(response);
         setProductList(response.data);
       })
-      .catch((error) => {
-        console.log(error.response.data);
-      });
+      .catch((error) => {});
   }, []);
 
   const filtered =

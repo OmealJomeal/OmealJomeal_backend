@@ -1,17 +1,18 @@
 package com.omealjomeal.dao;
 
 import com.omealjomeal.dto.ProductDTO;
+import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @Repository("productDAO")
 public class ProductDAO {
 
-    @Autowired
-    SqlSession sqlSession;
+    private final SqlSession sqlSession;
 
     public int insert(ProductDTO productDTO) throws Exception {
         return sqlSession.insert("com.config.ProductMapper.insert", productDTO);

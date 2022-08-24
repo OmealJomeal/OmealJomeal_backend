@@ -31,21 +31,15 @@ const CurlyTable = (props) => {
     axios
       .get("/api/feed")
       .then((response) => {
-        console.log(response);
         setFeedList(response.data);
       })
-      .catch((error) => {
-        console.log(error.response.data);
-      });
+      .catch((error) => {});
     axios
       .get("/api/bestFeed")
       .then((response) => {
-        console.log("top4", response);
         setBestFeed(response.data);
       })
-      .catch((error) => {
-        console.log(error.response.data);
-      });
+      .catch((error) => {});
   }, []);
 
   let navigate = useNavigate();

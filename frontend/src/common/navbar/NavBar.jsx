@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../../theme";
 import { useNavigate } from "react-router-dom";
+import { VscThreeBars } from "react-icons/vsc";
 
 const NavItem = styled.div`
   width: 33.3%;
@@ -26,11 +27,55 @@ const ShadowBox = styled.div`
 
 const CategoryBar = styled.div`
   width: 350px;
-  height: 130px;
-  background-color: gray;
-  z-index: 1;
-  display: inline-block;
+  height: 150px;
+  border: solid #ddd;
+  border-width: 1px;
+  background-color: white;
   position: absolute;
+  z-index: 10;
+  display: block;
+`;
+
+const CategoryBarItem1 = styled(CategoryBar)`
+  height: 50px;
+  border: none;
+  text-align: center;
+  line-height: 50px;
+  top: 0px;
+  &:hover {
+    color: ${(props) => props.theme.maincolor};
+    font-weight: bolder;
+    background-color: #f7f7f7;
+  }
+  cursor: pointer;
+`;
+
+const CategoryBarItem2 = styled(CategoryBar)`
+  height: 50px;
+  border: none;
+  text-align: center;
+  line-height: 50px;
+  top: 50px;
+  &:hover {
+    color: ${(props) => props.theme.maincolor};
+    font-weight: bolder;
+    background-color: #f7f7f7;
+  }
+  cursor: pointer;
+`;
+
+const CategoryBarItem3 = styled(CategoryBar)`
+  height: 50px;
+  border: none;
+  text-align: center;
+  line-height: 50px;
+  top: 100px;
+  &:hover {
+    color: ${(props) => props.theme.maincolor};
+    font-weight: bolder;
+    background-color: #f7f7f7;
+  }
+  cursor: pointer;
 `;
 
 const NavBar = (props) => {
@@ -61,7 +106,10 @@ const NavBar = (props) => {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
-            카테고리
+            <VscThreeBars
+              style={{ position: "relative", top: "2px" }}
+            ></VscThreeBars>
+            &nbsp; 카테고리
           </NavItem>
           <NavItem as="a" href="/curlytable">
             컬리의 식탁
@@ -74,7 +122,11 @@ const NavBar = (props) => {
             <CategoryBar
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
-            ></CategoryBar>
+            >
+              <CategoryBarItem1>라이프 생활</CategoryBarItem1>
+              <CategoryBarItem2>관심 분야</CategoryBarItem2>
+              <CategoryBarItem3>음식 취향</CategoryBarItem3>
+            </CategoryBar>
           ) : null}
         </div>
       </ThemeProvider>

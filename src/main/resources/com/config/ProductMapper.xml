@@ -7,8 +7,8 @@
 <!--	상품등록-->
 	<insert id="insert" parameterType="ProductDTO">
 		<![CDATA[
-		insert into product ( product_id, product_name, product_price, product_description, product_category, product_img, product_clear_img,product_time )
-		values (product_seq.nextval+50,  #{product_name}, #{product_price}, #{product_description}, #{product_category}, #{product_img}, #{product_clear_img},sysdate )
+		insert into product ( product_id, product_name, product_price, product_description, product_category,product_time )
+		values (product_seq.nextval+50,  #{product_name}, #{product_price}, #{product_description}, #{product_category},sysdate )
 		]]>
 	</insert>
 
@@ -34,23 +34,4 @@
 		WHERE product_name = #{product_name}
 		]]>
 	</select>
-
-
-<!--	<select id="search" resultType="ProductDTO" parameterType="hashmap">-->
-<!--		<![CDATA[-->
-<!--		select id,-->
-<!--			   member_name as memberName,-->
-<!--			   title,-->
-<!--			   datetime,-->
-<!--			   replies,-->
-<!--			   likes,-->
-<!--			   views-->
-<!--		from post-->
-<!--		where (${searchCol} like '%'||#{keyword}||'%') AND (category = #{category})-->
-<!--		order by id desc-->
-<!--		OFFSET (#{pageDto.currentPage}-1)*#{pageDto.limit} ROWS FETCH FIRST #{pageDto.limit} ROWS ONLY-->
-<!--		]]>-->
-<!--	</select>-->
-
-
 </mapper>

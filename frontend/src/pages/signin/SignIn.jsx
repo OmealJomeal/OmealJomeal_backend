@@ -62,7 +62,6 @@ const SignIn = (props) => {
         },
       })
       .then((response) => {
-        console.log(response);
         if (response.data !== "") {
           alert("로그인 되셨습니다");
           window.location.replace("/");
@@ -71,7 +70,6 @@ const SignIn = (props) => {
         }
       })
       .catch((error) => {
-        console.log(error.response.data);
         alert("");
       });
   };
@@ -102,6 +100,7 @@ const SignIn = (props) => {
           required
           onChange={onChangePassword}
           value={password}
+          type="password"
         ></InputBox>
         <div
           style={{
@@ -109,11 +108,7 @@ const SignIn = (props) => {
             margin: "20px 0px",
             fontSize: "small",
           }}
-        >
-          <span>아이디 찾기</span>
-          &nbsp; &nbsp; &nbsp; &nbsp;
-          <span>비밀번호 찾기</span>
-        </div>
+        ></div>
         <SignInUpBox onClick={axios_post}>로그인</SignInUpBox>
         <a href="/signup">
           <Link to={"/signup"}>

@@ -21,7 +21,6 @@ const FeedDetail = (props) => {
       axios
         .get(`/api/feedLikes/${id}`)
         .then((response) => {
-          console.log("좋아요 클릭 시 get", response);
           if (response.data === "") {
             const data = {
               feed_id: id,
@@ -33,20 +32,14 @@ const FeedDetail = (props) => {
                   data,
                 },
               })
-              .then((response) => {
-                console.log("좋아요 중복 확인", response.data);
-              })
-              .catch((error) => {
-                console.log(error);
-              });
+              .then((response) => {})
+              .catch((error) => {});
             setLikes(likes + 1);
           } else {
             alert("이미 좋아요를 누른 게시글입니다");
           }
         })
-        .catch((error) => {
-          console.log("좋아요 클릭 시 get", error.response.data);
-        });
+        .catch((error) => {});
     }
   };
 
@@ -54,13 +47,10 @@ const FeedDetail = (props) => {
     axios
       .get(`/api/feedDetail/${id}`)
       .then((response) => {
-        console.log(response.data);
         setFeed(response.data);
         setLikes(response.data.feedDetail.countLikes);
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   }, []);
 
   const onClickDelete = () => {
@@ -68,12 +58,9 @@ const FeedDetail = (props) => {
       axios
         .delete(`/api/feed/${id}`)
         .then(function (response) {
-          console.log("삭제", response);
           window.location.replace("/curlytable");
         })
-        .catch(function (error) {
-          console.log("삭제", error);
-        });
+        .catch(function (error) {});
     }
   };
 
@@ -112,7 +99,7 @@ const FeedDetail = (props) => {
               }}
             >
               <img
-                style={{ width: "300px" }}
+                style={{ width: "380px" }}
                 alt={id}
                 src={`/upload/feed/${id}_FeedImg.png`}
               />
@@ -157,11 +144,11 @@ const FeedDetail = (props) => {
                   }}
                 >
                   조리 난이도 :&nbsp;{" "}
-                  {feed && feed.feedDetail.feed_cooklevel === "2"
+                  {feed && feed.feedDetail.feed_cooklevel === 2
                     ? "상"
-                    : feed.feedDetail.feed_cooklevel === "1"
+                    : feed.feedDetail.feed_cooklevel === 1
                     ? "중"
-                    : feed.feedDetail.feed_cooklevel === "0"
+                    : feed.feedDetail.feed_cooklevel === 0
                     ? "하"
                     : null}
                 </div>

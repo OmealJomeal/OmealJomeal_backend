@@ -205,18 +205,13 @@ const SingUp = () => {
         },
       })
       .then((response) => {
-        console.log(data);
-        console.log(response);
         if (response.data === 1) {
           alert("중복된 이메일이 존재합니다.");
         } else {
           alert("사용 가능한 이메일입니다.");
         }
       })
-      .catch((error) => {
-        console.log(data);
-        console.log(error.response.data);
-      });
+      .catch((error) => {});
   };
 
   // 회원가입 버튼 조회
@@ -263,17 +258,12 @@ const SingUp = () => {
         },
       })
       .then((response) => {
-        console.log(data);
-        console.log(response);
         if (response.data === 1) {
           alert("회원가입 되셨습니다.");
           navigate("/");
         }
       })
-      .catch((error) => {
-        console.log(JSON.stringify(data));
-        console.log(error.response.data);
-      });
+      .catch((error) => {});
   };
 
   return (

@@ -3,17 +3,18 @@ package com.omealjomeal.dao;
 import com.omealjomeal.dto.FoodFavorDTO;
 import com.omealjomeal.dto.InterestDTO;
 import com.omealjomeal.dto.LifestyleDTO;
+import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 
+@RequiredArgsConstructor
 @Repository("LifestyleDAO")
 public class LifestyleDAO {
 
-    @Autowired
-    SqlSession sqlSession;
+    private final SqlSession sqlSession;
 
     //
     public int findLifestyle(HashMap<String, Integer> map) throws Exception {

@@ -1,6 +1,7 @@
 package com.omealjomeal.dao;
 
 import com.omealjomeal.dto.MemberDTO;
+import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -8,11 +9,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@RequiredArgsConstructor
 @Repository("memberDAO")
 public class MemberDAO {
 
-    @Autowired
-    SqlSession sqlSession;
+    private final SqlSession sqlSession;
 
     // 로그인
     public MemberDTO selectMember(HashMap<String, Object> map) throws Exception {

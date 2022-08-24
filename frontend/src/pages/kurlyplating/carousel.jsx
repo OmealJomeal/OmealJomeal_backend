@@ -22,13 +22,8 @@ export const CarouselItem = (props) => {
             data,
           },
         })
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(data);
-          console.log(error);
-        });
+        .then((response) => {})
+        .catch((error) => {});
     }
   };
 
@@ -39,15 +34,12 @@ export const CarouselItem = (props) => {
   const onClickImage = () => {
     if (props.category === "main_dish") {
       props.setPlateId(props.id);
-      console.log(props.category);
     }
     if (props.category === "table_mat") {
       props.setMatId(props.id);
-      console.log(props.category);
     }
     if (props.category === "spoon") {
       props.setSpoonId(props.id);
-      console.log(props.category);
     }
   };
 

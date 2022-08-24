@@ -58,7 +58,6 @@ const CreateFeed = () => {
   const onFeedImageUpload = (e) => {
     const img = e.target.files[0];
     formData.append("feed_img", img);
-    for (const keyValue of formData) console.log(keyValue); // ["img", File] File은 객체
   };
 
   const [productList, setProductList] = useState(null);
@@ -68,7 +67,6 @@ const CreateFeed = () => {
 
   const onChangeSearch = (e) => {
     setSearch(e.target.value);
-    console.log(search.length);
     if (search.length === 1 || 0) {
       setSearch("null");
     }
@@ -79,8 +77,6 @@ const CreateFeed = () => {
       setSearch("null");
     }
   }, [search.length]);
-
-  console.log(productList);
 
   const filtered =
     productList &&
@@ -97,8 +93,6 @@ const CreateFeed = () => {
       setSelectedId((selectedId) => [...selectedId, e.target.className]);
     }
   };
-
-  console.log(selectedId);
 
   const showFiltered =
     filtered &&
@@ -158,12 +152,9 @@ const CreateFeed = () => {
     axios
       .get("/api/product")
       .then((response) => {
-        console.log(response);
         setProductList(response.data);
       })
-      .catch((error) => {
-        console.log(error.response.data);
-      });
+      .catch((error) => {});
   }, []);
 
   let navigate = useNavigate();
@@ -193,16 +184,10 @@ const CreateFeed = () => {
     axios
       .post("/api/feed", formData)
       .then((response) => {
-        console.log(response);
         window.location.replace("/curlytable");
       })
-      .catch((error) => {
-        console.log(error.response.data);
-        for (const keyValue of formData) console.log(keyValue);
-      });
+      .catch((error) => {});
   };
-
-  console.log(selectedId);
 
   return (
     <>
@@ -294,6 +279,7 @@ const CreateFeed = () => {
             onChange={onChangeSearch}
             type="text"
             name="title"
+            placeholder="상품명으로 검색하세요 ex) 양파, 계란"
           ></input>
         </div>
       </UnitBox>

@@ -16,7 +16,6 @@ const CountButton = styled.button`
 `;
 
 const CartProduct = (props) => {
-  console.log(props.product_amount);
   const [count, setCount] = useState(props.product_amount);
   const onMinus = () => {
     if (count <= 1) {
@@ -36,12 +35,9 @@ const CartProduct = (props) => {
       axios
         .delete(`/api/cart/${props.cart_id}`)
         .then(function (response) {
-          console.log("장바구니 삭제", response);
           window.location.replace("/cart");
         })
-        .catch(function (error) {
-          console.log("장바구니 삭제", error);
-        });
+        .catch(function (error) {});
     }
   };
   return (

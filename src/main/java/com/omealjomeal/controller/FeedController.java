@@ -22,8 +22,7 @@ public class FeedController {
 
     private final FeedService feedService;
 
-    //requestPram
-    //feed 업로드
+
     @PostMapping("/api/feed")
     public int feedUpload(@RequestPart("feed_img") MultipartFile feedImg,
                           @RequestParam("feed_title") String feed_title,
@@ -90,6 +89,9 @@ public class FeedController {
     //피드목록 보기 메인 알고리즘 적용 맞춤취향 거리가 8이하인 유저의 피드를 불러옴.
     @GetMapping("/api/mainFeedFit")
     public List<Map<Object,Object>> selectMainFeedList(HttpSession session) throws Exception{
+        List<Map<Object,Object>> mapRealResult = new ArrayList<>();
+        if (session.getAttribute("login")!=null){
+
         int sum=0;
         int user_id=0;
 
@@ -109,7 +111,6 @@ public class FeedController {
                     int referenceCurrent = Integer.parseInt(String.valueOf(CurrentMemberViewMap.get(mapKey)));
                     int referenceOther = Integer.parseInt(String.valueOf(referenceMember.get(mapKey)));
                   sum += Math.pow((int) (referenceOther-referenceCurrent),2);
-//                    System.out.println(Integer.parseInt(String.valueOf(referenceMember.get(mapKey)))+"_"+mapKey+"_"+ referenceCurrent+"_"+referenceOther+"_"+sum);
                 }
             }
             key.put(user_id,sum);
@@ -118,40 +119,42 @@ public class FeedController {
         List<Map<Object,Object>> mapSave = new ArrayList<>();
         Object[] lists= key.values().toArray();
         Arrays.sort(lists);
-        List<Map<Object,Object>> mapRealResult = new ArrayList<>();
+
         for (int userID : key.keySet()) {
             Integer value = key.get(userID);
-            if (value <= 8) {
+            //거리가 4이하일 때 맞춤취향.
+            if (value <= 4) {
                 List<Map<Object, Object>> map = feedService.feedViewMainFit(userID);
                 for (Map<Object, Object> mapSSSS : map) {
                     mapSave.add(mapSSSS);
                 }
             }
         }
-                //랜덤으로 mapSave불러와서 8개만 따로저장해서 반환.
-                Collections.shuffle(mapSave);
-        if (mapSave.size() >= 8) {
-        for (int j = 0; j <8 ; j++) {
+
+            Collections.shuffle(mapSave);
+        for (int j = 0; j <mapSave.size() && j <8; j++) {
+            System.out.println(j);
             mapRealResult.add(mapSave.get(j));
         }}
         return mapRealResult;
     }
 
-    //피드목록 보기 메인 알고리즘 적용 반대취향 거리가 8이상인 유저의 피드를 불러옴.
+    //메인 반대취향 피드목록 보기
     @GetMapping("/api/mainFeedNotFit")
     public List<Map<Object,Object>> selectMainNotFeedList(HttpSession session) throws Exception{
+        List<Map<Object,Object>> mapRealResult = new ArrayList<>();
+        if (session.getAttribute("login")!=null){
         int sum=0;
         int user_id=0;
 
         HashMap<Integer,Integer> key = new HashMap<>();
         MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
         int currentUserId = memberDTO.getUser_id();
+        //현재 로그인한 유저와 다른 유저의 요소 값을 조회.
         Map<String,Integer> CurrentMemberViewMap = memberService.currentMemberView(currentUserId);
-        //membertable조회
-        // lifestyle, interest, food_favor 조인해서 조회.
         List<HashMap<String,Integer>> memberViewMap = memberService.memberView(currentUserId);
 
-        // 추천 알고리즘
+        // 추천 알고리즘 시작. 요소 값 비교.
         for (HashMap<String,Integer> referenceMember:memberViewMap) {
             for(String mapKey: referenceMember.keySet()){
                 if(mapKey.equals("user_id")){
@@ -168,22 +171,19 @@ public class FeedController {
         List<Map<Object,Object>> mapSave = new ArrayList<>();
         int i = 0;
         Object[] lists= key.values().toArray();
-        Arrays.sort(lists,Collections.reverseOrder());//(7, 10)
-        List<Map<Object,Object>> mapRealResult = new ArrayList<>();
+        Arrays.sort(lists,Collections.reverseOrder());
+
         for (int userID : key.keySet()) {
             Integer value = key.get(userID);
-            if (value >= 8) {
+            if (value > 4) {
                 List<Map<Object, Object>> map = feedService.feedViewMainFit(userID);
                 for (Map<Object, Object> mapSSSS : map) {
                     mapSave.add(mapSSSS);
                 }
             }
         }
-        //랜덤으로 mapSave불러와서 랜덤으로 섞어주고
         Collections.shuffle(mapSave);
-        if (mapSave.size() >= 8) {
-            for (int j = 0; j < 8; j++) {
-                //8개의 데이터만 저장.
+            for (int j = 0; j < mapSave.size() && j <8; j++) {
                 mapRealResult.add(mapSave.get(j));
             }
         }

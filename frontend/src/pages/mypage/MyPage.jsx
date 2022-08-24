@@ -89,12 +89,9 @@ const MyPage = () => {
     axios
       .get("/api/user")
       .then((response) => {
-        console.log("마이페이지", response);
         setMyfav(response.data);
       })
-      .catch((error) => {
-        console.log("마이페이지", error.response);
-      });
+      .catch((error) => {});
   }, []);
 
   useEffect(() => {
@@ -195,14 +192,8 @@ const MyPage = () => {
           data,
         },
       })
-      .then((response) => {
-        console.log(response);
-        console.log(JSON.stringify(data));
-      })
-      .catch((error) => {
-        console.log(error.response.data);
-        console.log(JSON.stringify(data));
-      });
+      .then((response) => {})
+      .catch((error) => {});
   };
 
   return (

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
 import { BsHeart } from "react-icons/bs";
@@ -57,7 +58,7 @@ const CountButton = styled.button`
   text-align: center;
 `;
 
-const ProductDetail = () => {
+const ProductDetail = (props) => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
 
@@ -65,12 +66,9 @@ const ProductDetail = () => {
     axios
       .get(`/api/productdetail/${id}`)
       .then((response) => {
-        console.log(response);
         setProduct(response.data);
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   }, [id]);
 
   const [heartHover, setHeartHover] = useState(false);
@@ -112,22 +110,24 @@ const ProductDetail = () => {
     setCount(count + 1);
   };
 
+  let navigate = useNavigate();
+
   const onClickCart = () => {
-    const data = {
-      product_price: count * product.product_price,
-      product_amount: count,
-      product_id: parseInt(id),
-    };
-    if (window.confirm("상품을 장바구니에 담겠습니까?")) {
-      axios
-        .post("/api/cart", JSON.stringify(data))
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(data);
-          console.log(error);
-        });
+    if (props.logined === "") {
+      alert("로그인이 필요한 작업입니다.");
+      navigate("/signin");
+    } else {
+      const data = {
+        product_price: count * product.product_price,
+        product_amount: count,
+        product_id: parseInt(id),
+      };
+      if (window.confirm("상품을 장바구니에 담겠습니까?")) {
+        axios
+          .post("/api/cart", JSON.stringify(data))
+          .then((response) => {})
+          .catch((error) => {});
+      }
     }
   };
 
@@ -157,6 +157,7 @@ const ProductDetail = () => {
                 src={`/upload/product/${
                   product && product.product_id
                 }_noneClear.png`}
+                style={{ width: "380px" }}
               />
             </div>
           </div>
@@ -249,7 +250,7 @@ const ProductDetail = () => {
               }}
             >
               <ProductMiniBox>상품 설명</ProductMiniBox>
-              <ProductSecBox>
+              <ProductSecBox style={{ whiteSpace: "pre-wrap" }}>
                 {product && product.product_description}
               </ProductSecBox>
             </ProductBox>
