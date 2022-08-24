@@ -12,7 +12,7 @@ public interface FeedService {
     //피드업로드
     public int feedUpload(FeedDTO feedDTO) throws Exception;
     //피드 업로드 후 피드 아이디 조회
-    public int selectFeedId(FeedDTO feedDTO) throws Exception;
+    public List<Integer> selectFeedId(FeedDTO feedDTO) throws Exception;
     //피드와 연결되어있는 feedProduct테이블에 업로드.
     public int feedProductUpload(FeedProductDTO feedProductDTO) throws Exception;
     public List<Map<Object,Object>> feedView() throws Exception;

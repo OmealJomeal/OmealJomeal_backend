@@ -20,6 +20,7 @@ public class MemberController {
 
     private final LifestyleService lifestyleService;
 
+    //로그인
     @PostMapping("/api/login")
     public MemberDTO login(HttpSession session, @RequestBody HashMap<String, Object> map) throws Exception {
         MemberDTO memberDTO = memberService.selectMember(map);

@@ -17,6 +17,7 @@
 	<![CDATA[
 		SELECT feed_id FROM feed
 		WHERE feed_title = #{feed_title} and feed_description=#{feed_description} and feed_recipe=#{feed_recipe}
+		ORDER BY feed_id
 		]]>
 	</select>
 
@@ -28,7 +29,7 @@
 		]]>
 	</insert>
 
-	<!--피드만 조회 + 좋아요-->
+	<!--피드 조회 + 좋아요-->
 	<select id="feedView" resultMap="selectMapList">
 	<![CDATA[
 		select f.feed_id, f.feed_title,
@@ -99,14 +100,16 @@
 
 	<select id="feedViewTop" resultMap="selectMapList">
 	<![CDATA[
-		select f.feed_id, f.feed_title,
-			   f.feed_description,
-			   to_char(f.feed_time,'yy-mm-dd HH24:mi:ss') as feed_time,m.user_name,
-			   count(case when likes_category=0 then 1 end) as countLikes
-		from feed f, member m,feedlikes fl
-		where  f.user_id=m.user_id and f.feed_id=fl.feed_id and rownum<=4
-		group by f.feed_id, f.feed_title,f.feed_description, f.feed_time,m.user_name
-		order by countLikes desc
+		select a.* from
+			(select f.feed_id, f.feed_title,
+					f.feed_description,
+					to_char(f.feed_time,'yy-mm-dd HH24:mi:ss') as feed_time,m.user_name,
+					count(case when likes_category=0 then 1 end) as countLikes
+			 from feed f, member m,feedlikes fl
+			 where  f.user_id=m.user_id and f.feed_id=fl.feed_id
+			 group by f.feed_id, f.feed_title,f.feed_description, f.feed_time,m.user_name
+			 order by countLikes desc) a
+		where rownum <=4
 		]]>
 	</select>
 	<resultMap type="map" id="selectMapList">

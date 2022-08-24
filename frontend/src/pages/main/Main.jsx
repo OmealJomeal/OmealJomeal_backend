@@ -27,7 +27,11 @@ const Main = (props) => {
     }
   }, []);
 
-  const mainimages = ["/img/maincarousel1.png", "/img/maincarousel2.png"];
+  const mainimages = [
+    "/img/maincarousel1.png",
+    "/img/maincarousel2.png",
+    "/img/maincarousel3.png",
+  ];
 
   const columnimages = ["/img/columncarousel1.png", "/img/columncarousel2.png"];
 
@@ -64,7 +68,7 @@ const Main = (props) => {
                 color: "#333",
               }}
             >
-              회원님을 위한 맞춤 추천
+              {props.logined.user_name}님을 위한 맞춤 추천
             </div>
             <Carousel style={{ display: "flex", flexWrap: "nowrap" }}>
               {feedFit &&

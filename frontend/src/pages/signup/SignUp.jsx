@@ -224,6 +224,7 @@ const SingUp = () => {
       password: value.password,
       name: value.name,
       phone: value.phoneNumber,
+      address: user_address,
       gender: value.gender,
       lifestyle: {
         livealone: value.livealone ? 1 : 0,

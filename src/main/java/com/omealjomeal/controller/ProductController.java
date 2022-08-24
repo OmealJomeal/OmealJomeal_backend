@@ -23,7 +23,7 @@ public class ProductController {
     @Value("${spring.servlet.multipart.location}")
     private String uploadPath;
 
-    // 상품 등록. 나중에 마켓컬리에서 사용할 수 있도록 기능을 구현하였습니다.
+    // 상품 등록.
     @PostMapping("/api/product")
     public int productImg(@RequestPart("product_img") MultipartFile files,
                             @RequestPart("product_clear_img") MultipartFile clear_img,
@@ -71,7 +71,6 @@ public class ProductController {
         int total_price = map.get("product_amount") * map.get("product_price");
         MemberDTO mDTO = (MemberDTO) session.getAttribute("login");
         int user_id = mDTO.getUser_id();
-
         map.put("total_price",total_price);
         map.put("user_id",user_id);
         int cartCnt=0;

@@ -20,8 +20,8 @@ public class FeedDAO {
         return sqlSession.insert("com.config.FeedMapper.feedUpload", feedDTO);
     }
 
-    public int selectFeedId(FeedDTO feedDTO) throws Exception {
-        return sqlSession.selectOne("com.config.FeedMapper.selectFeedId", feedDTO);
+    public List<Integer> selectFeedId(FeedDTO feedDTO) throws Exception {
+        return sqlSession.selectList("com.config.FeedMapper.selectFeedId", feedDTO);
     }
 
     public int feedProductUpload(FeedProductDTO feedProductDTO) throws Exception {

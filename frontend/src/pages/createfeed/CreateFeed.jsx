@@ -94,6 +94,13 @@ const CreateFeed = () => {
     }
   };
 
+  const onDelete = (e) => {
+    setSelected(selected.filter((item) => item !== e.target.id));
+    setSelectedId(
+      selectedId.filter((item) => item !== String(e.target.className))
+    );
+  };
+
   const showFiltered =
     filtered &&
     filtered.map((product) => {
@@ -141,8 +148,24 @@ const CreateFeed = () => {
             textAlign: "center",
             borderRadius: "5px",
             margin: "2px",
+            display: "flex",
           }}
         >
+          <div
+            id={name}
+            className={
+              productList.filter((product) => {
+                if (product.product_name.toLowerCase() === name) {
+                  return product.product_id;
+                }
+              })[0].product_id
+            }
+            onClick={onDelete}
+            style={{ color: "#777" }}
+          >
+            X{" "}
+          </div>
+          &nbsp;&nbsp;&nbsp;
           {name}
         </div>
       );
@@ -183,10 +206,9 @@ const CreateFeed = () => {
     }
     axios
       .post("/api/feed", formData)
-      .then((response) => {
-        window.location.replace("/curlytable");
-      })
+      .then((response) => {})
       .catch((error) => {});
+    window.location.replace("/curlytable");
   };
 
   return (

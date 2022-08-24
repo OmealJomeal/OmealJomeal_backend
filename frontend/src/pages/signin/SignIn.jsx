@@ -4,10 +4,10 @@ import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 
 const InputBox = styled.input`
-  width: 95px;
+  width: 300px;
   height: 14px;
   flex-grow: 0;
-  padding: 17px 229px 18px 16px;
+  padding: 17px 20px 18px 20px;
   border-radius: 4px;
   border: solid 0.7px #ddd;
   margin: 8px 0px;

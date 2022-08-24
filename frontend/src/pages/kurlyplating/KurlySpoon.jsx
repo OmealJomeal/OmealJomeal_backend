@@ -9,7 +9,7 @@ const KurlySpoon = (props) => {
           height: "210px",
           position: "absolute",
           bottom: "80px",
-          right: "170px",
+          right: "190px",
           zIndex: "2",
         }}
         src={`/upload/product/${props.id}_clearImg.png`}

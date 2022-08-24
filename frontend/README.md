@@ -1,70 +1,43 @@
 # Getting Started with Create React App
+# OmealJomeal
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+##### _[backend사이트는 여기!](https://github.com/OmealJomeal/OmealJomeal_backend)
 
-## Available Scripts
+## 소셜 네트워크와 게이미피케이션 기능을 접목한 추천 서비스 플랫폼, 오밀조밀
 
-In the project directory, you can run:
+## 개발환경
 
-### `npm start`
+- OS: windows 10
+- 협업 툴: Notion
+- 버전관리: Github
+- FrontEnd
+ Language: HTML5, &nbsp;CSS, &nbsp;JavaScript(ES6)
+Framework: react
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- BackEnd
+Language: Java
+Framework: Spring Boot 2.7.2
+ORM: mybatis 2.1.4
+DB: Oracle Database 19c Enterprise Edition
+Server: Tomcat 9.0, Oracle Cloud
+- Open API: Kakao 주소 API
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 오밀조밀 테이블 데이터 셋
+[오밀조밀 table.pdf](https://github.com/OmealJomeal/OmealJomeal_backend/files/9413085/table.pdf)
 
-### `npm test`
+## 플로우 차트
+![플로우차트](https://user-images.githubusercontent.com/95620153/186335011-3d3b28d9-1b18-4d08-8086-369cb8927410.png)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## ERD설계
+<img width="1310" alt="오밀조밀_ERD설계도" src="https://user-images.githubusercontent.com/95620153/186335055-a63615b1-9933-4521-9683-2d539694af45.png">
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 알고리즘
+마켓컬리's 오밀조밀 서비스는<br/>
+개개인의 성향을 파악하여 맞춤 추천 알고리즘을 제공합니다.<br/> 
+라이프스타일(ex. 혼자살아요, 아이가 있어요, 가정주부에요) / <br/>
+관심 분야 (ex. 반려 동물, 건강, 요리) /<br/>
+음식 취향( ex. 달달한 맛, 매운 맛, 짠 맛) 을<br/>
+유저별로 입력받아<br/>
+성향이 비슷한 다른 유저의 피드 게시물을 추천해줍니다.<br/>
+또 성향이 유사하지 않은 다른 유저의 피드 게시물도 추천해줌으로서 색다른 추천 또한 해줍니다.<br/>
+성향 유사도는 18차원(18 = 입력받는 성향의 개수)의 유클리드 거리를 사용하여 계산합니다.

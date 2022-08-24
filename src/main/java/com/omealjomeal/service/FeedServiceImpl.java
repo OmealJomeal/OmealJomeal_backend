@@ -25,7 +25,7 @@ public class FeedServiceImpl implements FeedService{
     }
 
     @Override
-    public int selectFeedId(FeedDTO feedDTO) throws Exception {
+    public List<Integer> selectFeedId(FeedDTO feedDTO) throws Exception {
         return dao.selectFeedId(feedDTO);
     }
 

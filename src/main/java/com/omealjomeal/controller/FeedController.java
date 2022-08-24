@@ -24,14 +24,14 @@ public class FeedController {
 
 
     @PostMapping("/api/feed")
-    public int feedUpload(@RequestPart("feed_img") MultipartFile feedImg,
-                          @RequestParam("feed_title") String feed_title,
-                          @RequestParam("feed_description") String feed_description,
-                          @RequestParam("feed_recipe") String feed_recipe,
-                          @RequestParam("feed_cooktime") String feed_cooktime,
-                          @RequestParam("feed_cooklevel") String feed_cooklevel,
-                          @RequestParam("feed_food_time") String feed_food_time,
-                          @RequestParam("product_id") String product_id,
+    public int feedUpload(@RequestPart(value = "feed_img",required = false) MultipartFile feedImg,
+                          @RequestParam(value ="feed_title",required = false) String feed_title,
+                          @RequestParam(value ="feed_description",required = false) String feed_description,
+                          @RequestParam(value ="feed_recipe",required = false) String feed_recipe,
+                          @RequestParam(value ="feed_cooktime",required = false) String feed_cooktime,
+                          @RequestParam(value ="feed_cooklevel",required = false) String feed_cooklevel,
+                          @RequestParam(value ="feed_food_time",required = false) String feed_food_time,
+                          @RequestParam(value ="product_id",required = false) String product_id,
                           HttpSession session
     ) throws Exception{
         MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
@@ -48,17 +48,17 @@ public class FeedController {
         //feed 정보 피드 테이블에 insert
         //feed-id 데이터베이스에서 받아와서 이미지 저장.
         int feedNum = feedService.feedUpload(feedDTO);
-        int feed_id = feedService.selectFeedId(feedDTO);
-
-        feedImg.transferTo(new File(uploadPath +"feed",  feed_id + "_"+"FeedImg"+ ".png"));
+        List<Integer> feed_id = new ArrayList<>();
+        feed_id = feedService.selectFeedId(feedDTO);
+        int feed_id2 = feed_id.get(feed_id.size()-1);
+        feedImg.transferTo(new File(uploadPath + "feed", feed_id2 + "_" + "FeedImg" + ".png"));
 
         //feedProduct 테이블에 insert..!
         FeedProductDTO feedProductDTO = new FeedProductDTO();
-        feedProductDTO.setFeed_id(feed_id);
+        feedProductDTO.setFeed_id(feed_id2);
 
-        //String str = "사과,배,귤_바나나_딸기 수박";
         String[] results = product_id.split(",");
-        for (int i=0; i<results.length; i++){
+        for (int i = 0; i < results.length; i++) {
             int id = Integer.parseInt(results[i]);
             feedProductDTO.setProduct_id(id);
             int feedProduct = feedService.feedProductUpload(feedProductDTO);
@@ -100,7 +100,7 @@ public class FeedController {
         int currentUserId = memberDTO.getUser_id();
         Map<String,Integer> CurrentMemberViewMap = memberService.currentMemberView(currentUserId);
         //membertable조회
-        // lifestyle, interest, food_favor 조인해서 조회.
+
         List<HashMap<String,Integer>> memberViewMap = memberService.memberView(currentUserId);
 
         for (HashMap<String,Integer> referenceMember:memberViewMap) {
@@ -122,8 +122,8 @@ public class FeedController {
 
         for (int userID : key.keySet()) {
             Integer value = key.get(userID);
-            //거리가 4이하일 때 맞춤취향.
-            if (value <= 4) {
+            //거리가 5이하일 때 맞춤취향.
+            if (value <= 8) {
                 List<Map<Object, Object>> map = feedService.feedViewMainFit(userID);
                 for (Map<Object, Object> mapSSSS : map) {
                     mapSave.add(mapSSSS);
@@ -174,7 +174,7 @@ public class FeedController {
 
         for (int userID : key.keySet()) {
             Integer value = key.get(userID);
-            if (value > 4) {
+            if (value > 8) {
                 List<Map<Object, Object>> map = feedService.feedViewMainFit(userID);
                 for (Map<Object, Object> mapSSSS : map) {
                     mapSave.add(mapSSSS);

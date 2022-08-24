@@ -74,7 +74,8 @@ const FeedDetail = (props) => {
             whiteSpace: "pre-wrap",
           }}
         >
-          {props.logined.user_id === feed.feedDetail.user_id ? (
+          {props.logined &&
+          props.logined.user_id === feed.feedDetail.user_id ? (
             <div
               style={{
                 backgroundColor: "#C8A3E3",
