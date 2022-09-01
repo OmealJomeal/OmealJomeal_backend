@@ -45,4 +45,10 @@ Server: Tomcat 9.0, Oracle Cloud
 또 성향이 유사하지 않은 다른 유저의 피드 게시물도 추천해줌으로서 색다른 추천 또한 해줍니다.<br/>
 성향 유사도는 18차원(18 = 입력받는 성향의 개수)의 유클리드 거리를 사용하여 계산합니다.
 
+![image](https://user-images.githubusercontent.com/95620153/187822260-bb1d78ae-d735-4e16-a8a7-922cd0e54318.png)
+![image](https://user-images.githubusercontent.com/95620153/187822281-54e6fe61-0fab-49de-ab60-d8a178d58654.png)
+![image](https://user-images.githubusercontent.com/95620153/187822297-245c0d9c-f0ce-46c8-86e9-7fb860b849f8.png)
+![image](https://user-images.githubusercontent.com/95620153/187822313-7d264ae9-a59f-4805-bd05-35c8159cc5d0.png)
+![image](https://user-images.githubusercontent.com/95620153/187822340-b826620b-79ff-4eb3-a930-820bd441c854.png)
+![image](https://user-images.githubusercontent.com/95620153/187822365-1cf947d0-5c39-4754-9de7-5e8944bdf5d5.png)
 
