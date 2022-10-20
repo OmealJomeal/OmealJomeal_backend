@@ -2,6 +2,9 @@
 
 ##### _[frontend사이트는 여기!](https://github.com/OmealJomeal/OmealJomeal-FE)
 
+## 배포사이트
+http://43.200.169.6/
+
 ## 소셜 네트워크와 게이미피케이션 기능을 접목한 추천 서비스 플랫폼, 오밀조밀
 
 ## 개발환경
